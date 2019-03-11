@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0)
         {
-            startMainActivity();
+            continueLogin();
 
             return null;
         }
@@ -45,6 +45,7 @@ public class SplashActivity extends AppCompatActivity {
             long timeLeft = SPLASH_TIME_OUT - (System.currentTimeMillis() - startTime);
             if(timeLeft < 0) timeLeft = 0;
             SystemClock.sleep(timeLeft);
+            startMainActivity();
         }
     }
 
