@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_syncConnectionTypes_entries">
+        <item>1 min</item>
+        <item>5 min</item>
+        <item>10 min</item>
+        <item>1 h</item>
+        <item>10 h</item>
+    </string-array>
+
+    <string-array name="pref_syncConnectionTypes_values">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>60</item>
+        <item>600</item>
+    </string-array>
+
+    <string-array name="pref_sort_by_date_entries">
+        <item>ascending</item>
+        <item>descending</item>
+    </string-array>
+
+    <string-array name="pref_sort_by_date_values">
+        <item>ascending</item>
+        <item>descending</item>
+    </string-array>
+</resources>
