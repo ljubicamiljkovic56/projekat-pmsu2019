@@ -16,4 +16,11 @@
     <string name="password_text">Password</string>
     <string name="password_hint">Enter your password</string>
 
+    <string name="folder_activity_text">Folder Activity</string>
+    <string name="toolbar_text">Toolbar</string>
+    <string name="action_edit_text">Edit</string>
+
+    <string name="create_folder_text">Create Folder Activity</string>
+    <string name="action_save_text">Save</string>
+
 </resources>
