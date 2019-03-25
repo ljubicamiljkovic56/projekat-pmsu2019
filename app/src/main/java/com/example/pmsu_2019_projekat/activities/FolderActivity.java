@@ -41,6 +41,8 @@ public class FolderActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
 
+        
+
     }
 
     @Override

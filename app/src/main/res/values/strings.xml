@@ -20,6 +20,8 @@
     <string name="toolbar_text">Toolbar</string>
     <string name="action_edit_text">Edit</string>
 
+
+
     <string name="create_folder_text">Create Folder Activity</string>
     <string name="action_save_text">Save</string>
     <string name="contacts_activity_toolbar" />
