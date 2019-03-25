@@ -8,5 +8,37 @@
     android:orientation="vertical">
 
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/create_email_toolbar"
+        android:text="@string/toolbar_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp"
+        />
+
+    <EditText
+        android:id="@+id/email_receiver"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="To:"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/email_subject"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Subject:"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/email_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:inputType="textMultiLine"
+        android:gravity="top" />
 
 </LinearLayout>

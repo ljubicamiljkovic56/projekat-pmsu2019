@@ -26,5 +26,7 @@
     <string name="action_save_text">Save</string>
     <string name="contacts_activity_toolbar" />
     <string name="contacts_activity_text" />
+    <string name="send_email">Send</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

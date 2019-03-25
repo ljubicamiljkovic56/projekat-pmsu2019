@@ -9,9 +9,8 @@
         />
     <item
         android:id="@+id/toolbar_cancel"
-        android:title="Cancel"
-        app:showAsAction="always"
-        />
+        android:title="@string/cancel"
+        app:showAsAction="always" />
 
 
 
