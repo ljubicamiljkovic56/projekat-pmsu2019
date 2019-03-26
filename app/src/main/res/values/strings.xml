@@ -28,5 +28,8 @@
     <string name="contacts_activity_text" />
     <string name="send_email">Send</string>
     <string name="cancel">Cancel</string>
+    <string name="profile_logout_button">logout</string>
+    <string name="contact_return">return</string>
+    <string name="create_contact_toolbar">Toolbar</string>
 
 </resources>
