@@ -11,7 +11,7 @@
         android:id="@+id/contacts_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:text="@string/contacts_activity_toolbar"
@@ -30,8 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="260dp" />
 
-    <android.support.design.widget.NavigationView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
 </LinearLayout>

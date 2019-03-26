@@ -18,7 +18,7 @@ public class ContactActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.contact_activity_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Toolbar");
-        toolbar.setSubtitle("Profile Activity");
+        toolbar.setSubtitle("Contact Activity");
     }
 
     @Override

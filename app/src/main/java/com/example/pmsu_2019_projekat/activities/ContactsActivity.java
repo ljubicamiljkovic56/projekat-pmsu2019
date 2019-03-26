@@ -2,6 +2,7 @@ package com.example.pmsu_2019_projekat.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.example.pmsu_2019_projekat.R;
 
@@ -11,7 +12,13 @@ public class ContactsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.contacts_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Toolbar");
+        toolbar.setSubtitle("Contacts Activity");
     }
+
     @Override
     protected void onStart() {
         super.onStart();
