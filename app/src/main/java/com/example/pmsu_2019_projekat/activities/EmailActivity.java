@@ -21,6 +21,7 @@ public class EmailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("Toolbar");
         toolbar.setSubtitle("Email Activity");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
