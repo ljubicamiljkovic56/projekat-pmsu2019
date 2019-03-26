@@ -28,6 +28,9 @@ public class CreateFolderActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Toolbar");
         toolbar.setSubtitle("Create Folder Activity");
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar ();
+        actionbar.setDisplayHomeAsUpEnabled(true) ;
 
 
     }
