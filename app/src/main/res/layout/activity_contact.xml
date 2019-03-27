@@ -16,4 +16,33 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp"/>
+
+    <EditText
+        android:id="@+id/contact_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/contact_email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email:"
+        android:inputType="text"/>
+
+
+    <EditText
+        android:id="@+id/contact_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name:"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/contact_surname"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Surname:"
+        android:inputType="text"/>
 </LinearLayout>
