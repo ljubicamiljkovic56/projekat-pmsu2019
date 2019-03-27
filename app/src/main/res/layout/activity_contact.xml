@@ -45,4 +45,6 @@
         android:layout_height="wrap_content"
         android:hint="Surname:"
         android:inputType="text"/>
+
+
 </LinearLayout>

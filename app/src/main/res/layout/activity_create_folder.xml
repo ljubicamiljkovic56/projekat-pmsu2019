@@ -40,4 +40,6 @@
         android:hint="Name:"
         android:inputType="text"/>
 
+
+
 </LinearLayout>
