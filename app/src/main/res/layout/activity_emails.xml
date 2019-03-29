@@ -1,108 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.EmailsActivity">
+    tools:context=".activities.EmailsActivity"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/emails_toolbar"
+        android:text="@string/toolbar_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp"
+        />
 
     <Button
         android:id="@+id/create_email"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
         android:text="Create email activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="161dp" />
+         />
 
     <Button
         android:id="@+id/create_folder"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginTop="72dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
-        android:text="Create folder activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:text="Create folder activity" />
 
     <Button
         android:id="@+id/email"
         android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_marginTop="128dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
         android:text="Email activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+         />
 
     <Button
         android:id="@+id/folders"
         android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_marginTop="184dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
         android:text="Folders activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        />
 
     <Button
         android:id="@+id/folder"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginTop="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
         android:text="folder activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+         />
 
     <Button
         android:id="@+id/settings"
         android:layout_width="match_parent"
-        android:layout_height="41dp"
-        android:layout_marginTop="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
         android:text="Settings activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+         />
 
     <Button
         android:id="@+id/profile"
         android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_marginTop="356dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
         android:text="Profile activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+         />
 
     <Button
         android:id="@+id/contacts"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginTop="412dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
         android:text="Contacts activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+         />
 
     <Button
         android:id="@+id/create_contact"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="468dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
-        android:text="Create contact activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:text="Create contact activity" />
 
     <Button
         android:id="@+id/contact"
         android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_marginTop="524dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:onClick="onButtonClicked"
         android:text="Contact activity"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-</android.support.constraint.ConstraintLayout>
+        />
+</LinearLayout>

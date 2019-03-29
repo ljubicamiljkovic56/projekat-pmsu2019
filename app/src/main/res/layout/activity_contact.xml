@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,10 +17,22 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp"/>
 
+    <ImageView
+        android:id="@id/avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_action_person"
+        android:layout_marginTop="70dp"
+        />
+
     <EditText
         android:id="@+id/contact_id"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/avatar"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@id/contact_activity_toolbar"
+        android:layout_marginTop="15dp"
         android:hint="ID"
         android:inputType="text"/>
 
@@ -28,6 +40,9 @@
         android:id="@+id/contact_email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/avatar"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@id/contact_id"
         android:hint="Email:"
         android:inputType="text"/>
 
@@ -36,6 +51,7 @@
         android:id="@+id/contact_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/avatar"
         android:hint="Name:"
         android:inputType="text"/>
 
@@ -43,8 +59,9 @@
         android:id="@+id/contact_surname"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/contact_name"
         android:hint="Surname:"
         android:inputType="text"/>
 
 
-</LinearLayout>
+</RelativeLayout>
