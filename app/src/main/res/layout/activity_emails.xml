@@ -19,6 +19,18 @@
         android:elevation="4dp"
         />
 
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <Button
         android:id="@+id/create_email"
         android:layout_width="match_parent"
@@ -106,4 +118,18 @@
         android:onClick="onButtonClicked"
         android:text="Contact activity"
         />
+
+    </LinearLayout>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header_navigation"
+            app:menu="@menu/activity_navigation_drawer" />
+
+    </android.support.v4.widget.DrawerLayout>
+
 </LinearLayout>
