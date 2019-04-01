@@ -9,15 +9,14 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/create_folder_toolbar"
-        android:text="@string/toolbar_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp"
-        />
+        android:minHeight="?attr/actionBarSize"
+        android:text="@string/toolbar_text"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
         android:layout_width="wrap_content"
