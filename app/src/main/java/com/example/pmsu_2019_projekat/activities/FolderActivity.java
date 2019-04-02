@@ -27,7 +27,7 @@ public class FolderActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.folder_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Toolbar");
+        getSupportActionBar().setTitle("PMSU_2019_Projekat");
         toolbar.setSubtitle("Folder Activity");
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();

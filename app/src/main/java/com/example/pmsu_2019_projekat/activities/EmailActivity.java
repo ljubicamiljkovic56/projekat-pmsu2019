@@ -20,7 +20,7 @@ public class EmailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.email_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Toolbar");
+        toolbar.setTitle("PMSU_2019_Projekat");
         toolbar.setSubtitle("Email Activity");
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar ();
