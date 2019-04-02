@@ -1,18 +1,12 @@
 package com.example.pmsu_2019_projekat.activities;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
-import android.view.View;
 
 import com.example.pmsu_2019_projekat.R;
 
@@ -45,16 +39,6 @@ public class ProfileActivity extends NavigationActivity {
 
 
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
     }
 
 

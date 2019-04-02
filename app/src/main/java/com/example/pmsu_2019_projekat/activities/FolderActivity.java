@@ -40,9 +40,7 @@ public class FolderActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.folder_list_view);
         listView.setAdapter(arrayAdapter);
 
-
         
-
     }
 
     @Override
@@ -63,8 +61,6 @@ public class FolderActivity extends AppCompatActivity {
         Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
     }
-
-
 
 
     @Override
