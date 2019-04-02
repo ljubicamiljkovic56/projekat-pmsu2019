@@ -40,7 +40,7 @@ public class FolderActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.folder_list_view);
         listView.setAdapter(arrayAdapter);
 
-        
+
     }
 
     @Override
