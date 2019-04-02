@@ -11,10 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.NavigationActivity"></activity>
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.EmailActivity" />
         <activity android:name=".activities.EmailsActivity" />
-        <activity android:name=".activities.CreateEmailActivity"
+        <activity
+            android:name=".activities.CreateEmailActivity"
             android:parentActivityName=".activities.EmailsActivity" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
@@ -33,7 +35,7 @@
         <activity
             android:name=".activities.CreateFolderActivity"
             android:parentActivityName=".activities.FoldersActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

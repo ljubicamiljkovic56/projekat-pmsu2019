@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,8 +17,7 @@ import android.view.View;
 import com.example.pmsu_2019_projekat.R;
 
 
-public class ProfileActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener {
+public class ProfileActivity extends NavigationActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,26 +97,4 @@ public class ProfileActivity extends AppCompatActivity implements
         super.onDestroy();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.nav_folders) {
-            Intent c = new Intent(ProfileActivity.this, FoldersActivity.class);
-            startActivity(c);
-        } else if (id == R.id.nav_contacts) {
-            Intent c = new Intent(ProfileActivity.this, ContactsActivity.class);
-            startActivity(c);
-        } else if (id == R.id.nav_emails) {
-            Intent d = new Intent(ProfileActivity.this, EmailsActivity.class);
-            startActivity(d);
-        } else if (id == R.id.nav_settings) {
-            Intent f = new Intent(ProfileActivity.this, SettingsActivity.class);
-            startActivity(f);
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

@@ -1,35 +1,39 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.pmsu_2019_projekat.R;
 
 import static com.example.pmsu_2019_projekat.R.*;
 
-public class EmailsActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener {
+public class EmailsActivity extends NavigationActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_emails);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.emails_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(id.emails_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Emails Activity");
-        final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(drawable.ic_menu_white_24dp);
         actionBar.setHomeButtonEnabled(true);
@@ -42,7 +46,6 @@ public class EmailsActivity extends AppCompatActivity implements
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     @Override
@@ -79,10 +82,6 @@ public class EmailsActivity extends AppCompatActivity implements
     }
 
 
-    public  void onProfileClicked(View v){
-        Intent a = new Intent(EmailsActivity.this, ProfileActivity.class);
-        startActivity(a);
-    }
 
     public void onButtonClicked(View v){
 
@@ -162,26 +161,5 @@ public class EmailsActivity extends AppCompatActivity implements
         super.onDestroy();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_emails) {
-            onBackPressed();
-        } else if (id == R.id.nav_contacts) {
-            Intent c = new Intent(EmailsActivity.this, ContactsActivity.class);
-            startActivity(c);
-        } else if (id == R.id.nav_folders) {
-            Intent d = new Intent(EmailsActivity.this, FoldersActivity.class);
-            startActivity(d);
-        } else if (id == R.id.nav_settings) {
-            Intent f = new Intent(EmailsActivity.this, SettingsActivity.class);
-            startActivity(f);
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }
