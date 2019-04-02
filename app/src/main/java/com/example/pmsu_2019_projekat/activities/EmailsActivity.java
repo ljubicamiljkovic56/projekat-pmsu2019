@@ -79,6 +79,10 @@ public class EmailsActivity extends AppCompatActivity implements
     }
 
 
+    public  void onProfileClicked(View v){
+        Intent a = new Intent(EmailsActivity.this, ProfileActivity.class);
+        startActivity(a);
+    }
 
     public void onButtonClicked(View v){
 
@@ -123,10 +127,7 @@ public class EmailsActivity extends AppCompatActivity implements
                 Intent j = new Intent(EmailsActivity.this, ContactActivity.class);
                 startActivity(j);
                 break;
-            case id.imageView:
-                Intent k = new Intent(EmailsActivity.this, ProfileActivity.class);
-                startActivity(k);
-                break;
+
         }
 
     }
@@ -167,7 +168,7 @@ public class EmailsActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         if (id == R.id.nav_emails) {
-            // Handle the camera action
+            onBackPressed();
         } else if (id == R.id.nav_contacts) {
             Intent c = new Intent(EmailsActivity.this, ContactsActivity.class);
             startActivity(c);

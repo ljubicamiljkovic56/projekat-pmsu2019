@@ -106,6 +106,7 @@ public class FoldersActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         if (id == R.id.nav_folders) {
+            onBackPressed();
         } else if (id == R.id.nav_contacts) {
             Intent c = new Intent(FoldersActivity.this, ContactsActivity.class);
             startActivity(c);

@@ -11,8 +11,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
+import android.view.View;
 
 import com.example.pmsu_2019_projekat.R;
+
 
 public class ProfileActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
