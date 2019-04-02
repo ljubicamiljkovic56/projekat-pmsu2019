@@ -1,13 +1,17 @@
 package com.example.pmsu_2019_projekat.activities;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.pmsu_2019_projekat.R;
 
-public class ContactsActivity extends AppCompatActivity {
+public class ContactsActivity extends NavigationActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +21,37 @@ public class ContactsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("Toolbar");
         toolbar.setSubtitle("Contacts Activity");
+        final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        actionBar.setHomeButtonEnabled(true);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.contacts_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.contacts_create) {
+            Intent a = new Intent(ContactsActivity.this, CreateContactActivity.class);
+            startActivity(a);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -48,4 +83,6 @@ public class ContactsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+
 }

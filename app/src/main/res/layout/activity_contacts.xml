@@ -9,26 +9,44 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/contacts_toolbar"
+        android:text="@string/toolbar_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        android:text="@string/contacts_activity_toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/contacts_activity_text"
-        />
+        <LinearLayout
+            android:id="@+id/mainContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </LinearLayout>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header_navigation"
+            app:menu="@menu/activity_navigation_drawer" />
+
+    </android.support.v4.widget.DrawerLayout>
 
     <ListView
         android:id="@+id/contacts_list"
         android:layout_width="match_parent"
         android:layout_height="260dp" />
+
 
 
 

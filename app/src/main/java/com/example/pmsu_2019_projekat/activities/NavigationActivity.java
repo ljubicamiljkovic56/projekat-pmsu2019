@@ -36,7 +36,6 @@ public class NavigationActivity extends AppCompatActivity
 
         Intent a = new Intent(NavigationActivity.this, ProfileActivity.class);
         startActivity(a);
-
     }
 
     @Override

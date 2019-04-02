@@ -39,5 +39,6 @@
     <string name="action_settings">Settings</string>
     <string name="create_new_email">create email</string>
     <string name="create_new_folder">create folder</string>
+    <string name="create_contact_button">create contact</string>
 
 </resources>
