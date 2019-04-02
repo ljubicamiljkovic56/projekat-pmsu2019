@@ -1,6 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +29,9 @@ public class FolderActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Toolbar");
         toolbar.setSubtitle("Folder Activity");
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
 
         List<String> list = new ArrayList<>();
         list.add("stavka 1");

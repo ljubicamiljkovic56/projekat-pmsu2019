@@ -20,6 +20,7 @@
         android:elevation="4dp"
         />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,9 +30,5 @@
         android:id="@+id/folder_list_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
-
-
-
 
 </LinearLayout>
