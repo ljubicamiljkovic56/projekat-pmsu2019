@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 
@@ -32,6 +34,27 @@ public class EmailActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.email_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        String message = "";
+        switch (item.getItemId()){
+            case id.email_delete:
+                message = "Delete";
+                break;
+            case id.email_replay:
+                message = "Replay";
+                break;
+            case id.email_replay_to_all:
+                message = "Replay to all";
+                break;
+            case id.email_foward:
+                message = "Forward";
+                break;
+        }
+        Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
+        return  super.onOptionsItemSelected(item);
     }
 
     @Override
