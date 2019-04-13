@@ -37,10 +37,10 @@ public class CreateContactActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         String message = "";
         switch (item.getItemId()){
-            case R.id.toolbar_save:
+            case R.id.create_contact_toolbar_save:
                 message = "Save";
                 break;
-            case R.id.toolbar_cancel:
+            case R.id.create_contact_toolbar_cancel:
                 message = "Cancel";
                 break;
         }

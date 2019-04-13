@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
+import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 
@@ -51,12 +52,15 @@ public class FoldersActivity extends NavigationActivity {
         int id = item.getItemId();
 
         if (id == R.id.folders_create) {
+            Toast.makeText(this, "Create folder  selected", Toast.LENGTH_LONG).show();
             Intent a = new Intent(FoldersActivity.this, CreateFolderActivity.class);
             startActivity(a);
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
 @Override
     protected void onStart() {

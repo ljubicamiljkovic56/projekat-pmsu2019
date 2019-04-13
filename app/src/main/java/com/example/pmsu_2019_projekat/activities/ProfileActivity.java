@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.support.design.widget.NavigationView;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 
@@ -51,6 +53,17 @@ public class ProfileActivity extends NavigationActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        String message = "";
+        switch (item.getItemId()){
+            case R.id.profile_toolbar_logout:
+                message = "Logout";
+                break;
+        }
+        Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
+        return  super.onOptionsItemSelected(item);
+    }
 
 
     @Override

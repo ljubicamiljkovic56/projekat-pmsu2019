@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.example.pmsu_2019_projekat.R;
@@ -58,6 +59,7 @@ public class EmailsActivity extends NavigationActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.emails_create) {
+            Toast.makeText(this, "Create email selected", Toast.LENGTH_LONG).show();
             Intent a = new Intent(EmailsActivity.this, CreateEmailActivity.class);
             startActivity(a);
         }

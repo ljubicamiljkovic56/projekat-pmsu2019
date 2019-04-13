@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 
@@ -47,6 +48,7 @@ public class ContactsActivity extends NavigationActivity{
         int id = item.getItemId();
 
         if (id == R.id.contacts_create) {
+            Toast.makeText(this, "Create contact selected", Toast.LENGTH_LONG).show();
             Intent a = new Intent(ContactsActivity.this, CreateContactActivity.class);
             startActivity(a);
         }
