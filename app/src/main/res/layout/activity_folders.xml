@@ -43,8 +43,9 @@
 
     </android.support.v4.widget.DrawerLayout>
         <TextView
+        android:id="@+id/folders_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Folders activity" />
+        android:text="@string/folders_activity_text" />
 
 </LinearLayout>

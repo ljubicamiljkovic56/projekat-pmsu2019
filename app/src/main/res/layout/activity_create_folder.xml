@@ -19,6 +19,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
+        android:id="@+id/create_folder_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_folder_text"/>
@@ -29,14 +30,14 @@
         android:id="@+id/folder_id"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="ID"
+        android:hint="@string/cf_hint_id"
         android:inputType="text"/>
 
     <EditText
         android:id="@+id/folder_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Name:"
+        android:hint="@string/cf_hint_name"
         android:inputType="text"/>
 
 

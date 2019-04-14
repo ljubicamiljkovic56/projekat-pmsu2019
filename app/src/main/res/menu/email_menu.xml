@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/email_delete"
-        android:title="delete" />
+        android:title="@string/email_menu_delete" />
     <item
         android:id="@+id/email_replay"
-        android:title="replay" />
+        android:title="@string/email_menu_replay" />
     <item
         android:id="@+id/email_replay_to_all"
-        android:title="replay to all" />
+        android:title="@string/email_menu_replay_to_all" />
     <item
         android:id="@+id/email_foward"
-        android:title="forward" />
+        android:title="@string/email_menu_forward" />
 </menu>

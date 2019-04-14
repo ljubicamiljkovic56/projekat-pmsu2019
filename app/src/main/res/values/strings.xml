@@ -19,8 +19,15 @@
     <string name="folder_activity_text">Folder Activity</string>
     <string name="toolbar_text">PMSU_2019_Projekat</string>
     <string name="action_edit_text">Edit</string>
-
-
+    <string name="folders_activity_text">Folders Activity</string>
+    <string name="cf_hint_id">ID</string>
+    <string name="cf_hint_name">Name:</string>
+    <string name="folder_menu_edit">Edit</string>
+    <string name="email_menu_delete">delete</string>
+    <string name="email_menu_replay">replay</string>
+    <string name="email_menu_replay_to_all">replay to all</string>
+    <string name="email_menu_forward">forward</string>
+    <string name="create_folder_menu_save">Save</string>
     <string name="create_folder_text">Create Folder Activity</string>
     <string name="action_save_text">Save</string>
     <string name="contacts_activity_toolbar" />
@@ -40,5 +47,10 @@
     <string name="create_new_email">create email</string>
     <string name="create_new_folder">create folder</string>
     <string name="create_contact_button">create contact</string>
+
+    <string name="navigation_inbox">Inbox</string>
+    <string name="navigation_contacts">Contacts</string>
+    <string name="navigation_folders">Folders</string>
+    <string name="navigation_settings">Settings</string>
 
 </resources>
