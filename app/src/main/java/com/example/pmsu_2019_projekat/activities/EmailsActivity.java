@@ -112,7 +112,10 @@ public class EmailsActivity extends NavigationActivity {
                 Intent j = new Intent(EmailsActivity.this, ContactActivity.class);
                 startActivity(j);
                 break;
-
+            case id.createEmail:
+                Toast.makeText(this, "Create email selected", Toast.LENGTH_LONG).show();
+                Intent k = new Intent(EmailsActivity.this, CreateEmailActivity.class);
+                startActivity(k);
         }
 
     }
