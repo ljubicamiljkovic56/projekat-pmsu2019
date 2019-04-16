@@ -9,14 +9,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.model.Contact;
+import com.example.pmsu_2019_projekat.model.Folder;
+import com.example.pmsu_2019_projekat.model.Message;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FolderActivity extends AppCompatActivity {
+
+    public static Folder folder1;
 
     Toolbar toolbar;
 
@@ -33,17 +40,56 @@ public class FolderActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
 
-        List<String> list = new ArrayList<>();
-        list.add("stavka 1");
-        list.add("stavka 2");
-        list.add("stavka 3");
-        list.add("stavka 4");
-        list.add("stavka 5");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1,list);
-        ListView listView = (ListView) findViewById(R.id.folder_list_view);
-        listView.setAdapter(arrayAdapter);
+        folderPodaci();
+        TextView name = findViewById(R.id.folder_name_txt);
+        name.append(folder1.getName());
+        TextView messageDetails = findViewById(R.id.folder_message);
+        messageDetails.append(folder1.getMessages().toString());
 
 
+
+
+    }
+    public static void folderPodaci(){
+        folder1 = new Folder();
+        folder1.setId("1");
+        folder1.setName("Folder 1");
+        folder1.setParentFolder(new Folder());
+        ArrayList<Folder> folders = new ArrayList<>();
+        folder1.setSubfolders(folders);
+        ArrayList<Message> messages = new ArrayList<>();
+        ArrayList<Contact> contacts = new ArrayList<>();
+        Message m1 = new Message();
+        Message m2 = new Message();
+        m1.setId("22");
+        Contact contact = new Contact();
+        contact.setFirst("Marko");
+        contact.setLast("Marković");
+        contact.setEmail("markom@yahoo.com");
+        Contact contact1 = new Contact();
+        contact.setFirst("Aca");
+        contact.setLast("Acic");
+        contact.setEmail("aca@gmail.com");
+        contacts.add(contact);
+        contacts.add(contact1);
+        m1.setFrom(contact);
+        m1.setTo(contacts);
+        m1.setCc(contacts);
+        m1.setBcc(contacts);
+        m1.setDateTime(new Date(2019,04,16,16,41));
+        m1.setSubject("nn");
+        m1.setContent("Poruka1");
+        m2.setId("23");
+        m2.setFrom(contact1);
+        m2.setTo(contacts);
+        m2.setCc(contacts);
+        m2.setBcc(contacts);
+        m2.setDateTime(new Date(2019,04,16,16,41));
+        m2.setSubject("Dobrodosli");
+        m2.setContent("Poruka2");
+        messages.add(m1);
+        messages.add(m2);
+        folder1.setMessages(messages);
     }
 
     @Override

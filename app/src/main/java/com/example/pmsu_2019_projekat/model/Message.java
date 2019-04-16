@@ -39,6 +39,11 @@ public class Message {
         this.account = account;
     }
 
+    @Override
+    public String toString() {
+        return "From : " + "Marko" + " " + "Subject: " + subject + " " + "Content: " + content + " ";
+    }
+
     public String getId() {
         return id;
     }
