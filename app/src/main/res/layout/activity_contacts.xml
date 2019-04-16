@@ -24,12 +24,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/mainContent"
+        <RelativeLayout
+            android:id="@id/mainContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-        </LinearLayout>
+
+            <ListView
+                android:id="@+id/contacts_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:scrollbars="vertical" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/create_contact_floating_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/fab_margin"
+                android:onClick="onButtonClicked"
+                app:backgroundTint="@color/design_default_color_primary_dark"
+                app:srcCompat="@drawable/ic_add_white_24dp" />
+
+
+        </RelativeLayout>
+
+
 
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
@@ -42,10 +64,7 @@
 
     </android.support.v4.widget.DrawerLayout>
 
-    <ListView
-        android:id="@+id/contacts_list"
-        android:layout_width="match_parent"
-        android:layout_height="260dp" />
+
 
 
 
