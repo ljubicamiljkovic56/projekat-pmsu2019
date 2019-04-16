@@ -23,45 +23,44 @@
         android:layout_height="100dp"
         android:src="@drawable/ic_action_person"
         android:layout_marginTop="70dp"
-        />
+        android:contentDescription="TODO" />
 
-    <EditText
-        android:id="@+id/contact_id"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/avatar"
-        android:layout_marginLeft="15dp"
-        android:layout_below="@id/contact_activity_toolbar"
-        android:layout_marginTop="15dp"
-        android:hint="ID"
-        android:inputType="text"/>
-
-    <EditText
-        android:id="@+id/contact_email"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/avatar"
-        android:layout_marginLeft="15dp"
-        android:layout_below="@id/contact_id"
-        android:hint="Email:"
-        android:inputType="text"/>
-
-
-    <EditText
+    <TextView
         android:id="@+id/contact_name"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/avatar"
-        android:hint="Name:"
-        android:inputType="text"/>
+        android:layout_height="40dp"
+        android:layout_below="@id/contact_activity_toolbar"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_toEndOf="@+id/avatar"
+        android:text="Name:   "
+        android:textSize="18sp" />
 
-    <EditText
+
+    <TextView
         android:id="@+id/contact_surname"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@id/contact_name"
-        android:hint="Surname:"
-        android:inputType="text"/>
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_toEndOf="@+id/avatar"
+        android:text="Surname:   "
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/contact_email"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/avatar"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="Email:   "
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

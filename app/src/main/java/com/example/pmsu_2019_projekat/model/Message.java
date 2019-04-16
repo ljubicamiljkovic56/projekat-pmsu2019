@@ -19,7 +19,7 @@ public class Message {
     private Account account;
 
     public Message(){
-
+        super();
     }
 
 

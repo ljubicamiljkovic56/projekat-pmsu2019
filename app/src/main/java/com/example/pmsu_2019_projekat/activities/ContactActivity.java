@@ -7,11 +7,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.model.Contact;
 
 public class ContactActivity extends AppCompatActivity {
+
+    public static Contact dummy1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,23 @@ public class ContactActivity extends AppCompatActivity {
         toolbar.setSubtitle("Contact Activity");
         ActionBar actionbar = getSupportActionBar ();
         actionbar.setDisplayHomeAsUpEnabled(true) ;
+
+        kontaktPodaci();
+        TextView name = findViewById(R.id.contact_name);
+        name.append(dummy1.getFirst());
+        TextView lastname = findViewById(R.id.contact_surname);
+        lastname.append(dummy1.getLast());
+        TextView email = findViewById(R.id.contact_email);
+        email.append(dummy1.getEmail());
+    }
+
+    public static void kontaktPodaci(){
+        dummy1 = new Contact();
+        dummy1.setFirst("Jašar");
+        dummy1.setLast("Ahmedovski");
+        dummy1.setEmail("jasara@uns.ac.rs");
+        dummy1.setId("1");
+
     }
 
     @Override

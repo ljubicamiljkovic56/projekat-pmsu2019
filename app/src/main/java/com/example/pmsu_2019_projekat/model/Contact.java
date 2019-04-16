@@ -5,23 +5,21 @@ public class Contact {
     private String id;
     private String first;
     private String last;
-    private String display;
     private String email;
     private String format;
-    private Photo photo;
+    private Photo display;
 
     public Contact(){
-
+        super();
     }
 
-    public Contact(String id, String first, String last, String display, String email, String format, Photo photo) {
+    public Contact(String id, String first, String last, Photo display, String email, String format) {
         this.id = id;
         this.first = first;
         this.last = last;
         this.display = display;
         this.email = email;
         this.format = format;
-        this.photo = photo;
     }
 
     public String getId() {
@@ -48,14 +46,6 @@ public class Contact {
         this.last = last;
     }
 
-    public String getDisplay() {
-        return display;
-    }
-
-    public void setDisplay(String display) {
-        this.display = display;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -72,11 +62,11 @@ public class Contact {
         this.format = format;
     }
 
-    public Photo getPhoto() {
-        return photo;
+    public Photo getDisplay() {
+        return display;
     }
 
-    public void setPhoto(Photo photo) {
-        this.photo = photo;
+    public void setDisplay(Photo photo) {
+        this.display = display;
     }
 }

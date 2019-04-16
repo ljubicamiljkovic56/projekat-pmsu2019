@@ -10,10 +10,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.model.Message;
 
 import static com.example.pmsu_2019_projekat.R.*;
 
 public class EmailActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class EmailActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar ();
         actionbar.setDisplayHomeAsUpEnabled(true) ;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
