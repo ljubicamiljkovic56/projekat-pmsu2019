@@ -26,11 +26,10 @@ public class EmailsActivity extends NavigationActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(id.emails_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Emails Activity");
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(drawable.ic_menu_white_24dp);
-        actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle("Inbox");
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

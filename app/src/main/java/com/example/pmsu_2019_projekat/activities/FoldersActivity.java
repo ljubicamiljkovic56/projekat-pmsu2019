@@ -23,12 +23,11 @@ public class FoldersActivity extends NavigationActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.folders_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Folders Activity");
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle("Folders");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

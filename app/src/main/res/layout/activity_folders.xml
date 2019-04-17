@@ -6,18 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@mipmap/backgroundnew3"
-    tools:context=".activities.FoldersActivity">
+    tools:context=".activities.FoldersActivity"
+    android:theme="@style/AppTheme">
 
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/folders_toolbar"
-        android:text="@string/toolbar_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         android:background="@color/colorPrimaryVivid"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/colorWhite"
+        app:popupTheme="@style/ThemeOverlay.AppCompat"
         android:elevation="4dp"
         />
 

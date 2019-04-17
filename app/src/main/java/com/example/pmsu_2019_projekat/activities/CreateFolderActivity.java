@@ -26,11 +26,9 @@ public class CreateFolderActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.create_folder_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("PMSU_2019_Projekat");
-        toolbar.setSubtitle("Create Folder Activity");
-        setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar ();
         actionbar.setDisplayHomeAsUpEnabled(true) ;
+        actionbar.setTitle("Create Folder");
 
 
     }

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@mipmap/backgroundnew3"
-    tools:context=".activities.CreateFolderActivity">
+    tools:context=".activities.CreateFolderActivity"
+    android:theme="@style/AppTheme">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/create_folder_toolbar"
@@ -16,8 +17,8 @@
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:text="@string/toolbar_text"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:titleTextColor="@color/colorWhite"
+        app:popupTheme="@style/ThemeOverlay.AppCompat" />
 
     <TextView
         android:id="@+id/create_folder_text"

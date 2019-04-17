@@ -24,10 +24,9 @@ public class ContactActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.contact_activity_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Toolbar");
-        toolbar.setSubtitle("Contact Activity");
         ActionBar actionbar = getSupportActionBar ();
         actionbar.setDisplayHomeAsUpEnabled(true) ;
+        actionbar.setTitle("Contact info");
 
         kontaktPodaci();
         TextView name = findViewById(R.id.contact_name);

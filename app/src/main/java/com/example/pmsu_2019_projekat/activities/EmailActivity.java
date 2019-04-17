@@ -31,11 +31,10 @@ public class EmailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.email_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("PMSU_2019_Projekat");
-        toolbar.setSubtitle("Email Activity");
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar ();
         actionbar.setDisplayHomeAsUpEnabled(true) ;
+        actionbar.setTitle("Email");
 
         emailPodaci();
         TextView from = findViewById(id.email_from);

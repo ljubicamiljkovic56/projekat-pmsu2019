@@ -21,9 +21,8 @@ public class CreateEmailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.create_email_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Toolbar");
-        toolbar.setSubtitle("Create Email Activity");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Create Email");
     }
 
     @Override

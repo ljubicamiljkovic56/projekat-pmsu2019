@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/create_contact_toolbar_save"
+        android:icon="@drawable/ic_save_white_24dp"
         android:title="@string/action_save_text"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
     <item
         android:id="@+id/create_contact_toolbar_cancel"
+        android:icon="@drawable/ic_cancel_white_24dp"
         android:title="@string/cancel"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
 </menu>

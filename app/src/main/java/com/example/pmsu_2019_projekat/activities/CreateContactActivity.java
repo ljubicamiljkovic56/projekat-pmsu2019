@@ -20,10 +20,9 @@ public class CreateContactActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.create_contact_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Toolbar");
-        toolbar.setSubtitle("Create Contact Activity");
         ActionBar actionbar = getSupportActionBar ();
         actionbar.setDisplayHomeAsUpEnabled(true) ;
+        actionbar.setTitle("Create Contact");
     }
 
     @Override

@@ -6,16 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".activities.ContactActivity"
     android:background="@mipmap/backgroundnew3"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/AppTheme">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/contact_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryVivid"
+        app:titleTextColor="@color/colorWhite"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:popupTheme="@style/ThemeOverlay.AppCompat"
         android:elevation="4dp"/>
 
     <ImageView

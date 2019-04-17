@@ -6,18 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@mipmap/backgroundnew3"
-    tools:context=".activities.ContactsActivity">
+    tools:context=".activities.ContactsActivity"
+    android:theme="@style/AppTheme">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/contacts_toolbar"
-        android:text="@string/toolbar_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryVivid"
+        app:titleTextColor="@color/colorWhite"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat" />
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"

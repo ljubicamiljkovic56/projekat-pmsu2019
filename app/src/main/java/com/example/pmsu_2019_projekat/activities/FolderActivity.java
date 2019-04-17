@@ -36,7 +36,6 @@ public class FolderActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.folder_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(folder1.getName());
-        toolbar.setSubtitle("Folder Activity");
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);

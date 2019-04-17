@@ -26,12 +26,10 @@ public class ContactsActivity extends NavigationActivity{
         setContentView(R.layout.activity_contacts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.contacts_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Toolbar");
-        toolbar.setSubtitle("Contacts Activity");
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle("Contacts");
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

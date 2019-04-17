@@ -23,13 +23,12 @@ public class ProfileActivity extends NavigationActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.profile_activity_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Toolbar");
-        toolbar.setSubtitle("Profile Activity");
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle("My Profile");
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

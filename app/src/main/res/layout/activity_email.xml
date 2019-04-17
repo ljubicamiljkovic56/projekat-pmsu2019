@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".activities.EmailActivity"
     android:background="@mipmap/backgroundnew3"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/AppTheme">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/email_toolbar"
@@ -15,9 +16,9 @@
         android:background="@color/colorPrimaryVivid"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@color/colorWhite"
         android:text="@string/toolbar_text"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat" />
 
 
     <TextView
