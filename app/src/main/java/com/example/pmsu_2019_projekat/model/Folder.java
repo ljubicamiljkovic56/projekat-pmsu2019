@@ -9,17 +9,19 @@ public class Folder {
     private Folder parentFolder;
     private ArrayList<Folder> subfolders;
     private ArrayList<Message> messages;
+    private ArrayList<Rule> rules;
 
     public Folder(){
 
     }
 
-    public Folder(String id, String name, ArrayList<Folder> subfolders, Folder parentFolder, ArrayList<Message> messages) {
+    public Folder(String id, String name, ArrayList<Folder> subfolders, Folder parentFolder, ArrayList<Message> messages, ArrayList<Rule> rules) {
         this.id = id;
         this.name = name;
         this.subfolders = subfolders;
         this.parentFolder = parentFolder;
         this.messages = messages;
+        this.rules = rules;
     }
 
     public String getId() {
@@ -60,5 +62,13 @@ public class Folder {
 
     public void setMessages(ArrayList<Message> messages) {
         this.messages = messages;
+    }
+
+    public ArrayList<Rule> getRules() {
+        return rules;
+    }
+
+    public void setRules(ArrayList<Rule> rules) {
+        this.rules = rules;
     }
 }
