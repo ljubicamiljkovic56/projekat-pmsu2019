@@ -41,7 +41,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "From : " + "Marko" + " " + "Subject: " + subject + " " + "Content: " + content + " ";
+        return from.getFirst() + ": " + "Subject: " + subject + " " + "Content: " + content + " ";
     }
 
     public String getId() {

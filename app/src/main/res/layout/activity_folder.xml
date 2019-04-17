@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryVivid"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp"
@@ -30,15 +30,47 @@
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
+        android:text="From:   "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/folder_message_subject"
+        android:layout_width="fill_parent"
+        android:layout_marginStart="5dp"
+        android:layout_height="40dp"
+        android:text="Subject:   "
         />
     <TextView
         android:id="@+id/folder_message"
         android:layout_width="fill_parent"
+        android:layout_marginStart="5dp"
+        android:layout_height="40dp"
+        />
+
+    <TextView
+        android:id="@+id/folder_name_txt2"
+        android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:text="From:   "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/folder_message_subject2"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="Subject:   "
+        />
+    <TextView
+        android:id="@+id/folder_message2"
+        android:layout_width="fill_parent"
+        android:layout_marginStart="5dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="5dp"
         />
 
 

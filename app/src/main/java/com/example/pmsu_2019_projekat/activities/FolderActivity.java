@@ -32,19 +32,29 @@ public class FolderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folder);
 
+        folderPodaci();
         toolbar = (Toolbar) findViewById(R.id.folder_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("PMSU_2019_Projekat");
+        getSupportActionBar().setTitle(folder1.getName());
         toolbar.setSubtitle("Folder Activity");
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
 
-        folderPodaci();
-        TextView name = findViewById(R.id.folder_name_txt);
-        name.append(folder1.getName());
+
+        TextView messageSender = findViewById(R.id.folder_name_txt);
+        messageSender.append(folder1.getMessages().get(0).getFrom().getFirst() +  " " + folder1.getMessages().get(0).getFrom().getLast());
+        TextView messageSubject = findViewById(R.id.folder_message_subject);
+        messageSubject.append(folder1.getMessages().get(0).getSubject());
         TextView messageDetails = findViewById(R.id.folder_message);
-        messageDetails.append(folder1.getMessages().toString());
+        messageDetails.append(folder1.getMessages().get(0).getContent());
+
+        TextView messageSender2 = findViewById(R.id.folder_name_txt2);
+        messageSender2.append(folder1.getMessages().get(1).getFrom().getFirst() +  " " + folder1.getMessages().get(1).getFrom().getLast());
+        TextView messageSubject2 = findViewById(R.id.folder_message_subject2);
+        messageSubject2.append(folder1.getMessages().get(1).getSubject());
+        TextView messageDetails2 = findViewById(R.id.folder_message2);
+        messageDetails2.append(folder1.getMessages().get(1).getContent());
 
 
 
@@ -67,9 +77,9 @@ public class FolderActivity extends AppCompatActivity {
         contact.setLast("Marković");
         contact.setEmail("markom@yahoo.com");
         Contact contact1 = new Contact();
-        contact.setFirst("Aca");
-        contact.setLast("Acic");
-        contact.setEmail("aca@gmail.com");
+        contact1.setFirst("Aca");
+        contact1.setLast("Acic");
+        contact1.setEmail("aca@gmail.com");
         contacts.add(contact);
         contacts.add(contact1);
         m1.setFrom(contact);
@@ -86,7 +96,7 @@ public class FolderActivity extends AppCompatActivity {
         m2.setBcc(contacts);
         m2.setDateTime(new Date(2019,04,16,16,41));
         m2.setSubject("Dobrodosli");
-        m2.setContent("Poruka2");
+        m2.setContent("Ovo je primer druge poruke");
         messages.add(m1);
         messages.add(m2);
         folder1.setMessages(messages);

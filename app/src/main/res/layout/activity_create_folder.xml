@@ -12,7 +12,7 @@
         android:id="@+id/create_folder_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryVivid"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:text="@string/toolbar_text"
