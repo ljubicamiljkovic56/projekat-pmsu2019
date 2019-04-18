@@ -1,8 +1,9 @@
 package com.example.pmsu_2019_projekat.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Account {
+public class Account implements Serializable {
 
     private String id;
     private String smtp;

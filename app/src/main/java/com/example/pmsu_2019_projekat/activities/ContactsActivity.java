@@ -62,15 +62,6 @@ public class ContactsActivity extends NavigationActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    public void onButtonClicked(View v){
-        switch (v.getId()){
-            case R.id.create_contact_floating_button:
-                Toast.makeText(this, "Create contact selected", Toast.LENGTH_LONG).show();
-                Intent b = new Intent(ContactsActivity.this, CreateContactActivity.class);
-                startActivity(b);
-
-        }
-    }
 
     @Override
     protected void onStart() {

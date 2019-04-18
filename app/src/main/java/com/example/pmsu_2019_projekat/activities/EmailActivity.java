@@ -37,7 +37,7 @@ public class EmailActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true) ;
         actionbar.setTitle("Email");
 
-        dummy2 = Data.getEmails().get(0);
+        dummy2 = (Message) getIntent().getSerializableExtra("Email");
         TextView from = findViewById(id.email_from);
         from.append(dummy2.getFrom().getEmail());
         TextView to = findViewById(id.email_to);

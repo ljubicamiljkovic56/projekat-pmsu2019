@@ -1,6 +1,8 @@
 package com.example.pmsu_2019_projekat.model;
 
-public class Photo {
+import java.io.Serializable;
+
+public class Photo implements Serializable {
 
     private String id;
     private String path;

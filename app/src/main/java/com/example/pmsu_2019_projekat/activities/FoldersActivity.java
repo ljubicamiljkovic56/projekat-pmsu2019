@@ -60,15 +60,6 @@ public class FoldersActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onButtonClicked(View v){
-        switch (v.getId()){
-            case R.id.createFolder:
-                Toast.makeText(this, "Create folder selected", Toast.LENGTH_LONG).show();
-                Intent b = new Intent(FoldersActivity.this, CreateFolderActivity.class);
-                startActivity(b);
-
-        }
-    }
 
 
 @Override

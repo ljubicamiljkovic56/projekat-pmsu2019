@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:background="@color/colorWhite"
-    android:clickable="true">
+    android:background="@color/colorWhite">
 
     <TextView
         android:id="@+id/EFrom"

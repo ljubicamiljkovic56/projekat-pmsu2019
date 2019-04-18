@@ -1,9 +1,10 @@
 package com.example.pmsu_2019_projekat.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Message {
+public class Message implements Serializable {
 
     private String id;
     private Contact from;

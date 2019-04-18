@@ -1,6 +1,8 @@
 package com.example.pmsu_2019_projekat.model;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
 
     private String id;
     private String first;

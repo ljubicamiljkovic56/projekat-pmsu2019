@@ -1,8 +1,9 @@
 package com.example.pmsu_2019_projekat.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Folder {
+public class Folder implements Serializable {
 
     private String id;
     private String name;

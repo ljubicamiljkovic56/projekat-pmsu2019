@@ -7,15 +7,18 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.adapters.EmailAdapter;
+import com.example.pmsu_2019_projekat.model.Message;
 
 import static com.example.pmsu_2019_projekat.R.*;
 
@@ -44,6 +47,7 @@ public class EmailsActivity extends NavigationActivity {
 
         ListView emailsList = findViewById(id.emails_list_view);
         EmailAdapter eAdapter = new EmailAdapter(this);
+        emailsList.setOnItemClickListener(new EmailsItemClickListener());
         emailsList.setAdapter(eAdapter);
     }
 
@@ -72,17 +76,14 @@ public class EmailsActivity extends NavigationActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
-    public void onButtonClicked(View v){
-
-        switch (v.getId()){
-            case id.createEmail:
-                Toast.makeText(this, "Create email selected", Toast.LENGTH_LONG).show();
-                Intent k = new Intent(EmailsActivity.this, CreateEmailActivity.class);
-                startActivity(k);
+    private class EmailsItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Message email = (Message) parent.getAdapter().getItem(position);
+            Intent intent = new Intent(EmailsActivity.this, EmailActivity.class);
+            intent.putExtra("Email", email);
+            startActivity(intent);
         }
-
     }
 
     @Override

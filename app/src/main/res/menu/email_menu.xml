@@ -4,14 +4,22 @@
 
     <item
         android:id="@+id/email_delete"
-        android:title="@string/email_menu_delete" />
+        android:icon="@drawable/ic_delete_white_24dp"
+        android:title="@string/email_menu_delete"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/email_replay"
-        android:title="@string/email_menu_replay" />
+        android:icon="@drawable/ic_reply_white_24dp"
+        android:title="@string/email_menu_replay"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/email_replay_to_all"
-        android:title="@string/email_menu_replay_to_all" />
+        android:icon="@drawable/ic_reply_all_white_24dp"
+        android:title="@string/email_menu_replay_to_all"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/email_foward"
-        android:title="@string/email_menu_forward" />
+        android:icon="@drawable/ic_forward_white_24dp"
+        android:title="@string/email_menu_forward"
+        app:showAsAction="ifRoom" />
 </menu>

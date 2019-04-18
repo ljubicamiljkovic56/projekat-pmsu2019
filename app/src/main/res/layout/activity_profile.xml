@@ -16,6 +16,7 @@
         android:background="@color/colorPrimaryVivid"
         android:minHeight="?attr/actionBarSize"
         app:titleTextColor="@color/colorWhite"
+        app:theme="@style/ToolbarColoredBackArrow"
         app:popupTheme="@style/ThemeOverlay.AppCompat"
         android:elevation="4dp"/>
 
