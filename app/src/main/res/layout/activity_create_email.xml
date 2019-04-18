@@ -26,6 +26,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="To:"
+        android:layout_marginTop="5sp"
+        android:background="#ecece7"
         android:inputType="textEmailAddress"/>
 
     <EditText
@@ -33,13 +35,17 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Subject:"
+        android:layout_marginTop="5sp"
+        android:background="#ecece7"
         android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/email_content"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:inputType="textMultiLine"
+        android:layout_marginTop="5sp"
+        android:background="#ecece7"
         android:gravity="top" />
 
 

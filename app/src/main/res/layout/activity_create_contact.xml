@@ -25,7 +25,9 @@
         android:id="@+id/create_contact_id"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="ID"
+        android:hint="ID:"
+        android:layout_marginTop="5sp"
+        android:background="#ecece7"
         android:inputType="text"/>
 
     <EditText
@@ -33,6 +35,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Email:"
+        android:layout_marginTop="5sp"
+        android:background="#ecece7"
         android:inputType="text"/>
 
 
@@ -41,6 +45,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Name:"
+        android:layout_marginTop="5sp"
+        android:background="#ecece7"
         android:inputType="text"/>
 
     <EditText
@@ -48,6 +54,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Surname:"
+        android:layout_marginTop="5sp"
+        android:background="#ecece7"
         android:inputType="text"/>
 
 

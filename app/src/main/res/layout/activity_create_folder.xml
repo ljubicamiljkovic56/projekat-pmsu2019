@@ -24,6 +24,7 @@
         android:id="@+id/create_folder_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ecece7"
         android:text="@string/create_folder_text"/>
 
 
@@ -33,6 +34,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/cf_hint_id"
+        android:layout_marginTop="5sp"
+        android:background="#ecece7"
         android:inputType="text"/>
 
     <EditText
@@ -40,6 +43,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/cf_hint_name"
+        android:layout_marginTop="5sp"
+        android:background="#ecece7"
         android:inputType="text"/>
 
 
