@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Contact;
 import com.example.pmsu_2019_projekat.model.Message;
+import com.example.pmsu_2019_projekat.tools.Data;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +37,7 @@ public class EmailActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true) ;
         actionbar.setTitle("Email");
 
-        emailPodaci();
+        dummy2 = Data.getEmails().get(0);
         TextView from = findViewById(id.email_from);
         from.append(dummy2.getFrom().getEmail());
         TextView to = findViewById(id.email_to);
@@ -51,29 +52,6 @@ public class EmailActivity extends AppCompatActivity {
         subject.append(dummy2.getSubject());
         TextView content = findViewById(id.email_content);
         content.append(dummy2.getContent());
-    }
-
-    public static void emailPodaci(){
-        dummy2 = new Message();
-        dummy2.setId("123");
-        Contact sender = ContactActivity.dummy1;
-        if(sender == null){
-            ContactActivity.kontaktPodaci();
-            sender = ContactActivity.dummy1;
-        }
-        dummy2.setFrom(sender);
-        ArrayList<Contact> contactList = new ArrayList<>();
-        Contact a = new Contact();
-        a.setFirst("Marko");
-        a.setLast("Marković");
-        a.setEmail("markom@yahoo.com");
-        contactList.add(a);
-        dummy2.setTo(contactList);
-        dummy2.setCc(contactList);
-        dummy2.setBcc(contactList);
-        dummy2.setDateTime(new Date(2019,04,16,16,41));
-        dummy2.setSubject("Veliki pozdrav");
-        dummy2.setContent("Ovo je primer neke email poruke");
     }
 
 

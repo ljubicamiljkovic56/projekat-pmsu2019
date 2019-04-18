@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Contact;
+import com.example.pmsu_2019_projekat.tools.Data;
 
 public class ContactActivity extends AppCompatActivity {
 
@@ -28,22 +29,13 @@ public class ContactActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true) ;
         actionbar.setTitle("Contact info");
 
-        kontaktPodaci();
+        dummy1 = Data.getContacts().get(0);
         TextView name = findViewById(R.id.contact_name);
         name.append(dummy1.getFirst());
         TextView lastname = findViewById(R.id.contact_surname);
         lastname.append(dummy1.getLast());
         TextView email = findViewById(R.id.contact_email);
         email.append(dummy1.getEmail());
-    }
-
-    public static void kontaktPodaci(){
-        dummy1 = new Contact();
-        dummy1.setFirst("Jašar");
-        dummy1.setLast("Ahmedovski");
-        dummy1.setEmail("jasara@uns.ac.rs");
-        dummy1.setId("1");
-
     }
 
     @Override

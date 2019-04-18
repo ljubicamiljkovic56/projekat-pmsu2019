@@ -16,6 +16,7 @@ import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Contact;
 import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.model.Message;
+import com.example.pmsu_2019_projekat.tools.Data;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +33,7 @@ public class FolderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folder);
 
-        folderPodaci();
+        folder1 = Data.getFolders().get(0);
         toolbar = (Toolbar) findViewById(R.id.folder_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(folder1.getName());
@@ -58,47 +59,6 @@ public class FolderActivity extends AppCompatActivity {
 
 
 
-    }
-    public static void folderPodaci(){
-        folder1 = new Folder();
-        folder1.setId("1");
-        folder1.setName("Folder 1");
-        folder1.setParentFolder(new Folder());
-        ArrayList<Folder> folders = new ArrayList<>();
-        folder1.setSubfolders(folders);
-        ArrayList<Message> messages = new ArrayList<>();
-        ArrayList<Contact> contacts = new ArrayList<>();
-        Message m1 = new Message();
-        Message m2 = new Message();
-        m1.setId("22");
-        Contact contact = new Contact();
-        contact.setFirst("Marko");
-        contact.setLast("Marković");
-        contact.setEmail("markom@yahoo.com");
-        Contact contact1 = new Contact();
-        contact1.setFirst("Aca");
-        contact1.setLast("Acic");
-        contact1.setEmail("aca@gmail.com");
-        contacts.add(contact);
-        contacts.add(contact1);
-        m1.setFrom(contact);
-        m1.setTo(contacts);
-        m1.setCc(contacts);
-        m1.setBcc(contacts);
-        m1.setDateTime(new Date(2019,04,16,16,41));
-        m1.setSubject("nn");
-        m1.setContent("Poruka1");
-        m2.setId("23");
-        m2.setFrom(contact1);
-        m2.setTo(contacts);
-        m2.setCc(contacts);
-        m2.setBcc(contacts);
-        m2.setDateTime(new Date(2019,04,16,16,41));
-        m2.setSubject("Dobrodosli");
-        m2.setContent("Ovo je primer druge poruke");
-        messages.add(m1);
-        messages.add(m2);
-        folder1.setMessages(messages);
     }
 
     @Override
