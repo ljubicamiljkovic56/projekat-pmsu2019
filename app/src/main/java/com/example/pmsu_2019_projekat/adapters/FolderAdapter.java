@@ -38,13 +38,20 @@ public class FolderAdapter extends BaseAdapter {
         View view = convertView;
         Folder folder = Data.getFolders().get(position);
 
-        if(convertView == null){
+        if(convertView == null)
             view = activity.getLayoutInflater().inflate(R.layout.folders_list_item, null);
 
-            TextView title = view.findViewById(R.id.folderTitle);
-            TextView desc = view.findViewById(R.id.folderDesc);
+        TextView title = view.findViewById(R.id.folderTitle);
+        TextView sender = view.findViewById(R.id.folderSender);
+        TextView subject = view.findViewById(R.id.folderSubject);
+        TextView desc = view.findViewById(R.id.folderDesc);
 
-        }
+        title.setText(folder.getName());
+        sender.setText(folder.getMessages().get(0).getFrom().getFirst());
+        subject.setText(folder.getMessages().get(0).getSubject());
+        desc.setText(folder.getMessages().get(0).getContent());
+
+
         return view;
     }
 }

@@ -19,10 +19,24 @@
         android:layout_alignParentTop="true"/>
 
     <TextView
+        android:id="@+id/folderSender"
+        android:layout_below="@+id/folderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/folderSubject"
+        android:layout_below="@+id/folderSender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
         android:id="@+id/folderDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/folderTitle"
+        android:layout_below="@+id/folderSubject"
         android:layout_marginStart="10dp"/>
 
 </RelativeLayout>

@@ -43,10 +43,10 @@ public class FoldersActivity extends NavigationActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        //ListView foldersList = findViewById(id.folders_list_view);
-       // FolderAdapter folderAdapter = new FolderAdapter(this);
-       // foldersList.setOnItemClickListener(new FoldersItemClickListener());
-       // foldersList.setAdapter(folderAdapter);
+        ListView foldersList = findViewById(R.id.folders_list_view);
+        FolderAdapter folderAdapter = new FolderAdapter(this);
+        foldersList.setOnItemClickListener(new FoldersItemClickListener());
+        foldersList.setAdapter(folderAdapter);
     }
 
 
