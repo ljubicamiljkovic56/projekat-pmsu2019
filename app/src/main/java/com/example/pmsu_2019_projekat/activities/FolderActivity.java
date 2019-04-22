@@ -33,7 +33,9 @@ public class FolderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folder);
 
-        folder1 = Data.getFolders().get(0);
+
+        //folder1 = Data.getFolders().get(0);
+        folder1 = (Folder) getIntent().getSerializableExtra("Folder");
         toolbar = (Toolbar) findViewById(R.id.folder_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(folder1.getName());
