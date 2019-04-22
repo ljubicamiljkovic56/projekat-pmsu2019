@@ -9,12 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.adapters.EmailAdapter;
 import com.example.pmsu_2019_projekat.model.Contact;
+import com.example.pmsu_2019_projekat.model.Message;
 
 import java.util.ArrayList;
 
@@ -40,6 +43,11 @@ public class ContactsActivity extends NavigationActivity{
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        ListView contactsList = findViewById(R.id.contacts_list_view);
+        //ContactAdapter contactAdapter = new ContactAdapter(this);
+        contactsList.setOnItemClickListener(new ContactsItemClickListener());
+        //contactsList.setAdapter(contactAdapter);
+
     }
 
 
@@ -60,6 +68,16 @@ public class ContactsActivity extends NavigationActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class ContactsItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Message contact = (Message) parent.getAdapter().getItem(position);
+            Intent intent = new Intent(ContactsActivity.this, ContactsActivity.class);
+            intent.putExtra("Contact", contact);
+            startActivity(intent);
+        }
     }
 
 
