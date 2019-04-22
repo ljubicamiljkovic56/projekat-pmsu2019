@@ -9,9 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.adapters.FolderAdapter;
+import com.example.pmsu_2019_projekat.model.Folder;
 
 
 public class FoldersActivity extends NavigationActivity {
@@ -39,7 +43,13 @@ public class FoldersActivity extends NavigationActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        //ListView foldersList = findViewById(id.folders_list_view);
+       // FolderAdapter folderAdapter = new FolderAdapter(this);
+       // foldersList.setOnItemClickListener(new FoldersItemClickListener());
+       // foldersList.setAdapter(folderAdapter);
     }
+
+
 
 
     @Override
@@ -58,6 +68,16 @@ public class FoldersActivity extends NavigationActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class FoldersItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Folder folder = (Folder) parent.getAdapter().getItem(position);
+            Intent intent = new Intent(FoldersActivity.this, FolderActivity.class);
+            intent.putExtra("Folder", folder);
+            startActivity(intent);
+        }
     }
 
 
