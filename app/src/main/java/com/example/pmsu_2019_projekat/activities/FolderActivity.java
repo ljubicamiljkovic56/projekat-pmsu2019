@@ -25,6 +25,7 @@ import java.util.List;
 public class FolderActivity extends AppCompatActivity {
 
     public static Folder folder1;
+    public static Message message1;
 
     Toolbar toolbar;
 
@@ -48,7 +49,7 @@ public class FolderActivity extends AppCompatActivity {
         messageSender.append(folder1.getMessages().get(0).getFrom().getFirst() +  " " + folder1.getMessages().get(0).getFrom().getLast());
         TextView messageSubject = findViewById(R.id.folder_message_subject);
         messageSubject.append(folder1.getMessages().get(0).getSubject());
-        TextView messageDetails = findViewById(R.id.folder_message);
+       TextView messageDetails = findViewById(R.id.folder_message);
         messageDetails.append(folder1.getMessages().get(0).getContent());
 
         TextView messageSender2 = findViewById(R.id.folder_name_txt2);
@@ -56,10 +57,14 @@ public class FolderActivity extends AppCompatActivity {
         TextView messageSubject2 = findViewById(R.id.folder_message_subject2);
         messageSubject2.append(folder1.getMessages().get(1).getSubject());
         TextView messageDetails2 = findViewById(R.id.folder_message2);
-        messageDetails2.append(folder1.getMessages().get(1).getContent());
+           messageDetails2.append(folder1.getMessages().get(1).getContent());
+
+        message1 = (Message) getIntent().getSerializableExtra("Message");
 
 
 
+
+        
 
     }
 
