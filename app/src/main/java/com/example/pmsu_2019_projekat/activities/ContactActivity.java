@@ -29,7 +29,7 @@ public class ContactActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true) ;
         actionbar.setTitle("Contact info");
 
-        dummy1 = Data.getContacts().get(0);
+        dummy1 = (Contact) getIntent().getSerializableExtra("Contact");
         TextView name = findViewById(R.id.contact_name);
         name.append(dummy1.getFirst());
         TextView lastname = findViewById(R.id.contact_surname);

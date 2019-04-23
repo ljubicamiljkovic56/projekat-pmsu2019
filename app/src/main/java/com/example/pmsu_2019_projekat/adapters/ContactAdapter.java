@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pmsu_2019_projekat.R;
@@ -36,14 +37,17 @@ public class ContactAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        //Message contact = Data.getContacts().get(position);
+        Contact contact = Data.getContacts().get(position);
 
         if(convertView == null)
             view = activity.getLayoutInflater().inflate(R.layout.contacts_list_item, null);
 
-        //ImageView icon = view.findViewById(R.id.icon);
+        ImageView icon = view.findViewById(R.id.icon);
         TextView name = view.findViewById(R.id.CName);
         TextView mail = view.findViewById(R.id.CMail);
+
+        name.setText(contact.getFirst() + " " + contact.getLast());
+        mail.setText(contact.getEmail());
 
         return view;
     }

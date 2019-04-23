@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.adapters.ContactAdapter;
 import com.example.pmsu_2019_projekat.adapters.EmailAdapter;
 import com.example.pmsu_2019_projekat.model.Contact;
 import com.example.pmsu_2019_projekat.model.Message;
@@ -44,9 +45,9 @@ public class ContactsActivity extends NavigationActivity{
         navigationView.setNavigationItemSelectedListener(this);
 
         ListView contactsList = findViewById(R.id.contacts_list_view);
-        //ContactAdapter contactAdapter = new ContactAdapter(this);
+        ContactAdapter contactAdapter = new ContactAdapter(this);
         contactsList.setOnItemClickListener(new ContactsItemClickListener());
-        //contactsList.setAdapter(contactAdapter);
+        contactsList.setAdapter(contactAdapter);
 
     }
 
@@ -73,8 +74,8 @@ public class ContactsActivity extends NavigationActivity{
     private class ContactsItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Message contact = (Message) parent.getAdapter().getItem(position);
-            Intent intent = new Intent(ContactsActivity.this, ContactsActivity.class);
+            Contact contact = (Contact) parent.getAdapter().getItem(position);
+            Intent intent = new Intent(ContactsActivity.this, ContactActivity.class);
             intent.putExtra("Contact", contact);
             startActivity(intent);
         }

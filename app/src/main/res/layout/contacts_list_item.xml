@@ -2,19 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="@color/colorWhite">
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_action_person"
+        android:src="@mipmap/default_person"
         />
 
     <TextView
@@ -26,15 +26,13 @@
         android:textColor="#000"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/icon"
         android:layout_toEndOf="@+id/icon" />
 
     <TextView android:id="@+id/CMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/icon"
+        android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/CName"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
