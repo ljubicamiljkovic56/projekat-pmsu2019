@@ -35,7 +35,7 @@
             android:parentActivityName=".activities.EmailsActivity"/>
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.FolderActivity"
-            android:parentActivityName=".activities.EmailsActivity"/>
+            android:parentActivityName=".activities.FoldersActivity"/>
         <activity android:name=".activities.FoldersActivity" />
         <activity
             android:name=".activities.CreateFolderActivity"

@@ -44,9 +44,9 @@ public class FoldersActivity extends NavigationActivity {
 
 
         ListView foldersList = findViewById(R.id.folders_list_view);
-        FolderAdapter folderAdapter = new FolderAdapter(this);
+        FolderAdapter foldersAdapter = new FolderAdapter(this);
         foldersList.setOnItemClickListener(new FoldersItemClickListener());
-        foldersList.setAdapter(folderAdapter);
+        foldersList.setAdapter(foldersAdapter);
     }
 
 

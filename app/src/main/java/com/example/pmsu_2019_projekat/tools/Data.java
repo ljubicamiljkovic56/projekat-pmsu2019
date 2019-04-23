@@ -67,12 +67,14 @@ public class Data {
         folder1.setId("1");
         folder1.setName("Folder 1");
         folder1.setMessages(getEmails());
-        folders.add(folder1);
+
 
         Folder folder2 = new Folder();
         folder2.setId("2");
         folder2.setName("Folder 2");
         folder2.setMessages(getEmails());
+
+        folders.add(folder1);
         folders.add(folder2);
 
         return folders;

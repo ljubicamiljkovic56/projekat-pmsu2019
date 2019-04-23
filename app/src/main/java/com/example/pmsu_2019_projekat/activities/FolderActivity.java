@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,12 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.adapters.FolderMessageAdapter;
 import com.example.pmsu_2019_projekat.model.Contact;
 import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.model.Message;
@@ -35,7 +39,6 @@ public class FolderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_folder);
 
 
-        //folder1 = Data.getFolders().get(0);
         folder1 = (Folder) getIntent().getSerializableExtra("Folder");
         toolbar = (Toolbar) findViewById(R.id.folder_toolbar);
         setSupportActionBar(toolbar);
@@ -44,26 +47,10 @@ public class FolderActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
 
-
-        TextView messageSender = findViewById(R.id.folder_name_txt);
-        messageSender.append(folder1.getMessages().get(0).getFrom().getFirst() +  " " + folder1.getMessages().get(0).getFrom().getLast());
-        TextView messageSubject = findViewById(R.id.folder_message_subject);
-        messageSubject.append(folder1.getMessages().get(0).getSubject());
-       TextView messageDetails = findViewById(R.id.folder_message);
-        messageDetails.append(folder1.getMessages().get(0).getContent());
-
-        TextView messageSender2 = findViewById(R.id.folder_name_txt2);
-        messageSender2.append(folder1.getMessages().get(1).getFrom().getFirst() +  " " + folder1.getMessages().get(1).getFrom().getLast());
-        TextView messageSubject2 = findViewById(R.id.folder_message_subject2);
-        messageSubject2.append(folder1.getMessages().get(1).getSubject());
-        TextView messageDetails2 = findViewById(R.id.folder_message2);
-           messageDetails2.append(folder1.getMessages().get(1).getContent());
-
-        message1 = (Message) getIntent().getSerializableExtra("Message");
-
-
-
-
+        ListView folderList = findViewById(R.id.folder_list_view);
+        FolderMessageAdapter folderAdapter = new FolderMessageAdapter(this);
+        folderList.setOnItemClickListener(new FolderItemClickListener());
+        folderList.setAdapter(folderAdapter);
         
 
     }
@@ -85,6 +72,16 @@ public class FolderActivity extends AppCompatActivity {
         }
         Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
+    }
+
+    private class FolderItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Message email = (Message) parent.getAdapter().getItem(position);
+            Intent intent = new Intent(FolderActivity.this, EmailActivity.class);
+            intent.putExtra("Email", email);
+            startActivity(intent);
+        }
     }
 
 
