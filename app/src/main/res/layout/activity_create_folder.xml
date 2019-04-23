@@ -19,13 +19,7 @@
         app:theme="@style/ToolbarColoredBackArrow"
         app:titleTextColor="@color/colorWhite"
         app:popupTheme="@style/ThemeOverlay.AppCompat" />
-
-    <TextView
-        android:id="@+id/create_folder_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#ecece7"
-        android:text="@string/create_folder_text"/>
+    
 
 
 

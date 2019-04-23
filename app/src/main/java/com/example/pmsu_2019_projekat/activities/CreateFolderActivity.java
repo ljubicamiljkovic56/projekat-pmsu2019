@@ -7,17 +7,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.model.Folder;
 
 public class CreateFolderActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
-
-
+    public static Folder f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,11 @@ public class CreateFolderActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true) ;
         actionbar.setTitle("Create Folder");
 
+        f = (Folder) getIntent().getSerializableExtra("Folder");
+        EditText editId = findViewById(R.id.folder_id);
+        editId.append("ID: " + f.getId());
+        EditText editName = findViewById(R.id.folder_name);
+        editName.append("Name: " + f.getName());
 
     }
 

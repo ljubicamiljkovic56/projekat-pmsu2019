@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,9 +69,13 @@ public class FolderActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.toolbar_edit:
                 message = "Edit";
+                Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(FolderActivity.this, CreateFolderActivity.class);
+                i.putExtra("Folder", folder1);
+                startActivity(i);
                 break;
+
         }
-        Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
     }
 
