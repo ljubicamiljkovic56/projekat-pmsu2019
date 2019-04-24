@@ -40,6 +40,8 @@
         android:id="@+id/profile_id"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:layout_marginTop="5dp"
         android:hint="ID"
         android:inputType="text"/>
 
@@ -48,6 +50,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Username:"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
         android:inputType="text"/>
 
     <EditText
@@ -55,6 +59,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Password:"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
         android:inputType="text"/>
 
     <EditText
@@ -62,6 +68,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Name:"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
         android:inputType="text"/>
 
     <EditText
@@ -69,6 +77,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Surname:"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
         android:inputType="text"/>
 
         </LinearLayout>
