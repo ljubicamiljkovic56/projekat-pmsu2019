@@ -1,6 +1,7 @@
 package com.example.pmsu_2019_projekat.activities;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -49,6 +50,15 @@ public class EmailsActivity extends NavigationActivity {
         EmailAdapter eAdapter = new EmailAdapter(this);
         emailsList.setOnItemClickListener(new EmailsItemClickListener());
         emailsList.setAdapter(eAdapter);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.emails_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EmailsActivity.this, CreateEmailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

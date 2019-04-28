@@ -1,6 +1,7 @@
 package com.example.pmsu_2019_projekat.activities;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ public class FoldersActivity extends NavigationActivity {
         setSupportActionBar(toolbar);
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+      //  actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setTitle("Folders");
 
@@ -47,6 +48,16 @@ public class FoldersActivity extends NavigationActivity {
         FolderAdapter foldersAdapter = new FolderAdapter(this);
         foldersList.setOnItemClickListener(new FoldersItemClickListener());
         foldersList.setAdapter(foldersAdapter);
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.folders_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FoldersActivity.this, CreateFolderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -79,6 +90,7 @@ public class FoldersActivity extends NavigationActivity {
             startActivity(intent);
         }
     }
+
 
 
 
