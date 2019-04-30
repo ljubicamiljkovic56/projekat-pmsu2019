@@ -30,7 +30,7 @@ public class FoldersActivity extends NavigationActivity {
         setSupportActionBar(toolbar);
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-      //  actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setTitle("Folders");
 
