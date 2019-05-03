@@ -54,6 +54,10 @@ public class NavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             Intent f = new Intent(NavigationActivity.this, SettingsActivity.class);
             startActivity(f);
+        }else if (id == R.id.nav_logout) {
+            Intent h = new Intent(NavigationActivity.this, LoginActivity.class);
+            startActivity(h);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

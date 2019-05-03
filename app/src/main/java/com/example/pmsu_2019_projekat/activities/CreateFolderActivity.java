@@ -30,13 +30,15 @@ public class CreateFolderActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar ();
         actionbar.setDisplayHomeAsUpEnabled(true) ;
         actionbar.setTitle("Create Folder");
-//
-//        f = (Folder) getIntent().getSerializableExtra("Folder");
-//        EditText editId = findViewById(R.id.folder_id);
-//        editId.append("ID: " + f.getId());
-//        EditText editName = findViewById(R.id.folder_name);
-//        editName.append("Name: " + f.getName());
 
+        f = (Folder) getIntent().getSerializableExtra("Folder");
+        if(f != null){
+            actionbar.setTitle(f.getName());
+            EditText editId = findViewById(R.id.folder_id);
+            editId.append("ID: " + f.getId());
+            EditText editName = findViewById(R.id.folder_name);
+            editName.append("Name: " + f.getName());
+        }
     }
 
     @Override
