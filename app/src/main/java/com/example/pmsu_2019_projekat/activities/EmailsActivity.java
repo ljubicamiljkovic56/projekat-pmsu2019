@@ -74,6 +74,7 @@ public class EmailsActivity extends NavigationActivity {
             public void onFailure(Call<List<Message>> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(EmailsActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.d("Ovo je tvoja greska:", "Greska: " + t.getMessage());
             }
         });
 

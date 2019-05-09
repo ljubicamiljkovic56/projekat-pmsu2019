@@ -11,10 +11,8 @@
 
     <string name="login_text">Login</string>
     <string name="welcome_text">Welcome</string>
-    <string name="username_text">Username</string>
-    <string name="username_hint">Enter your username</string>
-    <string name="password_text">Password</string>
-    <string name="password_hint">Enter your password</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
 
     <string name="toolbar_text">PMSU_2019_Projekat</string>
     <string name="action_edit_text">Edit</string>
