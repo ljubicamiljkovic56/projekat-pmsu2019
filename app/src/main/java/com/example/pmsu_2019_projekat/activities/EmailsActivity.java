@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,15 +21,29 @@ import android.widget.Toast;
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.adapters.EmailAdapter;
 import com.example.pmsu_2019_projekat.model.Message;
+import com.example.pmsu_2019_projekat.services.EmailService;
+import com.example.pmsu_2019_projekat.services.RetrofitClient;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.pmsu_2019_projekat.R.*;
 
 public class EmailsActivity extends NavigationActivity {
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_emails);
+
+        progressDialog = new ProgressDialog(EmailsActivity.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
         Toolbar toolbar = (Toolbar) findViewById(id.emails_toolbar);
         setSupportActionBar(toolbar);
@@ -46,10 +61,21 @@ public class EmailsActivity extends NavigationActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ListView emailsList = findViewById(id.emails_list_view);
-        EmailAdapter eAdapter = new EmailAdapter(this);
-        emailsList.setOnItemClickListener(new EmailsItemClickListener());
-        emailsList.setAdapter(eAdapter);
+        EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
+        Call<List<Message>> call = service.getAllEmails();
+        call.enqueue(new Callback<List<Message>>() {
+            @Override
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                progressDialog.dismiss();
+                generateDataList(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(EmailsActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.emails_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +85,13 @@ public class EmailsActivity extends NavigationActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void generateDataList(List<Message> messagesList) {
+        ListView emailsList = findViewById(id.emails_list_view);
+        EmailAdapter eAdapter = new EmailAdapter(this, messagesList);
+        emailsList.setOnItemClickListener(new EmailsItemClickListener());
+        emailsList.setAdapter(eAdapter);
     }
 
 
