@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -54,14 +55,21 @@ public class ProfileActivity extends NavigationActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        String message = "";
+        //String message = "";
         switch (item.getItemId()){
             case R.id.profile_toolbar_logout:
-                message = "Logout";
+                Toast.makeText(this, "Logout", Toast.LENGTH_LONG).show();
+                Intent a = new Intent(ProfileActivity.this, LoginActivity.class);
+                startActivity(a);
+                break;
+            case R.id.change_profile_btn:
+                Toast.makeText(this, "Change profile", Toast.LENGTH_LONG).show();
+                Intent b = new Intent(ProfileActivity.this, LoginActivity.class);
+                startActivity(b);
                 break;
         }
-        Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
-        return  super.onOptionsItemSelected(item);
+
+        return super.onOptionsItemSelected(item);
     }
 
 

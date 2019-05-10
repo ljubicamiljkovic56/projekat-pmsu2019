@@ -19,7 +19,7 @@
         app:theme="@style/ToolbarColoredBackArrow"
         app:titleTextColor="@color/colorWhite"
         app:popupTheme="@style/ThemeOverlay.AppCompat" />
-    
+
 
 
 

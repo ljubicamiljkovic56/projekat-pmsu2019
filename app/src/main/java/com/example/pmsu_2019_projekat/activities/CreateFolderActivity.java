@@ -32,11 +32,13 @@ public class CreateFolderActivity extends AppCompatActivity {
         actionbar.setTitle("Create Folder");
 
         f = (Folder) getIntent().getSerializableExtra("Folder");
-        EditText editId = findViewById(R.id.folder_id);
-        editId.append("ID: " + f.getId());
-        EditText editName = findViewById(R.id.folder_name);
-        editName.append("Name: " + f.getName());
-
+        if(f != null){
+            actionbar.setTitle(f.getName());
+            EditText editId = findViewById(R.id.folder_id);
+            editId.append("ID: " + f.getId());
+            EditText editName = findViewById(R.id.folder_name);
+            editName.append("Name: " + f.getName());
+        }
     }
 
     @Override
