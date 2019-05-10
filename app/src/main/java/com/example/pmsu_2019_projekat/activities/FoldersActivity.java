@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
@@ -17,14 +18,30 @@ import android.widget.Toast;
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.adapters.FolderAdapter;
 import com.example.pmsu_2019_projekat.model.Folder;
+import com.example.pmsu_2019_projekat.services.FolderService;
+import com.example.pmsu_2019_projekat.services.RetrofitClient;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class FoldersActivity extends NavigationActivity {
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folders);
+
+
+        progressDialog = new ProgressDialog(FoldersActivity.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.folders_toolbar);
         setSupportActionBar(toolbar);
@@ -44,10 +61,26 @@ public class FoldersActivity extends NavigationActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        ListView foldersList = findViewById(R.id.folders_list_view);
-        FolderAdapter foldersAdapter = new FolderAdapter(this);
-        foldersList.setOnItemClickListener(new FoldersItemClickListener());
-        foldersList.setAdapter(foldersAdapter);
+//        ListView foldersList = findViewById(R.id.folders_list_view);
+//        FolderAdapter foldersAdapter = new FolderAdapter(this);
+//        foldersList.setOnItemClickListener(new FoldersItemClickListener());
+//        foldersList.setAdapter(foldersAdapter);
+
+        FolderService service = RetrofitClient.getRetrofitInstance().create(FolderService.class);
+        Call<List<Folder>> call = service.getAllFolders();
+        call.enqueue(new Callback<List<Folder>>() {
+            @Override
+            public void onResponse(Call<List<Folder>> call, Response<List<Folder>> response) {
+                progressDialog.dismiss();
+                generateDataList(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Folder>> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(FoldersActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.folders_fab);
@@ -60,6 +93,13 @@ public class FoldersActivity extends NavigationActivity {
         });
     }
 
+
+    private void generateDataList(List<Folder> fsList) {
+        ListView foldersList = findViewById(R.id.folders_list_view);
+        FolderAdapter fAdapter = new FolderAdapter(this, fsList);
+        foldersList.setOnItemClickListener(new FoldersItemClickListener());
+        foldersList.setAdapter(fAdapter);
+    }
 
 
 

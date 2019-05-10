@@ -1,6 +1,7 @@
 package com.example.pmsu_2019_projekat.tools;
 
 import com.example.pmsu_2019_projekat.activities.ContactActivity;
+import com.example.pmsu_2019_projekat.model.Account;
 import com.example.pmsu_2019_projekat.model.Contact;
 import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.model.Message;
@@ -9,6 +10,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Data {
+
+/*
+    public static ArrayList<Account> getAccounts(){
+        ArrayList<Account> accounts = new ArrayList<>();
+        Account a1 = new Account();
+        a1.setId("1");
+        a1.setUsername("miki");
+        a1.setPassword("miki123");
+
+    }*/
 
     public static ArrayList<Message> getEmails(){
         ArrayList<Message> emails = new ArrayList<>();
