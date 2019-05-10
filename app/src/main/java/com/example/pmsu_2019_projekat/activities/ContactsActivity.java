@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +22,16 @@ import com.example.pmsu_2019_projekat.adapters.ContactAdapter;
 import com.example.pmsu_2019_projekat.adapters.EmailAdapter;
 import com.example.pmsu_2019_projekat.model.Contact;
 import com.example.pmsu_2019_projekat.model.Message;
+import com.example.pmsu_2019_projekat.services.ContactService;
+import com.example.pmsu_2019_projekat.services.EmailService;
+import com.example.pmsu_2019_projekat.services.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ContactsActivity extends NavigationActivity{
 
@@ -29,6 +39,12 @@ public class ContactsActivity extends NavigationActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+/*
+        OVDE JE GRESKA NEKA
+        progressDialog = new ProgressDialog(ContactsActivity.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.contacts_toolbar);
         setSupportActionBar(toolbar);
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -45,10 +61,31 @@ public class ContactsActivity extends NavigationActivity{
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        /* pre bilo
         ListView contactsList = findViewById(R.id.contacts_list_view);
         ContactAdapter contactAdapter = new ContactAdapter(this);
         contactsList.setOnItemClickListener(new ContactsItemClickListener());
         contactsList.setAdapter(contactAdapter);
+        */
+
+/*     GRESKA KOD PROGRESS DIALOG
+        ContactService service = RetrofitClient.getRetrofitInstance().create(ContactService.class);
+        Call<List<Message>> call = service.getAllContacts();
+        call.enqueue(new Callback<List<Message>>() {
+            @Override
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                progressDialog.dismiss();
+                generateDataList(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(ContactsActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.d("Ovo je tvoja greska:", "Greska: " + t.getMessage());
+            }
+        });
+*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.contacts_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +104,7 @@ public class ContactsActivity extends NavigationActivity{
         getMenuInflater().inflate(R.menu.contacts_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -80,6 +118,7 @@ public class ContactsActivity extends NavigationActivity{
         return super.onOptionsItemSelected(item);
     }
 
+
     private class ContactsItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -89,6 +128,13 @@ public class ContactsActivity extends NavigationActivity{
             startActivity(intent);
         }
     }
+    private void generateDataList(List<Message> messagesList) {
+        ListView contactsList = findViewById(R.id.contacts_list_view);
+        ContactAdapter cAdapter = new ContactAdapter(this, messagesList);
+        contactsList.setOnItemClickListener(new ContactsActivity.ContactsItemClickListener());
+        contactsList.setAdapter(cAdapter);
+    }
+
 
 
     @Override

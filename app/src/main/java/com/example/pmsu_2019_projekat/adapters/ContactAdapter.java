@@ -12,8 +12,16 @@ import com.example.pmsu_2019_projekat.model.Contact;
 import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.tools.Data;
 
+import java.util.List;
+
 public class ContactAdapter extends BaseAdapter {
     private Activity activity;
+    private List<Message> dataList;
+
+    public ContactAdapter(Activity activity, List<Message> dataList) {
+        this.activity = activity;
+        this.dataList = dataList;
+    }
 
     public ContactAdapter(Activity activity) {
         this.activity = activity;
