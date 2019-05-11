@@ -35,16 +35,19 @@ import retrofit2.Response;
 
 public class ContactsActivity extends NavigationActivity{
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
-/*
-        OVDE JE GRESKA NEKA
+
+
         progressDialog = new ProgressDialog(ContactsActivity.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
-*/
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.contacts_toolbar);
         setSupportActionBar(toolbar);
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -68,24 +71,22 @@ public class ContactsActivity extends NavigationActivity{
         contactsList.setAdapter(contactAdapter);
         */
 
-/*     GRESKA KOD PROGRESS DIALOG
         ContactService service = RetrofitClient.getRetrofitInstance().create(ContactService.class);
-        Call<List<Message>> call = service.getAllContacts();
-        call.enqueue(new Callback<List<Message>>() {
+        Call<List<Contact>> call = service.getAllContacts();
+        call.enqueue(new Callback<List<Contact>>() {
             @Override
-            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+            public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
                 progressDialog.dismiss();
                 generateDataList(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<Message>> call, Throwable t) {
+            public void onFailure(Call<List<Contact>> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(ContactsActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                 Log.d("Ovo je tvoja greska:", "Greska: " + t.getMessage());
             }
         });
-*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.contacts_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +99,12 @@ public class ContactsActivity extends NavigationActivity{
     }
 
 
+    private void generateDataList(List<Contact> csList) {
+        ListView contactsList = findViewById(R.id.contacts_list_view);
+        ContactAdapter cAdapter = new ContactAdapter(this, csList);
+        contactsList.setOnItemClickListener(new ContactsItemClickListener());
+        contactsList.setAdapter(cAdapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,12 +134,6 @@ public class ContactsActivity extends NavigationActivity{
             intent.putExtra("Contact", contact);
             startActivity(intent);
         }
-    }
-    private void generateDataList(List<Message> messagesList) {
-        ListView contactsList = findViewById(R.id.contacts_list_view);
-        ContactAdapter cAdapter = new ContactAdapter(this, messagesList);
-        contactsList.setOnItemClickListener(new ContactsActivity.ContactsItemClickListener());
-        contactsList.setAdapter(cAdapter);
     }
 
 

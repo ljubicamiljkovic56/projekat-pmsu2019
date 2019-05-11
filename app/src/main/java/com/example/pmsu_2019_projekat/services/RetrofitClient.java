@@ -6,7 +6,9 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 public class RetrofitClient {
 
     private static Retrofit retrofit;
-    private static final String BASE_URL ="http://192.168.1.6:8080/emailClient/";
+    //192.168.1.6 Jovan stavio tu adresu
+    //10.0.0.2 emulator adresa
+    private static final String BASE_URL ="http://10.0.0.2:8080/emailClient/";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {

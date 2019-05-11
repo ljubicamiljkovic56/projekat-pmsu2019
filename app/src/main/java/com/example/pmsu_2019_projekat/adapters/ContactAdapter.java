@@ -16,25 +16,25 @@ import java.util.List;
 
 public class ContactAdapter extends BaseAdapter {
     private Activity activity;
-    private List<Message> dataList;
+    private List<Contact> dataList;
 
-    public ContactAdapter(Activity activity, List<Message> dataList) {
+    public ContactAdapter(Activity activity, List<Contact> dataList) {
         this.activity = activity;
         this.dataList = dataList;
     }
 
-    public ContactAdapter(Activity activity) {
-        this.activity = activity;
-    }
+  //  public ContactAdapter(Activity activity) {
+  //      this.activity = activity;
+  //  }
 
     @Override
     public int getCount() {
-        return Data.getContacts().size();
+        return dataList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return Data.getContacts().get(position);
+        return dataList.get(position);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ContactAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        Contact contact = Data.getContacts().get(position);
+        Contact contact = dataList.get(position);
 
         if(convertView == null)
             view = activity.getLayoutInflater().inflate(R.layout.contacts_list_item, null);
