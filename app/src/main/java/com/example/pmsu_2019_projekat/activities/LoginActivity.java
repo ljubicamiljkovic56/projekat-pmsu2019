@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         user = (EditText) findViewById(id.username_edit);
         pass = (EditText) findViewById(id.password_edit);
         loginButton = (Button) findViewById(id.btnStartEmails);
-        sharedPreferences = getSharedPreferences("prefs",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         intent = new Intent(LoginActivity.this,EmailsActivity.class);
         if(sharedPreferences.contains("username") && sharedPreferences.contains("password")){
             startActivity(intent);

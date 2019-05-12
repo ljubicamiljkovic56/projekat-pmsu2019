@@ -1,6 +1,8 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -55,6 +57,10 @@ public class NavigationActivity extends AppCompatActivity
             Intent f = new Intent(NavigationActivity.this, SettingsActivity.class);
             startActivity(f);
         }else if (id == R.id.nav_logout) {
+            SharedPreferences preferences =getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();
+            editor.commit();
             Intent h = new Intent(NavigationActivity.this, LoginActivity.class);
             startActivity(h);
             finish();
