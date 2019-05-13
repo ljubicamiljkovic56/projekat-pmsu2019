@@ -1,6 +1,8 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -58,11 +60,19 @@ public class ProfileActivity extends NavigationActivity {
         //String message = "";
         switch (item.getItemId()){
             case R.id.profile_toolbar_logout:
+                SharedPreferences preferences =getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
                 Toast.makeText(this, "Logout", Toast.LENGTH_LONG).show();
                 Intent a = new Intent(ProfileActivity.this, LoginActivity.class);
                 startActivity(a);
                 break;
             case R.id.change_profile_btn:
+                SharedPreferences preferences1 =getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = preferences1.edit();
+                editor1.clear();
+                editor1.commit();
                 Toast.makeText(this, "Change profile", Toast.LENGTH_LONG).show();
                 Intent b = new Intent(ProfileActivity.this, LoginActivity.class);
                 startActivity(b);
