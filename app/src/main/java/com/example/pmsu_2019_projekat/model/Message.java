@@ -2,6 +2,7 @@ package com.example.pmsu_2019_projekat.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Message implements Serializable {
@@ -39,6 +40,18 @@ public class Message implements Serializable {
         this.folder = folder;
         this.account = account;
     }
+
+    public static Comparator<Message> MessageDateComparator = new Comparator<Message>() {
+        public int compare(Message a, Message b) {
+            return a.getDateTime().compareTo(b.getDateTime());
+        }
+    };
+
+    public static Comparator<Message> MessageDateComparatorDesc = new Comparator<Message>() {
+        public int compare(Message a, Message b) {
+            return b.getDateTime().compareTo(a.getDateTime());
+        }
+    };
 
     @Override
     public String toString() {

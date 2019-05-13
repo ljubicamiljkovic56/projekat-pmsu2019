@@ -32,7 +32,7 @@
             android:dialogTitle="@string/pref_sort_by_date"
             android:entries="@array/pref_sort_by_date_entries"
             android:entryValues="@array/pref_sort_by_date_values"
-            android:key="@string/pref_radius"
+            android:key="@string/pref_sort"
             android:title="@string/pref_sort_by_date"
             android:summary="%s"
             android:defaultValue="1"/>
