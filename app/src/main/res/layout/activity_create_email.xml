@@ -30,43 +30,68 @@
         <android.support.design.widget.TextInputEditText
             android:id="@+id/email_receiver"
             android:layout_width="match_parent"
+            android:hint="To:"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_height="wrap_content"
             android:background="#ecece7"
             android:inputType="textEmailAddress"/>
     </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/email_cc"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="CC:"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="#ecece7"
-        android:inputType="textEmailAddress"/>
 
-    <EditText
-        android:id="@+id/email_bcc"
-        android:layout_width="fill_parent"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="BCC:"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="#ecece7"
-        android:inputType="textEmailAddress"/>
+        app:errorEnabled="true">
 
-    <EditText
-        android:id="@+id/email_subject"
-        android:layout_width="fill_parent"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/email_cc"
+            android:layout_width="match_parent"
+            android:hint="CC:"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_height="wrap_content"
+            android:background="#ecece7"
+            android:inputType="textEmailAddress"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Subject:"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="#ecece7"
-        android:inputType="textEmailAddress"/>
+        app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/email_bcc"
+            android:layout_width="match_parent"
+            android:hint="BCC:"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_height="wrap_content"
+            android:background="#ecece7"
+            android:inputType="textEmailAddress"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/email_subject"
+            android:layout_width="match_parent"
+            android:hint="Subject:"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_height="wrap_content"
+            android:background="#ecece7"
+            android:inputType="textEmailAddress"/>
+    </android.support.design.widget.TextInputLayout>
+
 
     <EditText
         android:id="@+id/email_content"

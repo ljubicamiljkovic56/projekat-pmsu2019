@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,8 +24,10 @@ public class CreateEmailActivity extends AppCompatActivity {
                     "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
                     "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +")" );
 
-    private TextInputLayout textTo;
-
+    private TextInputEditText textTo;
+    private TextInputEditText textCc;
+    private TextInputEditText textBcc;
+    private TextInputEditText textSubject;
 
 
     @Override
@@ -33,7 +36,10 @@ public class CreateEmailActivity extends AppCompatActivity {
         setContentView(layout.activity_create_email);
 
 
-        textTo = findViewById(id.email_receiver);
+        textTo = (TextInputEditText) findViewById(id.email_receiver);
+        textCc = (TextInputEditText) findViewById(id.email_cc);
+        textBcc = (TextInputEditText) findViewById(id.email_bcc);
+        textSubject = (TextInputEditText) findViewById(id.email_subject);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.create_email_toolbar);
         setSupportActionBar(toolbar);
@@ -64,7 +70,8 @@ public class CreateEmailActivity extends AppCompatActivity {
     }
 
     private boolean validateEmail(){
-        String emailInput = textTo.getEditText().getText().toString().trim();
+
+        String emailInput = textTo.getText().toString().trim();
 
         if(emailInput.isEmpty()){
             textTo.setError("Prazno polje!");
@@ -77,11 +84,60 @@ public class CreateEmailActivity extends AppCompatActivity {
             return true;
         }
     }
-    public void validateInput(View v){
-        if(!validateEmail()){
+    private boolean validateCC(){
+
+        String emailInput = textCc.getText().toString().trim();
+
+        if(emailInput.isEmpty()){
+            textCc.setError("Prazno polje!");
+            return false;
+        }else  if(email.matcher(emailInput).matches()){
+            textCc.setError("Niste dobro uneli email");
+            return false;
+        }else {
+            textCc.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateBCC(){
+
+        String emailInput = textBcc.getText().toString().trim();
+
+        if(emailInput.isEmpty()){
+            textBcc.setError("Prazno polje!");
+            return false;
+        }else  if(email.matcher(emailInput).matches()){
+            textBcc.setError("Niste dobro uneli email");
+            return false;
+        }else {
+            textBcc.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateSubject(){
+        String subjectInput = textSubject.getText().toString().trim();
+        if(subjectInput.length() > 20){
+            textSubject.setError("Subject predugacak!");
+            return false;
+        }else {
+            textSubject.setError(null);
+            return true;
+        }
+    }
+
+    public void validateInput(MenuItem menuItem){
+        if(!validateEmail() | !validateCC() | !validateBCC() | !validateSubject()){
             return;
         }
-        String inputT = "Email" + textTo.getEditText().getText().toString();
+        String inputT = "Email" + textTo.getText().toString();
+        inputT += "\n";
+        inputT += "CC: " + textCc.getText().toString();
+        inputT += "\n";
+        inputT += "BCC: " + textBcc.getText().toString();
+        inputT += "\n";
+        inputT += "Subject: " + textSubject.getText().toString();
         Toast.makeText(this, inputT, Toast.LENGTH_LONG);
     }
 
