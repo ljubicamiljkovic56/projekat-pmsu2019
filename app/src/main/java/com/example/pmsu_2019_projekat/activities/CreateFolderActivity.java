@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,10 +21,14 @@ public class CreateFolderActivity extends AppCompatActivity {
 
     public static Folder f;
 
+    private TextInputEditText textName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_folder);
+
+        textName = (TextInputEditText) findViewById(R.id.folder_name);
 
         toolbar = (Toolbar) findViewById(R.id.create_folder_toolbar);
         setSupportActionBar(toolbar);
@@ -34,8 +39,8 @@ public class CreateFolderActivity extends AppCompatActivity {
         f = (Folder) getIntent().getSerializableExtra("Folder");
         if(f != null){
             actionbar.setTitle(f.getName());
-            EditText editId = findViewById(R.id.folder_id);
-            editId.append("ID: " + f.getId());
+          //  EditText editId = findViewById(R.id.folder_id);
+          //  editId.append("ID: " + f.getId());
             EditText editName = findViewById(R.id.folder_name);
             editName.append("Name: " + f.getName());
         }
@@ -62,6 +67,31 @@ public class CreateFolderActivity extends AppCompatActivity {
         Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
     }
+
+    private boolean validateName(){
+        String nameInput = textName.getText().toString().trim();
+
+        if(nameInput.isEmpty()){
+            textName.setError("Ime foldera ne sme biti prazno!");
+            return false;
+        }else if(nameInput.length() > 20){
+            textName.setError("Predugacko ime!");
+            return false;
+        }else {
+            textName.setError(null);
+            return true;
+        }
+    }
+
+    public void validateInputName(MenuItem menuItem){
+        if(!validateName()){
+            return;
+        }
+        String inputT = "Name" + textName.getText().toString();
+        Toast.makeText(this, inputT, Toast.LENGTH_LONG);
+    }
+
+
 
     @Override
     protected void onStart() {

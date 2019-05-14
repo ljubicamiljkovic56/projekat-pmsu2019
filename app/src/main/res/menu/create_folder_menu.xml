@@ -6,6 +6,7 @@
         android:id="@+id/toolbar_save"
         android:icon="@drawable/ic_save_white_24dp"
         android:title="@string/create_folder_menu_save"
+        android:onClick="validateInputName"
         app:showAsAction="always" />
     <item
         android:id="@+id/toolbar_cancel"

@@ -23,23 +23,23 @@
 
 
 
-    <EditText
-        android:id="@+id/folder_id"
-        android:layout_width="fill_parent"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/cf_hint_id"
-        android:layout_marginTop="5sp"
-        android:background="#ecece7"
-        android:inputType="text"/>
+        app:errorEnabled="true">
 
-    <EditText
-        android:id="@+id/folder_name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/cf_hint_name"
-        android:layout_marginTop="5sp"
-        android:background="#ecece7"
-        android:inputType="text"/>
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/folder_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cf_hint_name"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="#ecece7"
+            android:inputType="text"/>
+    </android.support.design.widget.TextInputLayout>
+
 
 
 
