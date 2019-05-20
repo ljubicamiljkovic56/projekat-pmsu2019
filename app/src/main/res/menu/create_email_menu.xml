@@ -5,7 +5,6 @@
         android:id="@+id/toolbar_send"
         android:icon="@drawable/ic_send_white_24dp"
         android:title="@string/send_email"
-        android:onClick="validateInput"
         app:showAsAction="always" />
     <item
         android:id="@+id/toolbar_cancel"

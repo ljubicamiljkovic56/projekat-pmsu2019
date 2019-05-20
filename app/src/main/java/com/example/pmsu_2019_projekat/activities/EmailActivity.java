@@ -39,7 +39,11 @@ public class EmailActivity extends AppCompatActivity {
 
         dummy2 = (Message) getIntent().getSerializableExtra("Email");
         TextView from = findViewById(id.email_from);
-        from.append(dummy2.getFrom().getEmail());
+        if(dummy2.getFrom() == null){
+            from.append(dummy2.getAccount().getUsername());
+        }else{
+            from.append(dummy2.getFrom().getEmail());
+        }
         TextView to = findViewById(id.email_to);
         to.append(dummy2.getTo().get(0).getEmail());
         TextView cc = findViewById(id.email_cc);

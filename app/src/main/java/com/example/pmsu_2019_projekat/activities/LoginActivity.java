@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.model.Account;
+import com.example.pmsu_2019_projekat.tools.Data;
 
 import java.util.regex.Pattern;
 
@@ -35,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(id.btnStartEmails);
         sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         intent = new Intent(LoginActivity.this,EmailsActivity.class);
-        if(sharedPreferences.contains("username") && sharedPreferences.contains("password")){
+        if(sharedPreferences.contains("username")){
             startActivity(intent);
         }
 
@@ -44,15 +46,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = user.getText().toString();
                 String password = pass.getText().toString();
-                if(username.equals("miki") && password.equals("miki123")){
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("username",username);
-                    editor.putString("password",password);
-                    editor.commit();
-                    Toast.makeText(getApplicationContext(), "Login uspesan",Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(),"Niste uneli dobre informacije",Toast.LENGTH_SHORT).show();
+                for(Account a : Data.getAccounts()){
+                    if(a.getUsername().equals(username) && a.getPassword().equals(password)){
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username",username);
+                        editor.commit();
+                        Toast.makeText(getApplicationContext(), "Login uspesan",Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Niste uneli dobre informacije",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

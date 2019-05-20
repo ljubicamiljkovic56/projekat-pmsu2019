@@ -9,19 +9,22 @@ public class Contact implements Serializable {
     private String last;
     private String email;
     private String format;
-    private Photo display;
+    private Photo photo;
+    private String displayName;
 
     public Contact(){
         super();
     }
 
-    public Contact(String id, String first, String last, Photo display, String email, String format) {
+    public Contact(String id, String first, String last, Photo photo, String email, String format, String displayName) {
         this.id = id;
         this.first = first;
         this.last = last;
-        this.display = display;
+        this.photo = photo;
         this.email = email;
         this.format = format;
+        this.format = format;
+        this.displayName = displayName;
     }
 
     public String getId() {
@@ -64,11 +67,19 @@ public class Contact implements Serializable {
         this.format = format;
     }
 
-    public Photo getDisplay() {
-        return display;
+    public Photo getPhoto() {
+        return photo;
     }
 
-    public void setDisplay(Photo photo) {
-        this.display = display;
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }

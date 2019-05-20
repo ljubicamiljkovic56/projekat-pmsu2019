@@ -36,6 +36,7 @@ import retrofit2.Response;
 public class ContactsActivity extends NavigationActivity{
 
     ProgressDialog progressDialog;
+    public static List<Contact> contacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,8 @@ public class ContactsActivity extends NavigationActivity{
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
                 progressDialog.dismiss();
-                generateDataList(response.body());
+                contacts = response.body();
+                generateDataList(contacts);
             }
 
             @Override

@@ -11,24 +11,22 @@ import java.util.Date;
 
 public class Data {
 
-/*    public static ArrayList<Account> getAccounts(){
+    public static ArrayList<Account> getAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
         Account a1 = new Account();
         a1.setId("1");
-        a1.setUsername("miki");
+        a1.setUsername("miki@gmail.com");
         a1.setPassword("miki123");
         ArrayList<Message> messages = new ArrayList<>();
-        messages.add(getEmails().get(0));
         a1.setMessages(messages);
         Account a2 = new Account();
         a2.setId("2");
-        a2.setUsername("kiki");
+        a2.setUsername("kiki@icloud.com");
         a2.setPassword("kiki123");
-        a2.setMessages(messages);
         accounts.add(a1);
         accounts.add(a2);
         return accounts;
-    }*/
+    }
 
     public static ArrayList<Message> getEmails(){
         ArrayList<Message> emails = new ArrayList<>();

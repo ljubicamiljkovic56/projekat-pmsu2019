@@ -1,24 +1,42 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.SharedPreferences;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.model.Account;
+import com.example.pmsu_2019_projekat.model.Contact;
+import com.example.pmsu_2019_projekat.model.Message;
+import com.example.pmsu_2019_projekat.services.ContactService;
+import com.example.pmsu_2019_projekat.services.EmailService;
+import com.example.pmsu_2019_projekat.services.RetrofitClient;
+import com.example.pmsu_2019_projekat.tools.Data;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.pmsu_2019_projekat.R.*;
 
 public class CreateEmailActivity extends AppCompatActivity {
 
+    private Message newEmail;
     private static final Pattern email =
             Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\+]{1,256}" +
                     "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
@@ -28,6 +46,7 @@ public class CreateEmailActivity extends AppCompatActivity {
     private TextInputEditText textCc;
     private TextInputEditText textBcc;
     private TextInputEditText textSubject;
+    private EditText textContent;
 
 
     @Override
@@ -40,6 +59,7 @@ public class CreateEmailActivity extends AppCompatActivity {
         textCc = (TextInputEditText) findViewById(id.email_cc);
         textBcc = (TextInputEditText) findViewById(id.email_bcc);
         textSubject = (TextInputEditText) findViewById(id.email_subject);
+        textContent = (EditText) findViewById(id.email_content);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.create_email_toolbar);
         setSupportActionBar(toolbar);
@@ -59,17 +79,71 @@ public class CreateEmailActivity extends AppCompatActivity {
         String message = "";
         switch (item.getItemId()){
             case id.toolbar_send:
-                message = "Send";
+                sendEmail();
+                message = "Sent";
                 break;
             case id.toolbar_cancel:
-                message = "Cancel";
+                message = "Canceled";
                 break;
         }
         Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
     }
 
-    private boolean validateEmail(){
+    private static Contact contactFinder(String contactEmail){
+        List<Contact> csList = Data.getContacts();
+        if(csList != null){
+            for(Contact c : csList){
+                if(c.getEmail().equals(contactEmail)){
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
+
+    private void sendEmail(){
+        newEmail = new Message();
+        newEmail.setId("125");
+        SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
+        String loggedAccount = sharedPreferences.getString("username", "");
+        Account from = new Account();
+        for(Account a : Data.getAccounts()){
+            if(a.getUsername().equals(loggedAccount))
+                from = a;
+        }
+        newEmail.setAccount(from);
+        ArrayList<Contact> to = new ArrayList<>();
+        to.add(contactFinder(textTo.getText().toString().trim()));
+        newEmail.setTo(to);
+        ArrayList<Contact> cc = new ArrayList<>();
+        cc.add(contactFinder(textCc.getText().toString().trim()));
+        newEmail.setCc(cc);
+        ArrayList<Contact> bcc = new ArrayList<>();
+        bcc.add(contactFinder(textBcc.getText().toString().trim()));
+        newEmail.setBcc(to);
+        newEmail.setDateTime(new Date());
+        newEmail.setSubject(textSubject.getText().toString());
+        newEmail.setContent(textContent.getText().toString());
+        EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
+        Call<Void> addEmail = service.addNewEmail(newEmail);
+        addEmail.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(CreateEmailActivity.this, "Uspesno poslat email", Toast.LENGTH_LONG);
+
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(CreateEmailActivity.this, "Nesto nije u redu", Toast.LENGTH_LONG);
+                finish();
+            }
+        });
+    }
+
+    private boolean validateTo(){
 
         String emailInput = textTo.getText().toString().trim();
 
@@ -88,10 +162,7 @@ public class CreateEmailActivity extends AppCompatActivity {
 
         String emailInput = textCc.getText().toString().trim();
 
-        if(emailInput.isEmpty()){
-            textCc.setError("Prazno polje!");
-            return false;
-        }else  if(email.matcher(emailInput).matches()){
+        if(email.matcher(emailInput).matches()){
             textCc.setError("Niste dobro uneli email");
             return false;
         }else {
@@ -104,10 +175,7 @@ public class CreateEmailActivity extends AppCompatActivity {
 
         String emailInput = textBcc.getText().toString().trim();
 
-        if(emailInput.isEmpty()){
-            textBcc.setError("Prazno polje!");
-            return false;
-        }else  if(email.matcher(emailInput).matches()){
+        if(email.matcher(emailInput).matches()){
             textBcc.setError("Niste dobro uneli email");
             return false;
         }else {
@@ -116,19 +184,8 @@ public class CreateEmailActivity extends AppCompatActivity {
         }
     }
 
-    private boolean validateSubject(){
-        String subjectInput = textSubject.getText().toString().trim();
-        if(subjectInput.length() > 20){
-            textSubject.setError("Subject predugacak!");
-            return false;
-        }else {
-            textSubject.setError(null);
-            return true;
-        }
-    }
-
-    public void validateInput(MenuItem menuItem){
-        if(!validateEmail() | !validateCC() | !validateBCC() | !validateSubject()){
+    /*public void validateInput(MenuItem menuItem){
+        if(!validateTo() | !validateCC() | !validateBCC()){
             return;
         }
         String inputT = "Email" + textTo.getText().toString();
@@ -136,10 +193,8 @@ public class CreateEmailActivity extends AppCompatActivity {
         inputT += "CC: " + textCc.getText().toString();
         inputT += "\n";
         inputT += "BCC: " + textBcc.getText().toString();
-        inputT += "\n";
-        inputT += "Subject: " + textSubject.getText().toString();
         Toast.makeText(this, inputT, Toast.LENGTH_LONG);
-    }
+    }*/
 
     @Override
     protected void onStart() {

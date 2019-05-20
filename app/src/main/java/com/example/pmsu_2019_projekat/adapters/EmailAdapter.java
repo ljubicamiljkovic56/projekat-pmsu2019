@@ -51,9 +51,15 @@ public class EmailAdapter extends BaseAdapter {
         TextView title = v.findViewById(R.id.ETitle);
         TextView content = v.findViewById(R.id.EContent);
 
-        from.setText(email.getFrom().getFirst() + " " + email.getFrom().getLast());
-        title.setText(email.getSubject());
-        content.setText(email.getContent());
+        if(email.getFrom() == null){
+            from.setText(email.getAccount().getUsername());
+            title.setText(email.getSubject());
+            content.setText(email.getContent());
+        }else {
+            from.setText(email.getFrom().getFirst() + " " + email.getFrom().getLast());
+            title.setText(email.getSubject());
+            content.setText(email.getContent());
+        }
 
         return v;
     }
