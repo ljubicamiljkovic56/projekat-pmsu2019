@@ -92,8 +92,21 @@ public class Data {
         folder2.setName("Folder 2");
         folder2.setMessages(getEmails());
 
+        Folder drafts = new Folder();
+        drafts.setId("3");
+        drafts.setName("Drafts");
+        drafts.setMessages(getEmails());
+
+        Folder sent = new Folder();
+        sent.setId("4");
+        sent.setName("Sent");
+        sent.setMessages(getEmails());
+
         folders.add(folder1);
         folders.add(folder2);
+        folders.add(drafts);
+        folders.add(sent);
+
 
         return folders;
     }
