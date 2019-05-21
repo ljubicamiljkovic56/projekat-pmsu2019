@@ -52,7 +52,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_emails);
         handler = new Handler();
-        setupSharedPreferences();
+
 
         progressDialog = new ProgressDialog(EmailsActivity.this);
         progressDialog.setMessage("Loading...");
@@ -74,6 +74,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        setupSharedPreferences();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.emails_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -142,13 +143,13 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
                 Collections.sort(messagesList, Message.MessageDateComparatorDesc);
                 generateDataList();
             }
-        }/*else if(key.equals("pref_sync")){
-            if(sharedPref.getString(key,"true").equals("false")){
+        }else if(key.equals("pref_sync")){
+            if(sharedPref.getBoolean(key,true) == false){
                 stopRepeatingTask();
             }else{
                 startRepeatingTask();
             }
-        }*/
+        }
     }
 
     Runnable dataLoader = new Runnable() {
@@ -203,6 +204,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     protected void onResume() {
         super.onResume();
         startRepeatingTask();
+        stopRepeatingTask();
     }
 
     @Override
@@ -213,7 +215,6 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     @Override
     protected void onPause() {
         super.onPause();
-        stopRepeatingTask();
     }
 
     @Override
@@ -224,6 +225,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopRepeatingTask();
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
     }
 
