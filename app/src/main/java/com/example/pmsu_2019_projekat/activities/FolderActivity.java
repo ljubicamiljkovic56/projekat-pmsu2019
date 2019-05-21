@@ -10,21 +10,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
-import com.example.pmsu_2019_projekat.adapters.FolderMessageAdapter;
-import com.example.pmsu_2019_projekat.model.Contact;
+import com.example.pmsu_2019_projekat.adapters.EmailAdapter;
 import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.tools.Data;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class FolderActivity extends AppCompatActivity {
@@ -48,11 +42,13 @@ public class FolderActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
 
+        List<Message> messagesList = Data.getInstance().emails;
+
         ListView folderList = findViewById(R.id.folder_list_view);
-        FolderMessageAdapter folderAdapter = new FolderMessageAdapter(this);
+        EmailAdapter folderAdapter = new EmailAdapter(this, messagesList);
         folderList.setOnItemClickListener(new FolderItemClickListener());
         folderList.setAdapter(folderAdapter);
-        
+
 
     }
 

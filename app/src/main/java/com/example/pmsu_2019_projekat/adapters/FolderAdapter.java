@@ -23,11 +23,6 @@ public class FolderAdapter extends BaseAdapter {
         this.dataList = dataList;
     }
 
-
-   // public FolderAdapter(Activity activity){
-       // this.activity = activity;
-   // }
-
     @Override
     public int getCount() {
         return dataList.size();

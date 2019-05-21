@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.example.pmsu_2019_projekat.tools.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -37,7 +39,7 @@ import static com.example.pmsu_2019_projekat.R.*;
 public class CreateEmailActivity extends AppCompatActivity {
 
     private Message newEmail;
-    private static final Pattern email =
+    private static final Pattern emailPattern=
             Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\+]{1,256}" +
                     "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
                     "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +")" );
@@ -79,9 +81,13 @@ public class CreateEmailActivity extends AppCompatActivity {
         String message = "";
         switch (item.getItemId()){
             case id.toolbar_send:
-                sendEmail();
-                message = "Sent";
-                break;
+                if(validateTo() && validateCc() && validateBcc()){
+                    sendEmail();
+                    message = "Sent";
+                    break;
+                }else {
+                    break;
+                }
             case id.toolbar_cancel:
                 message = "Canceled";
                 break;
@@ -91,7 +97,7 @@ public class CreateEmailActivity extends AppCompatActivity {
     }
 
     private static Contact contactFinder(String contactEmail){
-        List<Contact> csList = Data.getContacts();
+        List<Contact> csList = Data.getInstance().contacts;
         if(csList != null){
             for(Contact c : csList){
                 if(c.getEmail().equals(contactEmail)){
@@ -108,7 +114,7 @@ public class CreateEmailActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String loggedAccount = sharedPreferences.getString("username", "");
         Account from = new Account();
-        for(Account a : Data.getAccounts()){
+        for(Account a : Data.getInstance().accounts){
             if(a.getUsername().equals(loggedAccount))
                 from = a;
         }
@@ -117,11 +123,15 @@ public class CreateEmailActivity extends AppCompatActivity {
         to.add(contactFinder(textTo.getText().toString().trim()));
         newEmail.setTo(to);
         ArrayList<Contact> cc = new ArrayList<>();
-        cc.add(contactFinder(textCc.getText().toString().trim()));
+        if(textCc.getText() != null){
+            cc.add(contactFinder(textCc.getText().toString().trim()));
+        }
         newEmail.setCc(cc);
         ArrayList<Contact> bcc = new ArrayList<>();
-        bcc.add(contactFinder(textBcc.getText().toString().trim()));
-        newEmail.setBcc(to);
+        if(textBcc.getText() != null){
+            bcc.add(contactFinder(textBcc.getText().toString().trim()));
+        }
+        newEmail.setBcc(bcc);
         newEmail.setDateTime(new Date());
         newEmail.setSubject(textSubject.getText().toString());
         newEmail.setContent(textContent.getText().toString());
@@ -146,11 +156,12 @@ public class CreateEmailActivity extends AppCompatActivity {
     private boolean validateTo(){
 
         String emailInput = textTo.getText().toString().trim();
+        Matcher m = emailPattern.matcher(emailInput);
 
         if(emailInput.isEmpty()){
             textTo.setError("Prazno polje!");
             return false;
-        }else  if(email.matcher(emailInput).matches()){
+        }else  if(!m.matches()){
             textTo.setError("Niste dobro uneli email");
             return false;
         }else {
@@ -158,11 +169,15 @@ public class CreateEmailActivity extends AppCompatActivity {
             return true;
         }
     }
-    private boolean validateCC(){
+    private boolean validateCc(){
 
-        String emailInput = textCc.getText().toString().trim();
+        String emailInputCC = textCc.getText().toString().trim();
+        Matcher m = emailPattern.matcher(emailInputCC);
 
-        if(email.matcher(emailInput).matches()){
+        if(textCc.getText().toString().equals("")) {
+            textCc.setError(null);
+            return true;
+        }else if(!m.matches()){
             textCc.setError("Niste dobro uneli email");
             return false;
         }else {
@@ -171,30 +186,20 @@ public class CreateEmailActivity extends AppCompatActivity {
         }
     }
 
-    private boolean validateBCC(){
-
-        String emailInput = textBcc.getText().toString().trim();
-
-        if(email.matcher(emailInput).matches()){
+    private boolean validateBcc() {
+        String emailInputBCC = textBcc.getText().toString().trim();
+        Matcher m2 = emailPattern.matcher(emailInputBCC);
+        if (textBcc.getText().toString().equals("")) {
+            textBcc.setError(null);
+            return true;
+        } else if (!m2.matches()) {
             textBcc.setError("Niste dobro uneli email");
             return false;
-        }else {
+        } else {
             textBcc.setError(null);
             return true;
         }
     }
-
-    /*public void validateInput(MenuItem menuItem){
-        if(!validateTo() | !validateCC() | !validateBCC()){
-            return;
-        }
-        String inputT = "Email" + textTo.getText().toString();
-        inputT += "\n";
-        inputT += "CC: " + textCc.getText().toString();
-        inputT += "\n";
-        inputT += "BCC: " + textBcc.getText().toString();
-        Toast.makeText(this, inputT, Toast.LENGTH_LONG);
-    }*/
 
     @Override
     protected void onStart() {

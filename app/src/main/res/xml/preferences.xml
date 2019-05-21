@@ -7,7 +7,7 @@
         android:key="sync_settings">
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="@string/pref_sync"
             android:summary="@string/pref_sync_summ"
             android:title="@string/pref_sync_title" />

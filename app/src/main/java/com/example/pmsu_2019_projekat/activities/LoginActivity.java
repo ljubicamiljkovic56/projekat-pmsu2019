@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = user.getText().toString();
                 String password = pass.getText().toString();
-                for(Account a : Data.getAccounts()){
+                for(Account a : Data.getInstance().accounts){
                     if(a.getUsername().equals(username) && a.getPassword().equals(password)){
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username",username);

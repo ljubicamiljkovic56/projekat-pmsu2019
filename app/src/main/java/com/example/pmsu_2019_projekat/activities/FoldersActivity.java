@@ -60,12 +60,6 @@ public class FoldersActivity extends NavigationActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-//        ListView foldersList = findViewById(R.id.folders_list_view);
-//        FolderAdapter foldersAdapter = new FolderAdapter(this);
-//        foldersList.setOnItemClickListener(new FoldersItemClickListener());
-//        foldersList.setAdapter(foldersAdapter);
-
         FolderService service = RetrofitClient.getRetrofitInstance().create(FolderService.class);
         Call<List<Folder>> call = service.getAllFolders();
         call.enqueue(new Callback<List<Folder>>() {

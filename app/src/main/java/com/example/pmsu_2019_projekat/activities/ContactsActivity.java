@@ -25,7 +25,9 @@ import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.services.ContactService;
 import com.example.pmsu_2019_projekat.services.EmailService;
 import com.example.pmsu_2019_projekat.services.RetrofitClient;
+import com.example.pmsu_2019_projekat.tools.Data;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,6 @@ import retrofit2.Response;
 public class ContactsActivity extends NavigationActivity{
 
     ProgressDialog progressDialog;
-    public static List<Contact> contacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,30 +66,14 @@ public class ContactsActivity extends NavigationActivity{
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /* pre bilo
-        ListView contactsList = findViewById(R.id.contacts_list_view);
-        ContactAdapter contactAdapter = new ContactAdapter(this);
-        contactsList.setOnItemClickListener(new ContactsItemClickListener());
-        contactsList.setAdapter(contactAdapter);
-        */
-
-        ContactService service = RetrofitClient.getRetrofitInstance().create(ContactService.class);
-        Call<List<Contact>> call = service.getAllContacts();
-        call.enqueue(new Callback<List<Contact>>() {
-            @Override
-            public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
-                progressDialog.dismiss();
-                contacts = response.body();
-                generateDataList(contacts);
-            }
-
-            @Override
-            public void onFailure(Call<List<Contact>> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(ContactsActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                Log.d("Ovo je tvoja greska:", "Greska: " + t.getMessage());
-            }
-        });
+        List<Contact> contacts = Data.getInstance().contacts;
+        if (contacts.isEmpty() == false && contacts != null){
+            progressDialog.dismiss();
+            generateDataList(contacts);
+        }else{
+            progressDialog.dismiss();
+            Toast.makeText(ContactsActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.contacts_fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -46,10 +46,14 @@ public class EmailActivity extends AppCompatActivity {
         }
         TextView to = findViewById(id.email_to);
         to.append(dummy2.getTo().get(0).getEmail());
-        TextView cc = findViewById(id.email_cc);
-        cc.append(dummy2.getTo().get(0).getEmail());
-        TextView bcc = findViewById(id.email_bcc);
-        bcc.append(dummy2.getTo().get(0).getEmail());
+        if(!dummy2.getCc().contains(null)){
+            TextView cc = findViewById(id.email_cc);
+            cc.append(dummy2.getCc().get(0).getEmail());
+        }
+        if(!dummy2.getBcc().contains(null)){
+            TextView bcc = findViewById(id.email_bcc);
+            bcc.append(dummy2.getBcc().get(0).getEmail());
+        }
         TextView dateTime = findViewById(id.email_date);
         dateTime.append(dummy2.getDateTime().toString());
         TextView subject = findViewById(id.email_subject);

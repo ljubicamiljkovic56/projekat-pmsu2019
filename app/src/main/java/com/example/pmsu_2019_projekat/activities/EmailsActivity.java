@@ -3,6 +3,8 @@ package com.example.pmsu_2019_projekat.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -25,9 +27,11 @@ import com.example.pmsu_2019_projekat.adapters.EmailAdapter;
 import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.services.EmailService;
 import com.example.pmsu_2019_projekat.services.RetrofitClient;
+import com.example.pmsu_2019_projekat.tools.Data;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,13 +41,18 @@ import static com.example.pmsu_2019_projekat.R.*;
 
 public class EmailsActivity extends NavigationActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    ProgressDialog progressDialog;
-    List<Message> messagesList;
+    private ProgressDialog progressDialog;
+    private List<Message> messagesList;
+    private SharedPreferences sharedPreferences;
+    private long interval = 0;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_emails);
+        handler = new Handler();
+        setupSharedPreferences();
 
         progressDialog = new ProgressDialog(EmailsActivity.this);
         progressDialog.setMessage("Loading...");
@@ -65,7 +74,6 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        loadData();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.emails_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -75,32 +83,11 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
                 startActivity(intent);
             }
         });
-        setupSharedPreferences();
     }
 
     private void setupSharedPreferences() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-    }
-
-    private void loadData(){
-        EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
-        Call<List<Message>> call = service.getAllEmails();
-        call.enqueue(new Callback<List<Message>>() {
-            @Override
-            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
-                progressDialog.dismiss();
-                messagesList = response.body();
-                generateDataList();
-            }
-
-            @Override
-            public void onFailure(Call<List<Message>> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(EmailsActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-                Log.d("Ovo je tvoja greska:", "Greska: " + t.getMessage());
-            }
-        });
     }
 
     private void generateDataList() {
@@ -146,16 +133,65 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    public void onSharedPreferenceChanged(SharedPreferences sharedPref, String key) {
         if (key.equals("pref_sort")) {
-            if(sharedPreferences.getString(key, "ascending").equals("ascending")){
+            if(sharedPref.getString(key, "ascending").equals("ascending")){
                 Collections.sort(messagesList, Message.MessageDateComparator);
                 generateDataList();
-            }else if(sharedPreferences.getString(key, "ascending").equals("descending")){
+            }else if(sharedPref.getString(key, "ascending").equals("descending")){
                 Collections.sort(messagesList, Message.MessageDateComparatorDesc);
                 generateDataList();
             }
+        }/*else if(key.equals("pref_sync")){
+            if(sharedPref.getString(key,"true").equals("false")){
+                stopRepeatingTask();
+            }else{
+                startRepeatingTask();
+            }
+        }*/
+    }
+
+    Runnable dataLoader = new Runnable() {
+        @Override
+        public void run() {
+            try{
+                String syncTimeStr = sharedPreferences.getString("pref_sync_list", "1");
+                interval = TimeUnit.MINUTES.toMillis(Integer.parseInt(syncTimeStr));
+                Toast toast = Toast.makeText(getApplicationContext(), "Syncing", Toast.LENGTH_SHORT);
+                toast.show();
+
+                messagesList = Data.getInstance().emails;
+
+                EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
+                Call<List<Message>> call = service.getAllEmails();
+                call.enqueue(new Callback<List<Message>>() {
+                    @Override
+                    public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                        progressDialog.dismiss();
+                        messagesList = response.body();
+                        generateDataList();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Message>> call, Throwable t) {
+                        progressDialog.dismiss();
+                        Toast.makeText(EmailsActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        Log.d("Ovo je tvoja greska:", "Greska: " + t.getMessage());
+                    }
+                });
+
+            }finally {
+                handler.postDelayed(dataLoader, interval);
+            }
         }
+    };
+
+    void startRepeatingTask() {
+        dataLoader.run();
+    }
+
+    void stopRepeatingTask(){
+        handler.removeCallbacks(dataLoader);
     }
 
     @Override
@@ -166,6 +202,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     @Override
     protected void onResume() {
         super.onResume();
+        startRepeatingTask();
     }
 
     @Override
@@ -176,6 +213,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     @Override
     protected void onPause() {
         super.onPause();
+        stopRepeatingTask();
     }
 
     @Override
