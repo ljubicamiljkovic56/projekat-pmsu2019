@@ -198,13 +198,13 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     @Override
     protected void onStart() {
         super.onStart();
+        startRepeatingTask();
+        stopRepeatingTask();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        startRepeatingTask();
-        stopRepeatingTask();
     }
 
     @Override

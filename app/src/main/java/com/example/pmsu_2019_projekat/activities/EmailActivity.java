@@ -1,6 +1,8 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,10 +16,16 @@ import android.widget.Toast;
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Contact;
 import com.example.pmsu_2019_projekat.model.Message;
+import com.example.pmsu_2019_projekat.services.EmailService;
+import com.example.pmsu_2019_projekat.services.RetrofitClient;
 import com.example.pmsu_2019_projekat.tools.Data;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.pmsu_2019_projekat.R.*;
 
@@ -75,6 +83,9 @@ public class EmailActivity extends AppCompatActivity {
         String message = "";
         switch (item.getItemId()){
             case id.email_delete:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", deleteDialogClickListener)
+                        .setNegativeButton("No", deleteDialogClickListener).show();
                 message = "Delete";
                 break;
             case id.email_replay:
@@ -90,6 +101,36 @@ public class EmailActivity extends AppCompatActivity {
         Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
     }
+
+    DialogInterface.OnClickListener deleteDialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
+                    Call<Void> deleteEmail = service.deleteEmail(dummy2.getId());
+                    deleteEmail.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Toast.makeText(EmailActivity.this, "Email deleted", Toast.LENGTH_LONG);
+
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(EmailActivity.this, "Something went wrong", Toast.LENGTH_LONG);
+                            finish();
+                        }
+                    });
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    Toast.makeText(EmailActivity.this, "Canceled", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onStart() {
