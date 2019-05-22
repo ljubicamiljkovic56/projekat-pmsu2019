@@ -136,19 +136,23 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPref, String key) {
         if (key.equals("pref_sort")) {
-            if(sharedPref.getString(key, "ascending").equals("ascending")){
-                Collections.sort(messagesList, Message.MessageDateComparator);
-                generateDataList();
-            }else if(sharedPref.getString(key, "ascending").equals("descending")){
-                Collections.sort(messagesList, Message.MessageDateComparatorDesc);
-                generateDataList();
-            }
+            emailSorter(sharedPref);
         }else if(key.equals("pref_sync")){
             if(sharedPref.getBoolean(key,true) == false){
                 stopRepeatingTask();
             }else{
                 startRepeatingTask();
             }
+        }
+    }
+
+    public void emailSorter(SharedPreferences sharedPref){
+        if(sharedPref.getString("pref_sort", "ascending").equals("ascending")){
+            Collections.sort(messagesList, Message.MessageDateComparator);
+            generateDataList();
+        }else if(sharedPref.getString("pref_sort", "ascending").equals("descending")){
+            Collections.sort(messagesList, Message.MessageDateComparatorDesc);
+            generateDataList();
         }
     }
 
@@ -170,6 +174,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
                     public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                         progressDialog.dismiss();
                         messagesList = response.body();
+                        emailSorter(sharedPreferences);
                         generateDataList();
                     }
 
@@ -182,7 +187,9 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
                 });
 
             }finally {
-                handler.postDelayed(dataLoader, interval);
+                if(sharedPreferences.getBoolean("pref_sync", true) == true){
+                    handler.postDelayed(dataLoader, interval);
+                }
             }
         }
     };

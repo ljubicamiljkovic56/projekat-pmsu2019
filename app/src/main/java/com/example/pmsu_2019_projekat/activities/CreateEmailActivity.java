@@ -110,7 +110,7 @@ public class CreateEmailActivity extends AppCompatActivity {
 
     private void sendEmail(){
         newEmail = new Message();
-        newEmail.setId("125");
+        newEmail.setId(String.valueOf(125 + Data.getInstance().contacts.size()));
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String loggedAccount = sharedPreferences.getString("username", "");
         Account from = new Account();
@@ -120,7 +120,14 @@ public class CreateEmailActivity extends AppCompatActivity {
         }
         newEmail.setAccount(from);
         ArrayList<Contact> to = new ArrayList<>();
-        to.add(contactFinder(textTo.getText().toString().trim()));
+        Contact fromContact = contactFinder(textTo.getText().toString().trim());
+        if(fromContact != null){
+            to.add(fromContact);
+        }else{
+            fromContact = new Contact();
+            fromContact.setEmail(textTo.getText().toString().trim());
+            to.add(fromContact);
+        }
         newEmail.setTo(to);
         ArrayList<Contact> cc = new ArrayList<>();
         if(textCc.getText() != null){
