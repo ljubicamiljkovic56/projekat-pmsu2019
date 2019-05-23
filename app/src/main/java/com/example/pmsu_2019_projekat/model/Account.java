@@ -11,6 +11,8 @@ public class Account implements Serializable {
     private String username;
     private String password;
     private ArrayList<Message> messages;
+    private  ArrayList<Contact> contacts;
+    private ArrayList<Folder> folders;
 
 
     public Account() {
@@ -19,13 +21,16 @@ public class Account implements Serializable {
 
 
 
-    public Account(String id, String smtp, String pop3imap, String username, String password,ArrayList<Message> messages ) {
+    public Account(String id, String smtp, String pop3imap, String username, String password,ArrayList<Message> messages,
+                   ArrayList<Contact> contacts, ArrayList<Folder> folders) {
         this.id = id;
         this.smtp = smtp;
         this.pop3imap = pop3imap;
         this.username = username;
         this.password = password;
         this.messages = messages;
+        this.contacts = contacts;
+        this.folders = folders;
     }
 
     public String getId() {
@@ -75,4 +80,12 @@ public class Account implements Serializable {
     public void setMessages(ArrayList<Message> messages) {
         this.messages = messages;
     }
+
+    public ArrayList<Contact> getContacts() { return contacts; }
+
+    public void setContacts(ArrayList<Contact> contacts) { this.contacts = contacts; }
+
+    public ArrayList<Folder> getFolders() { return folders; }
+
+    public void setFolders(ArrayList<Folder> folders) { this.folders = folders; }
 }
