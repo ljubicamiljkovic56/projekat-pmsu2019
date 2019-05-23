@@ -39,7 +39,7 @@ public class Data {
         getContacts();
     }
 
-    private static Data instance = new Data();
+    private static Data instance = null;
 
     public static Data getInstance()
     {

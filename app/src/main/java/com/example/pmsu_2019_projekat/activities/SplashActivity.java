@@ -1,10 +1,14 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 
@@ -19,7 +23,15 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_splash);
 
-        new InitTask().execute();
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        if (mWifi.isConnected()) {
+            new InitTask().execute();
+        }else{
+            Toast.makeText(getApplicationContext(), "Niste povezani na internet",Toast.LENGTH_SHORT).show();
+            finishAffinity();
+        }
     }
 
     private class InitTask extends AsyncTask<Void, Void, Void>

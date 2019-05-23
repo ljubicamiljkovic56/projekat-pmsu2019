@@ -2,6 +2,7 @@ package com.example.pmsu_2019_projekat.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_login);
 
-        user = (EditText) findViewById(id.username_edit);
-        pass = (EditText) findViewById(id.password_edit);
+        user = (TextInputEditText) findViewById(id.username_edit);
+        pass = (TextInputEditText) findViewById(id.password_edit);
         loginButton = (Button) findViewById(id.btnStartEmails);
         sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         intent = new Intent(LoginActivity.this,EmailsActivity.class);
@@ -47,12 +48,18 @@ public class LoginActivity extends AppCompatActivity {
                 String username = user.getText().toString();
                 String password = pass.getText().toString();
                 for(Account a : Data.getInstance().accounts){
-                    if(a.getUsername().equals(username) && a.getPassword().equals(password)){
+                    if(a.getUsername().equals(username) && !a.getPassword().equals(password)){
+                        pass.setError("Pogrešna lozinka");
+                        break;
+                    }else if(a.getUsername().equals(username) && a.getPassword().equals(password)){
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username",username);
                         editor.commit();
                         Toast.makeText(getApplicationContext(), "Login uspesan",Toast.LENGTH_SHORT).show();
                         startActivity(intent);
+                        break;
+                    }else if(!a.getUsername().equals(username)){
+                        user.setError("Nepostojeći korisnik");
                     }else{
                         Toast.makeText(getApplicationContext(),"Niste uneli dobre informacije",Toast.LENGTH_SHORT).show();
                     }

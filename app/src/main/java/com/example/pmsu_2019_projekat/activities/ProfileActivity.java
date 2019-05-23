@@ -12,12 +12,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.support.design.widget.NavigationView;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.model.Account;
+import com.example.pmsu_2019_projekat.tools.Data;
 
 
 public class ProfileActivity extends NavigationActivity {
+
+    EditText inputUsername, inputPassword;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +48,17 @@ public class ProfileActivity extends NavigationActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        inputUsername = findViewById(R.id.profile_username);
+        inputPassword = findViewById(R.id.profile_password);
 
-
+        sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        for(Account a : Data.getInstance().accounts){
+            if(a.getUsername().equals(username)){
+                inputUsername.append(a.getUsername());
+                inputPassword.append(a.getPassword());
+            }
+        }
 
     }
 
