@@ -53,7 +53,7 @@ public class ProfileActivity extends NavigationActivity {
 
         sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
-        for(Account a : Data.getInstance().accounts){
+        for(Account a : Data.accounts){
             if(a.getUsername().equals(username)){
                 inputUsername.append(a.getUsername());
                 inputPassword.append(a.getPassword());
@@ -90,6 +90,7 @@ public class ProfileActivity extends NavigationActivity {
                 editor1.commit();
                 Toast.makeText(this, "Change profile", Toast.LENGTH_LONG).show();
                 Intent b = new Intent(ProfileActivity.this, LoginActivity.class);
+                b.putExtra("activityCaller", "ProfileActivity");
                 startActivity(b);
                 break;
         }

@@ -17,6 +17,9 @@ public interface EmailService {
     @GET("get/emails")
     Call<List<Message>> getAllEmails();
 
+    @GET("get/emails/{accountId}")
+    Call<List<Message>> getEmailsByAccount(@Path("accountId") String accountId);
+
     @POST("add/email")
     Call<Void> addNewEmail(@Body Message email);
 

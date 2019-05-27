@@ -42,7 +42,7 @@ public class FolderActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
 
-        List<Message> messagesList = Data.getInstance().emails;
+        List<Message> messagesList = folder1.getMessages();
 
         ListView folderList = findViewById(R.id.folder_list_view);
         EmailAdapter folderAdapter = new EmailAdapter(this, messagesList);

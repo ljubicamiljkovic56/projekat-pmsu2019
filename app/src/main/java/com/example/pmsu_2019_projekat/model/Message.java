@@ -18,7 +18,6 @@ public class Message implements Serializable {
     private ArrayList<Tag> tags;
     private ArrayList<Attachment> attachments;
     private Folder folder;
-    private Account account;
 
     public Message(){
         super();
@@ -26,7 +25,7 @@ public class Message implements Serializable {
 
 
 
-    public Message(String id, Contact from, ArrayList<Contact> to, ArrayList<Contact> cc, ArrayList<Contact> bcc, Date dateTime, String subject, String content, ArrayList<Tag> tags, ArrayList<Attachment> attachments, Folder folder, Account account) {
+    public Message(String id, Contact from, ArrayList<Contact> to, ArrayList<Contact> cc, ArrayList<Contact> bcc, Date dateTime, String subject, String content, ArrayList<Tag> tags, ArrayList<Attachment> attachments, Folder folder) {
         this.id = id;
         this.from = from;
         this.to = to;
@@ -38,7 +37,6 @@ public class Message implements Serializable {
         this.tags = tags;
         this.attachments = attachments;
         this.folder = folder;
-        this.account = account;
     }
 
     public static Comparator<Message> MessageDateComparator = new Comparator<Message>() {
@@ -146,11 +144,4 @@ public class Message implements Serializable {
         this.folder = folder;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

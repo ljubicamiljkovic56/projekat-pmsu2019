@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.adapters.EmailAdapter;
+import com.example.pmsu_2019_projekat.model.Account;
 import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.services.EmailService;
 import com.example.pmsu_2019_projekat.services.RetrofitClient;
@@ -165,15 +166,25 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
                 Toast toast = Toast.makeText(getApplicationContext(), "Syncing", Toast.LENGTH_SHORT);
                 toast.show();
 
-                messagesList = Data.getInstance().emails;
+                SharedPreferences sharedPreferences2 = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                String user = sharedPreferences2.getString("username", "");
+                String userId = null;
+                for(Account a : Data.accounts){
+                    if(a.getUsername().equals(user))
+                        userId = a.getId();
+                }
+
+                Data.getContactsByAccountID();
+                Data.getFoldersByAccountID();
 
                 EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
-                Call<List<Message>> call = service.getAllEmails();
+                Call<List<Message>> call = service.getEmailsByAccount(userId);
                 call.enqueue(new Callback<List<Message>>() {
                     @Override
                     public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                         progressDialog.dismiss();
                         messagesList = response.body();
+                        Data.emails = messagesList;
                         emailSorter(sharedPreferences);
                         generateDataList();
                     }

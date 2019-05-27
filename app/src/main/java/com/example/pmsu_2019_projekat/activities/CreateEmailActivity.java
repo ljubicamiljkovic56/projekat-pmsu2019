@@ -97,7 +97,7 @@ public class CreateEmailActivity extends AppCompatActivity {
     }
 
     private static Contact contactFinder(String contactEmail){
-        List<Contact> csList = Data.getInstance().contacts;
+        List<Contact> csList = Data.contacts;
         if(csList != null){
             for(Contact c : csList){
                 if(c.getEmail().equals(contactEmail)){
@@ -110,15 +110,14 @@ public class CreateEmailActivity extends AppCompatActivity {
 
     private void sendEmail(){
         newEmail = new Message();
-        newEmail.setId(String.valueOf(125 + Data.getInstance().contacts.size()));
+        newEmail.setId(String.valueOf(125 + Data.contacts.size()));
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String loggedAccount = sharedPreferences.getString("username", "");
         Account from = new Account();
-        for(Account a : Data.getInstance().accounts){
+        for(Account a : Data.accounts){
             if(a.getUsername().equals(loggedAccount))
                 from = a;
         }
-        newEmail.setAccount(from);
         ArrayList<Contact> to = new ArrayList<>();
         Contact fromContact = contactFinder(textTo.getText().toString().trim());
         if(fromContact != null){

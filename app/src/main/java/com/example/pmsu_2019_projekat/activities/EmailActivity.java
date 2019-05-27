@@ -48,17 +48,21 @@ public class EmailActivity extends AppCompatActivity {
         dummy2 = (Message) getIntent().getSerializableExtra("Email");
         TextView from = findViewById(id.email_from);
         if(dummy2.getFrom() == null){
-            from.append(dummy2.getAccount().getUsername());
+            from.append(Data.loggedInUser.getUsername());
         }else{
             from.append(dummy2.getFrom().getEmail());
         }
         TextView to = findViewById(id.email_to);
-        to.append(dummy2.getTo().get(0).getEmail());
-        if(!dummy2.getCc().contains(null)){
+        if(dummy2.getTo() == null){
+            to.append(Data.loggedInUser.getUsername());
+        }else{
+            to.append(dummy2.getTo().get(0).getEmail());
+        }
+        if(dummy2.getCc() != null && !dummy2.getCc().contains(null)){
             TextView cc = findViewById(id.email_cc);
             cc.append(dummy2.getCc().get(0).getEmail());
         }
-        if(!dummy2.getBcc().contains(null)){
+        if(dummy2.getBcc() != null && !dummy2.getBcc().contains(null)){
             TextView bcc = findViewById(id.email_bcc);
             bcc.append(dummy2.getBcc().get(0).getEmail());
         }

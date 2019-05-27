@@ -1,11 +1,13 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,9 +38,15 @@ public class LoginActivity extends AppCompatActivity {
         user = (TextInputEditText) findViewById(id.username_edit);
         pass = (TextInputEditText) findViewById(id.password_edit);
         loginButton = (Button) findViewById(id.btnStartEmails);
-        sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
-        intent = new Intent(LoginActivity.this,EmailsActivity.class);
+        sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        String callerActivity = (String) getIntent().getSerializableExtra("activityCaller");
+        if(callerActivity != null && callerActivity.equals("ProfileActivity")){
+            intent = new Intent(LoginActivity.this,ProfileActivity.class);
+        }else{
+            intent = new Intent(LoginActivity.this,EmailsActivity.class);
+        }
         if(sharedPreferences.contains("username")){
+            new Data(sharedPreferences.getString("username", ""));
             startActivity(intent);
         }
 
@@ -47,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = user.getText().toString();
                 String password = pass.getText().toString();
-                for(Account a : Data.getInstance().accounts){
+                new Data(username);
+                for(Account a : Data.accounts){
                     if(a.getUsername().equals(username) && !a.getPassword().equals(password)){
                         pass.setError("Pogrešna lozinka");
                         break;

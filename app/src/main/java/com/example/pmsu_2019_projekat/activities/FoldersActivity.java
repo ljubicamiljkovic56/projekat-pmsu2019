@@ -20,6 +20,7 @@ import com.example.pmsu_2019_projekat.adapters.FolderAdapter;
 import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.services.FolderService;
 import com.example.pmsu_2019_projekat.services.RetrofitClient;
+import com.example.pmsu_2019_projekat.tools.Data;
 
 import java.util.List;
 
@@ -60,21 +61,14 @@ public class FoldersActivity extends NavigationActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FolderService service = RetrofitClient.getRetrofitInstance().create(FolderService.class);
-        Call<List<Folder>> call = service.getAllFolders();
-        call.enqueue(new Callback<List<Folder>>() {
-            @Override
-            public void onResponse(Call<List<Folder>> call, Response<List<Folder>> response) {
-                progressDialog.dismiss();
-                generateDataList(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Folder>> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(FoldersActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        List<Folder> folders = Data.folders;
+        if (folders.isEmpty() == false && folders != null){
+            progressDialog.dismiss();
+            generateDataList(folders);
+        }else{
+            progressDialog.dismiss();
+            Toast.makeText(FoldersActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+        }
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.folders_fab);

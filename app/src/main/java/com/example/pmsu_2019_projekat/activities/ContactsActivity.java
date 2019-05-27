@@ -66,7 +66,7 @@ public class ContactsActivity extends NavigationActivity{
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        List<Contact> contacts = Data.getInstance().contacts;
+        List<Contact> contacts = Data.contacts;
         if (contacts.isEmpty() == false && contacts != null){
             progressDialog.dismiss();
             generateDataList(contacts);

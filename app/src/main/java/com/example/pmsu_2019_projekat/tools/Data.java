@@ -1,5 +1,8 @@
 package com.example.pmsu_2019_projekat.tools;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,6 +15,7 @@ import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.services.ContactService;
 import com.example.pmsu_2019_projekat.services.EmailService;
+import com.example.pmsu_2019_projekat.services.FolderService;
 import com.example.pmsu_2019_projekat.services.RetrofitClient;
 
 import java.util.ArrayList;
@@ -22,31 +26,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class Data {
 
-    public List<Account> accounts;
-    public List<Message> emails;
-    public List<Contact> contacts;
-    public List<Folder> folders;
+    public static List<Account> accounts;
+    public static List<Message> emails;
+    public static List<Contact> contacts;
+    public static List<Folder> folders;
+    public static Account loggedInUser;
 
-    private Data(){
+    public Data(String username){
         accounts = new ArrayList<Account>();
         emails = new ArrayList<Message>();
         contacts = new ArrayList<Contact>();
         folders = new ArrayList<Folder>();
         getAccounts();
-        getEmails();
-        getContacts();
+        getLoggedInUser(username);
+        getContactsByAccountID();
+        getFoldersByAccountID();
     }
 
-    private static Data instance = null;
-
-    public static Data getInstance()
-    {
-        if (instance == null)
-            instance = new Data();
-
-        return instance;
+    private void getLoggedInUser(String username) {
+        for(Account a : accounts)
+            if(a.getUsername().equals(username))
+                loggedInUser = a;
     }
 
     public void getAccounts(){
@@ -64,9 +68,9 @@ public class Data {
         accounts.add(a2);
     }
 
-    public void getContacts(){
+    public static void getContactsByAccountID(){
         ContactService service = RetrofitClient.getRetrofitInstance().create(ContactService.class);
-        Call<List<Contact>> call = service.getAllContacts();
+        Call<List<Contact>> call = service.getContactsByAccount(loggedInUser.getId());
         call.enqueue(new Callback<List<Contact>>() {
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
@@ -80,24 +84,20 @@ public class Data {
         });
     }
 
-    public void getEmails(){
-        EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
-        Call<List<Message>> call = service.getAllEmails();
-        call.enqueue(new Callback<List<Message>>() {
+    public static void getFoldersByAccountID(){
+        FolderService service = RetrofitClient.getRetrofitInstance().create(FolderService.class);
+        Call<List<Folder>> call = service.getFoldersByAccount(loggedInUser.getId());
+        call.enqueue(new Callback<List<Folder>>() {
             @Override
-            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
-                emails = response.body();
+            public void onResponse(Call<List<Folder>> call, Response<List<Folder>> response) {
+                folders = response.body();
             }
 
             @Override
-            public void onFailure(Call<List<Message>> call, Throwable t) {
+            public void onFailure(Call<List<Folder>> call, Throwable t) {
                 Log.d("Ovo je tvoja greska:", "Greska: " + t.getMessage());
             }
         });
-    }
-
-    public void getFolders(){
-
     }
 
     /*
