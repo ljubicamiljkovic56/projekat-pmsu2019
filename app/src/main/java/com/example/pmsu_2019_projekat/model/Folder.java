@@ -72,4 +72,16 @@ public class Folder implements Serializable {
     public void setRules(ArrayList<Rule> rules) {
         this.rules = rules;
     }
+
+    @Override
+    public String toString() {
+        return "Folder{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", parentFolder=" + parentFolder +
+                ", subfolders=" + subfolders +
+                ", messages=" + messages +
+                ", rules=" + rules +
+                '}';
+    }
 }

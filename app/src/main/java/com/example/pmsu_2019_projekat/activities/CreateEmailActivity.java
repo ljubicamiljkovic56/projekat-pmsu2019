@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -82,17 +83,18 @@ public class CreateEmailActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case id.toolbar_send:
                 if(validateTo() && validateCc() && validateBcc()){
-                    sendEmail();
+                    sendEmail("Send");
                     message = "Sent";
                     break;
                 }else {
                     break;
                 }
             case id.toolbar_cancel:
+                sendEmail("Cancel");
                 message = "Canceled";
                 break;
         }
-        Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
     }
 
@@ -108,16 +110,15 @@ public class CreateEmailActivity extends AppCompatActivity {
         return null;
     }
 
-    private void sendEmail(){
+    private void sendEmail(String operation){
         newEmail = new Message();
-        newEmail.setId(String.valueOf(125 + Data.contacts.size()));
+        newEmail.setId(String.valueOf(125 + Data.emails.size()));
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String loggedAccount = sharedPreferences.getString("username", "");
-        Account from = new Account();
-        for(Account a : Data.accounts){
-            if(a.getUsername().equals(loggedAccount))
-                from = a;
-        }
+        Contact from = new Contact();
+        from.setEmail(loggedAccount);
+        newEmail.setFrom(from);
+
         ArrayList<Contact> to = new ArrayList<>();
         Contact fromContact = contactFinder(textTo.getText().toString().trim());
         if(fromContact != null){
@@ -141,22 +142,29 @@ public class CreateEmailActivity extends AppCompatActivity {
         newEmail.setDateTime(new Date());
         newEmail.setSubject(textSubject.getText().toString());
         newEmail.setContent(textContent.getText().toString());
-        EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
-        Call<Void> addEmail = service.addNewEmail(newEmail);
-        addEmail.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(CreateEmailActivity.this, "Uspesno poslat email", Toast.LENGTH_LONG);
+        if(operation == "Send"){
+            Data.defaultFolders.get(1).getMessages().add(newEmail);
+            EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
+            Call<Void> addEmail = service.addNewEmail(newEmail);
+            addEmail.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Toast.makeText(CreateEmailActivity.this, "Uspesno poslat email", Toast.LENGTH_LONG);
 
-                finish();
-            }
+                    finish();
+                }
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(CreateEmailActivity.this, "Nesto nije u redu", Toast.LENGTH_LONG);
-                finish();
-            }
-        });
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(CreateEmailActivity.this, "Nesto nije u redu", Toast.LENGTH_LONG);
+                    finish();
+                }
+            });
+        }else if(operation == "Cancel"){
+            Data.defaultFolders.get(0).getMessages().add(newEmail);
+            finish();
+        }
+
     }
 
     private boolean validateTo(){

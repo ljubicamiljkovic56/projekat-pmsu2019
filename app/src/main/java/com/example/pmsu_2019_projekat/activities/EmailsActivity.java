@@ -94,6 +94,11 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
 
     private void generateDataList() {
         ListView emailsList = findViewById(id.emails_list_view);
+        for(int i = 0; i < messagesList.size(); i++) {
+            if(messagesList.get(i).getFrom().getFirst() == null){
+                messagesList.remove(i);
+            }
+        }
         EmailAdapter eAdapter = new EmailAdapter(this, messagesList);
         emailsList.setOnItemClickListener(new EmailsItemClickListener());
         emailsList.setAdapter(eAdapter);
@@ -184,7 +189,8 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
                     public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                         progressDialog.dismiss();
                         messagesList = response.body();
-                        Data.emails = messagesList;
+                        Data.emails.clear();
+                        Data.emails.addAll(messagesList);
                         emailSorter(sharedPreferences);
                         generateDataList();
                     }

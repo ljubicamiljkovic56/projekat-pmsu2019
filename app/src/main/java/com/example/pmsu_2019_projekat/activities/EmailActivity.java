@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Contact;
+import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.services.EmailService;
 import com.example.pmsu_2019_projekat.services.RetrofitClient;
@@ -90,7 +91,7 @@ public class EmailActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Are you sure?").setPositiveButton("Yes", deleteDialogClickListener)
                         .setNegativeButton("No", deleteDialogClickListener).show();
-                message = "Delete";
+                //message = "Delete";
                 break;
             case id.email_replay:
                 message = "Replay";
@@ -117,7 +118,11 @@ public class EmailActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Toast.makeText(EmailActivity.this, "Email deleted", Toast.LENGTH_LONG);
-
+                            for(Folder f : Data.defaultFolders)
+                                for(Message m : f.getMessages())
+                                    if(m.getId().equals(dummy2.getId()))
+                                        f.getMessages().remove(m);
+                            Data.getFoldersByAccountID();
                             finish();
                         }
 

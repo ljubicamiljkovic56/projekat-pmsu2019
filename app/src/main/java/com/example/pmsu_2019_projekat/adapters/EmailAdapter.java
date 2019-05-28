@@ -51,7 +51,7 @@ public class EmailAdapter extends BaseAdapter {
         TextView title = v.findViewById(R.id.ETitle);
         TextView content = v.findViewById(R.id.EContent);
 
-        if(email.getFrom() == null){
+        if(email.getFrom().getFirst() == null){
             from.setText(Data.loggedInUser.getUsername());
             title.setText(email.getSubject());
             content.setText(email.getContent());

@@ -50,16 +50,12 @@ public class FolderAdapter extends BaseAdapter {
 
         TextView title = view.findViewById(R.id.folderTitle);
         TextView message = view.findViewById(R.id.folderMessage);
-        //TextView sender = view.findViewById(R.id.folderSender);
-        //TextView subject = view.findViewById(R.id.folderSubject);
-        //TextView desc = view.findViewById(R.id.folderDesc);
 
         title.setText(folder.getName());
-        message.setText("messages: " + folder.getMessages().size());
-        //sender.setText(folder.getMessages().get(0).getFrom().getFirst());
-        //subject.setText(folder.getMessages().get(0).getSubject());
-        //desc.setText(folder.getMessages().get(0).getContent());
-
+        if(folder.getMessages() != null)
+            message.setText("messages: " + folder.getMessages().size());
+        else
+            message.setText("messages: 0" );
 
         return view;
     }

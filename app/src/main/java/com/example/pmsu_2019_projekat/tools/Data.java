@@ -34,6 +34,7 @@ public class Data {
     public static List<Message> emails;
     public static List<Contact> contacts;
     public static List<Folder> folders;
+    public static List<Folder> defaultFolders;
     public static Account loggedInUser;
 
     public Data(String username){
@@ -41,9 +42,11 @@ public class Data {
         emails = new ArrayList<Message>();
         contacts = new ArrayList<Contact>();
         folders = new ArrayList<Folder>();
+        defaultFolders = new ArrayList<Folder>();
         getAccounts();
         getLoggedInUser(username);
         getContactsByAccountID();
+        getDefaultFolders();
         getFoldersByAccountID();
     }
 
@@ -90,7 +93,9 @@ public class Data {
         call.enqueue(new Callback<List<Folder>>() {
             @Override
             public void onResponse(Call<List<Folder>> call, Response<List<Folder>> response) {
-                folders = response.body();
+                folders.clear();
+                folders.addAll(defaultFolders);
+                folders.addAll(response.body());
             }
 
             @Override
@@ -98,6 +103,23 @@ public class Data {
                 Log.d("Ovo je tvoja greska:", "Greska: " + t.getMessage());
             }
         });
+    }
+    
+    public static void getDefaultFolders(){
+        
+        Folder drafts = new Folder();
+        drafts.setId("3");
+        drafts.setName("Drafts");
+        drafts.setMessages(new ArrayList<Message>());
+
+        Folder sent = new Folder();
+        sent.setId("4");
+        sent.setName("Sent");
+        sent.setMessages(new ArrayList<Message>());
+
+        defaultFolders.add(drafts);
+        defaultFolders.add(sent);
+
     }
 
     /*
