@@ -8,7 +8,7 @@ public class RetrofitClient {
     private static Retrofit retrofit;
     //192.168.1.6 Jovan stavio tu adresu
     //10.0.2.2 emulator adresa
-    private static final String BASE_URL ="http://10.0.2.2:8080/emailClient/";
+    private static final String BASE_URL ="http://192.168.137.1:8080/emailClient/";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {

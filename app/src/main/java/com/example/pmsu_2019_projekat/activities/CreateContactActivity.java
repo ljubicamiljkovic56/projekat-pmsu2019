@@ -17,9 +17,10 @@ import java.util.regex.Pattern;
 public class CreateContactActivity extends AppCompatActivity {
 
     private static final Pattern email =
-            Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\+]{1,256}" +
-                    "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                    "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +")" );
+            Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]");
+//            Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\+]{1,256}" +
+//                    "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+//                    "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +")" );
 
     private TextInputEditText textEmail;
     private TextInputEditText textName;
