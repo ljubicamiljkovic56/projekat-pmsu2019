@@ -13,7 +13,7 @@
         android:id="@+id/contact_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryVivid"
+        android:background="@color/colorPrimaryDark"
         app:titleTextColor="@color/colorWhite"
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/ToolbarColoredBackArrow"

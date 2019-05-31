@@ -13,7 +13,7 @@
         android:id="@+id/contacts_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryVivid"
+        android:background="@color/colorPrimaryDark"
         app:titleTextColor="@color/colorWhite"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
@@ -50,7 +50,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="@dimen/fab_margin"
-                app:backgroundTint="@color/design_default_color_primary_dark"
+                app:backgroundTint="@color/colorPrimaryDark"
                 app:srcCompat="@drawable/ic_add_white_24dp" />
 
         </RelativeLayout>

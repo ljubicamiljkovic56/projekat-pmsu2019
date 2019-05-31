@@ -13,7 +13,7 @@
         android:id="@+id/email_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryVivid"
+        android:background="@color/colorPrimaryDark"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         app:titleTextColor="@color/colorWhite"
@@ -75,6 +75,17 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:text="Date:   "
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/email_attachment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="Attachment:   "
         android:textSize="18sp"/>
 
 

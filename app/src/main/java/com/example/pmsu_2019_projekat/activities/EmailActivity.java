@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -69,6 +70,12 @@ public class EmailActivity extends AppCompatActivity {
         }
         TextView dateTime = findViewById(id.email_date);
         dateTime.append(dummy2.getDateTime().toString());
+        if(dummy2.getAttachments() != null && !dummy2.getAttachments().contains(null)){
+            TextView attachment = findViewById(id.email_attachment);
+            attachment.append(Html.fromHtml("<font color=\"#0645AD\"><bold>"
+                    + dummy2.getAttachments().get(0).getName()
+                    + "</bold></font>"));
+        }
         TextView subject = findViewById(id.email_subject);
         subject.append(dummy2.getSubject());
         TextView content = findViewById(id.email_content);

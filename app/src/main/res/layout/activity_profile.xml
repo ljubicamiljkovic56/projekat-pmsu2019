@@ -13,7 +13,7 @@
         android:id="@+id/profile_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryVivid"
+        android:background="@color/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
         app:titleTextColor="@color/colorWhite"
         app:theme="@style/ToolbarColoredBackArrow"
