@@ -78,6 +78,7 @@ public class FoldersActivity extends NavigationActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FoldersActivity.this, CreateFolderActivity.class);
+                intent.putExtra("Add", true);
                 startActivity(intent);
             }
         });
