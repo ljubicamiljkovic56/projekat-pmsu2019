@@ -31,12 +31,14 @@ import retrofit2.Response;
 
 public class FoldersActivity extends NavigationActivity {
 
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folders);
+
 
 
         progressDialog = new ProgressDialog(FoldersActivity.this);

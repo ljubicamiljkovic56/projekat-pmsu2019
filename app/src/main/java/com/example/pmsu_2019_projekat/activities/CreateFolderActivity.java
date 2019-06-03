@@ -1,5 +1,6 @@
 package com.example.pmsu_2019_projekat.activities;
 
+import android.content.SharedPreferences;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +15,19 @@ import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Folder;
+import com.example.pmsu_2019_projekat.services.FolderService;
+import com.example.pmsu_2019_projekat.services.RetrofitClient;
+import com.example.pmsu_2019_projekat.tools.Data;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateFolderActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
+    private Folder newFolder;
     public static Folder f;
 
     private TextInputEditText textName;
@@ -58,15 +67,51 @@ public class CreateFolderActivity extends AppCompatActivity {
         String message = "";
         switch (item.getItemId()){
             case R.id.toolbar_save:
-                message = "Save";
-                break;
+                if(validateName()){
+                    saveFolder("Save");
+                    message = "Save";
+                    break;
+                } else {
+                    break;
+                }
+
             case R.id.toolbar_cancel:
+                saveFolder("Cancel");
                 message = "Cancel";
                 break;
         }
-        Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
     }
+
+    private void saveFolder(String operation){
+        newFolder = new Folder();
+        newFolder.setId(String.valueOf(125 + Data.folders.size()));
+        newFolder.setName(textName.getText().toString());
+        if(operation == "Save"){
+            Data.folders.get(1).getName();
+            FolderService folderService = RetrofitClient.getRetrofitInstance().create(FolderService.class);
+            Call<Void> saveFolder = folderService.addNewFolder(newFolder);
+            saveFolder.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Toast.makeText(CreateFolderActivity.this, "Uspesno dodat novi folder", Toast.LENGTH_LONG);
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(CreateFolderActivity.this, "Nesto nije u redu", Toast.LENGTH_LONG);
+                    finish();
+                }
+            });
+        }else if(operation == "Cancel"){
+            Data.folders.get(0).getName();
+            finish();
+        }
+
+    }
+
 
     private boolean validateName(){
         String nameInput = textName.getText().toString().trim();
