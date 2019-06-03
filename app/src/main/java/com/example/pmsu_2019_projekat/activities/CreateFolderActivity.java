@@ -15,9 +15,12 @@ import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Folder;
+import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.services.FolderService;
 import com.example.pmsu_2019_projekat.services.RetrofitClient;
 import com.example.pmsu_2019_projekat.tools.Data;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +30,7 @@ public class CreateFolderActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
+    private ArrayList<Message> messages = new ArrayList<>();
     private Folder newFolder;
     public static Folder f;
 
@@ -88,6 +92,10 @@ public class CreateFolderActivity extends AppCompatActivity {
         newFolder = new Folder();
         newFolder.setId(String.valueOf(125 + Data.folders.size()));
         newFolder.setName(textName.getText().toString());
+        newFolder.setMessages(messages);
+        newFolder.setSubfolders(null);
+        newFolder.setParentFolder(null);
+        newFolder.setRules(null);
         if(operation == "Save"){
             Data.folders.get(1).getName();
             FolderService folderService = RetrofitClient.getRetrofitInstance().create(FolderService.class);
