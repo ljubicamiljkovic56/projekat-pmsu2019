@@ -105,6 +105,7 @@ public class FoldersActivity extends NavigationActivity {
         if (id == R.id.folders_create) {
             Toast.makeText(this, "Create folder  selected", Toast.LENGTH_LONG).show();
             Intent a = new Intent(FoldersActivity.this, CreateFolderActivity.class);
+            a.putExtra("Add", true);
             startActivity(a);
         }
 

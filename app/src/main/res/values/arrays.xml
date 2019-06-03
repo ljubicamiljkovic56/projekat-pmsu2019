@@ -25,4 +25,17 @@
         <item>ascending</item>
         <item>descending</item>
     </string-array>
+
+    <string-array name="create_folder_operations">
+        <item>MOVE</item>
+        <item>COPY</item>
+        <item>DELETE</item>
+    </string-array>
+
+    <string-array name="create_folder_conditions">
+        <item>TO</item>
+        <item>FROM</item>
+        <item>CC</item>
+        <item>SUBJECT</item>
+    </string-array>
 </resources>

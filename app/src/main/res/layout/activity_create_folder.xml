@@ -40,6 +40,31 @@
             android:inputType="text"/>
     </android.support.design.widget.TextInputLayout>
 
+    <Spinner
+        android:id="@+id/spinnerCondition"
+        android:background="#ecece7"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/promptCondition"
+        android:entries="@array/create_folder_conditions"
+        android:entryValues="@array/create_folder_conditions"
+        />
+
+    <Spinner
+        android:id="@+id/spinnerOperation"
+        android:background="#ecece7"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/promptOperation"
+        android:entries="@array/create_folder_operations"
+        android:entryValues="@array/create_folder_operations"
+        />
+
 
 
 

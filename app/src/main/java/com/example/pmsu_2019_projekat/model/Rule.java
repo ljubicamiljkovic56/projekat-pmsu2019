@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 public class Rule implements Serializable {
     private String id;
-    private String  condition;
-    private String operation;
+    private Condition condition;
+    private Operation operation;
     private ArrayList<Folder> folders;
 
     public Rule() {
     }
 
-    public Rule(String id, String condition, String operation, ArrayList<Folder> folders) {
+    public Rule(String id, Condition condition, Operation operation, ArrayList<Folder> folders) {
         this.id = id;
         this.condition = condition;
         this.operation = operation;
@@ -27,19 +27,19 @@ public class Rule implements Serializable {
         this.id = id;
     }
 
-    public String getCondition() {
+    public Condition getCondition() {
         return condition;
     }
 
-    public void setCondition(String condition) {
+    public void setCondition(Condition condition) {
         this.condition = condition;
     }
 
-    public String getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
-    public void setOperation(String operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
 

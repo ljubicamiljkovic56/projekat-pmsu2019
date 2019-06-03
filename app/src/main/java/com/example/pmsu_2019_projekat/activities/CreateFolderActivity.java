@@ -10,12 +10,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.model.Account;
+import com.example.pmsu_2019_projekat.model.Condition;
 import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.model.Message;
+import com.example.pmsu_2019_projekat.model.Operation;
+import com.example.pmsu_2019_projekat.model.Rule;
 import com.example.pmsu_2019_projekat.services.FolderService;
 import com.example.pmsu_2019_projekat.services.RetrofitClient;
 import com.example.pmsu_2019_projekat.tools.Data;
@@ -30,11 +35,11 @@ public class CreateFolderActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
-    private ArrayList<Message> messages = new ArrayList<>();
     private Folder newFolder;
-    public static Folder f;
-
     private TextInputEditText textName;
+    private boolean add;
+    private Spinner condition;
+    private Spinner operation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +54,11 @@ public class CreateFolderActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true) ;
         actionbar.setTitle("Create Folder");
 
-        f = (Folder) getIntent().getSerializableExtra("Folder");
-        if(f != null){
-            actionbar.setTitle(f.getName());
-          //  EditText editId = findViewById(R.id.folder_id);
-          //  editId.append("ID: " + f.getId());
-            EditText editName = findViewById(R.id.folder_name);
-            editName.append("Name: " + f.getName());
-        }
+        add = (Boolean) getIntent().getSerializableExtra("Add");
+
+        condition = (Spinner) findViewById(R.id.spinnerCondition);
+        operation = (Spinner) findViewById(R.id.spinnerOperation);
+
     }
 
     @Override
@@ -72,7 +74,7 @@ public class CreateFolderActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.toolbar_save:
                 if(validateName()){
-                    saveFolder("Save");
+                    saveFolder();
                     message = "Save";
                     break;
                 } else {
@@ -80,30 +82,42 @@ public class CreateFolderActivity extends AppCompatActivity {
                 }
 
             case R.id.toolbar_cancel:
-                saveFolder("Cancel");
                 message = "Cancel";
+                finish();
                 break;
         }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
     }
 
-    private void saveFolder(String operation){
+    private void saveFolder(){
         newFolder = new Folder();
         newFolder.setId(String.valueOf(125 + Data.folders.size()));
         newFolder.setName(textName.getText().toString());
-        newFolder.setMessages(messages);
-        newFolder.setSubfolders(null);
-        newFolder.setParentFolder(null);
-        newFolder.setRules(null);
-        if(operation == "Save"){
-            Data.folders.get(1).getName();
+        newFolder.setMessages(new ArrayList<Message>());
+        Rule r = new Rule();
+        r.setCondition(Condition.valueOf(condition.getSelectedItem().toString()));
+        r.setOperation(Operation.valueOf(operation.getSelectedItem().toString()));
+        ArrayList<Rule> rules = new ArrayList<>();
+        rules.add(r);
+        newFolder.setRules(rules);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
+        String loggedAccount = sharedPreferences.getString("username", "");
+        String userId = null;
+        for(Account a : Data.accounts){
+            if(a.getUsername().equals(loggedAccount))
+                userId = a.getId();
+        }
+
+        if(add == true){
             FolderService folderService = RetrofitClient.getRetrofitInstance().create(FolderService.class);
-            Call<Void> saveFolder = folderService.addNewFolder(newFolder);
+            Call<Void> saveFolder = folderService.addNewFolder(newFolder, userId);
             saveFolder.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     Toast.makeText(CreateFolderActivity.this, "Uspesno dodat novi folder", Toast.LENGTH_LONG);
+                    Data.getFoldersByAccountID();
                     finish();
                 }
 
@@ -113,8 +127,9 @@ public class CreateFolderActivity extends AppCompatActivity {
                     finish();
                 }
             });
-        }else if(operation == "Cancel"){
-            Data.folders.get(0).getName();
+        }else if(add == false){
+            //Data.folders.get(0).getName();
+            Data.getFoldersByAccountID();
             finish();
         }
 

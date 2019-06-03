@@ -70,6 +70,7 @@ public class EmailActivity extends AppCompatActivity {
         }
         TextView dateTime = findViewById(id.email_date);
         dateTime.append(dummy2.getDateTime().toString());
+
         if(dummy2.getAttachments() != null && !dummy2.getAttachments().contains(null)){
             TextView attachment = findViewById(id.email_attachment);
             attachment.append(Html.fromHtml("<font color=\"#0645AD\"><bold>"

@@ -85,6 +85,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
                 startActivity(intent);
             }
         });
+
     }
 
     private void setupSharedPreferences() {

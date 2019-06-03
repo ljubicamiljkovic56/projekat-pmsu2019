@@ -18,6 +18,6 @@ public interface FolderService {
     @GET("get/folders/{accountId}")
     Call<List<Folder>> getFoldersByAccount(@Path("accountId") String accountId);
 
-    @POST("add/folder")
-    Call<Void> addNewFolder(@Body Folder folder);
+    @POST("add/folder/{accountId}")
+    Call<Void> addNewFolder(@Body Folder folder, @Path("accountId") String accountId);
 }

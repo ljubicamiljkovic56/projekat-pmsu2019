@@ -67,7 +67,7 @@ public class FolderActivity extends AppCompatActivity {
                 message = "Edit";
                 Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(FolderActivity.this, CreateFolderActivity.class);
-                i.putExtra("Folder", folder1);
+                i.putExtra("Add", false);
                 startActivity(i);
                 break;
 

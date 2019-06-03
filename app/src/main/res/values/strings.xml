@@ -52,5 +52,7 @@
     <string name="navigation_logout">Logout</string>
     <string name="logout_txt">Logout</string>
     <string name="change_profile_txt">Change Profile</string>
+    <string name="promptOperation">Chose operation</string>
+    <string name="promptCondition">Chose condition</string>
 
 </resources>
