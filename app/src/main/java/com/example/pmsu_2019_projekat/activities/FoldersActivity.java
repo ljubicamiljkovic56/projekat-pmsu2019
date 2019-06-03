@@ -85,6 +85,8 @@ public class FoldersActivity extends NavigationActivity {
     }
 
 
+    
+
     private void generateDataList(List<Folder> fsList) {
         ListView foldersList = findViewById(R.id.folders_list_view);
         FolderAdapter fAdapter = new FolderAdapter(this, fsList);
