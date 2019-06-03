@@ -5,7 +5,6 @@
         android:id="@+id/create_contact_toolbar_save"
         android:icon="@drawable/ic_save_white_24dp"
         android:title="@string/action_save_text"
-        android:onClick="validateInputContact"
         app:showAsAction="always" />
     <item
         android:id="@+id/create_contact_toolbar_cancel"

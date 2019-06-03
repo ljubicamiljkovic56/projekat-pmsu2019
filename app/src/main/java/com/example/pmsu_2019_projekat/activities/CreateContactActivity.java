@@ -11,10 +11,20 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
+import com.example.pmsu_2019_projekat.model.Contact;
+import com.example.pmsu_2019_projekat.services.ContactService;
+import com.example.pmsu_2019_projekat.services.RetrofitClient;
+import com.example.pmsu_2019_projekat.tools.Data;
 
 import java.util.regex.Pattern;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CreateContactActivity extends AppCompatActivity {
+
+    private Contact newContact;
 
     private static final Pattern email =
             Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]");
@@ -55,15 +65,51 @@ public class CreateContactActivity extends AppCompatActivity {
         String message = "";
         switch (item.getItemId()){
             case R.id.create_contact_toolbar_save:
-                message = "Save";
-                break;
+               // message = "Save";
+                if(validateEmail() && validateName() && validateSurname()){
+                   // saveContact("Save");
+                    message = "Save";
+                    break;
+                }
+
             case R.id.create_contact_toolbar_cancel:
+                //saveContact("Cancel");
                 message = "Cancel";
                 break;
         }
-        Toast.makeText(this, message + "  selected", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return  super.onOptionsItemSelected(item);
     }
+
+/*    private void saveContact(String operation){
+        newContact = new Contact();
+        newContact.setId(String.valueOf(125 + Data.contacts.size()));
+        newContact.setEmail(textEmail.toString());
+        newContact.setFirst(textName.toString());
+        newContact.setLast(textSurname.toString());
+        newContact.setDisplayName(textName.toString().toLowerCase());
+        newContact.setFormat("text");
+        newContact.setPhoto(null);
+        if(operation == "Save"){
+            Data.contacts.get(1).getEmail();
+            ContactService contactService = RetrofitClient.getRetrofitInstance().create(ContactService.class);
+            Call<Void> saveContact = contactService.addNewContact(newContact, "1");
+            saveContact.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Toast.makeText(CreateContactActivity.this, "Uspesno dodat novi kontakt", Toast.LENGTH_LONG);
+
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(CreateContactActivity.this, "Nesto nije u redu", Toast.LENGTH_LONG);
+                    finish();
+                }
+            });
+        }
+    }*/
 
     private boolean validateEmail(){
         String emailInput = textEmail.getText().toString().trim();
@@ -102,7 +148,7 @@ public class CreateContactActivity extends AppCompatActivity {
     }
 
 
-    public void validateInputContact(MenuItem menuItem){
+/*    public void validateInputContact(MenuItem menuItem){
         if(!validateEmail() | !validateName() | !validateSurname()){
             return;
         }
@@ -112,7 +158,7 @@ public class CreateContactActivity extends AppCompatActivity {
         inputT += "\n";
         inputT += "Surname: " + textSurname.getText().toString();
         Toast.makeText(this, inputT, Toast.LENGTH_LONG);
-    }
+    }*/
 
 
     @Override

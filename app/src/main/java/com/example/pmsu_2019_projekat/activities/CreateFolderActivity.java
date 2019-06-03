@@ -136,13 +136,13 @@ public class CreateFolderActivity extends AppCompatActivity {
         }
     }
 
-    public void validateInputName(MenuItem menuItem){
+  /*  public void validateInputName(MenuItem menuItem){
         if(!validateName()){
             return;
         }
         String inputT = "Name" + textName.getText().toString();
         Toast.makeText(this, inputT, Toast.LENGTH_LONG);
-    }
+    }*/
 
 
 
