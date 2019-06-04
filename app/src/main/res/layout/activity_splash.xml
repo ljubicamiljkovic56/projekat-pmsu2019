@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.SplashActivity"
-    android:background="@mipmap/airmail_updated"
+    android:background="@mipmap/airmail_updated_small"
     android:orientation="vertical">
 
     
