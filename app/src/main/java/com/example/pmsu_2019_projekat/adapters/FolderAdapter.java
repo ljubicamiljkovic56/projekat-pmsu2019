@@ -8,17 +8,19 @@ import android.widget.TextView;
 
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Folder;
+import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.tools.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FolderAdapter extends BaseAdapter {
 
     private Activity activity;
 
-    private List<Folder> dataList;
+    private List dataList;
 
-    public FolderAdapter(Activity activity, List<Folder> dataList) {
+    public FolderAdapter(Activity activity, List dataList) {
         this.activity = activity;
         this.dataList = dataList;
     }
@@ -43,20 +45,47 @@ public class FolderAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
-        Folder folder = dataList.get(position);
+        if(dataList.get(position) instanceof Folder){
+            Folder folder = (Folder) dataList.get(position);
 
-        if(convertView == null)
             view = activity.getLayoutInflater().inflate(R.layout.folders_list_item, null);
 
-        TextView title = view.findViewById(R.id.folderTitle);
-        TextView message = view.findViewById(R.id.folderMessage);
+            TextView title = view.findViewById(R.id.folderTitle);
+            TextView message = view.findViewById(R.id.folderMessage);
+            TextView folders = view.findViewById(R.id.foldersFolders);
 
-        title.setText(folder.getName());
-        if(folder.getMessages() != null)
-            message.setText("messages: " + folder.getMessages().size());
-        else
-            message.setText("messages: 0" );
+            title.setText(folder.getName());
+            if(folder.getMessages() != null)
+                message.setText("messages: " + folder.getMessages().size());
+            else
+                message.setText("messages: 0" );
 
-        return view;
+            if(folder.getSubfolders() != null)
+                folders.setText("folders: " + folder.getSubfolders().size());
+            else
+                folders.setText("folders: 0" );
+
+            return view;
+        }else{
+            Message email = (Message) dataList.get(position);
+
+            view = activity.getLayoutInflater().inflate(R.layout.emails_list_item, null);
+
+            TextView from = view.findViewById(R.id.EFrom);
+            TextView title = view.findViewById(R.id.ETitle);
+            TextView content = view.findViewById(R.id.EContent);
+
+            if(email.getFrom().getFirst() == null){
+                from.setText(Data.loggedInUser.getUsername());
+                title.setText(email.getSubject());
+                content.setText(email.getContent());
+            }else {
+                from.setText(email.getFrom().getDisplayName());
+                title.setText(email.getSubject());
+                content.setText(email.getContent());
+            }
+
+            return view;
+        }
     }
 }

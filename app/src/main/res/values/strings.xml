@@ -54,5 +54,6 @@
     <string name="change_profile_txt">Change Profile</string>
     <string name="promptOperation">Chose operation</string>
     <string name="promptCondition">Chose condition</string>
+    <string name="folder_menu_delete">delete folder</string>
 
 </resources>

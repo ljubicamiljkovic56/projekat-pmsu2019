@@ -7,4 +7,17 @@ public enum Condition {
     CC,
     SUBJECT;
 
+    public static int toInt(Condition condition) {
+        switch (condition) {
+            case TO:
+                return 0;
+            case FROM:
+                return 1;
+            case CC:
+                return 2;
+            default:
+                return 3;
+        }
+    }
+
 }

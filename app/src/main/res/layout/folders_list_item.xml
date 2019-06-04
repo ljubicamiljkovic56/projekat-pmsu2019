@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/folder_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:src="@drawable/ic_folder_green_24dp"/>
@@ -31,10 +31,19 @@
         android:layout_toEndOf="@+id/folder_icon"
        />
 
+    <TextView
+        android:id="@+id/foldersFolders"
+        android:layout_below="@+id/folderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/folder_icon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
 
     <TextView
         android:id="@+id/folderMessage"
-        android:layout_below="@+id/folderTitle"
+        android:layout_below="@+id/foldersFolders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/folder_icon"
