@@ -160,6 +160,38 @@ public class CreateContactActivity extends AppCompatActivity {
         Toast.makeText(this, inputT, Toast.LENGTH_LONG);
     }*/
 
+    //private void createContact(String operation){
+
+    //    newContact = new Contact();
+    //    newContact.setId(String.valueOf(125 + Data.contacts.size()));
+    //    SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
+    //    String loggedAccount = sharedPreferences.getString("username", "");
+
+    //    newContact.setFirst(textName);
+    //    newContact.setLast(textSurname);
+    //    newContact.setEmail(textEmail);
+    //    if(operation == "Save"){
+    //        ContactService service = RetrofitClient.getRetrofitInstance().create(ContactService.class);
+    //        Call<Void> addContact = service.addNewContact(newContact);
+    //        addContact.enqueue(new Callback<Void>() {
+    //            @Override
+    //            public void onResponse(Call<Void> call, Response<Void> response) {
+    //                Toast.makeText(CreateContactActivity.this, "Uspesno kreiran kontakt", Toast.LENGTH_LONG);
+
+    //                finish();
+    //            }
+
+    //            @Override
+    //            public void onFailure(Call<Void> call, Throwable t) {
+    //                Toast.makeText(CreateContactActivity.this, "Nemozeeeee!!!", Toast.LENGTH_LONG);
+    //                finish();
+    //            }
+    //        });
+    //    }else if(operation == "Cancel"){
+    //        finish();
+    //    }
+
+    //}
 
     @Override
     protected void onStart() {
