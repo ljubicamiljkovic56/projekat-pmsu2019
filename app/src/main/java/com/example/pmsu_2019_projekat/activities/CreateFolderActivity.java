@@ -119,8 +119,8 @@ public class CreateFolderActivity extends AppCompatActivity {
             newFolder.setMessages(new ArrayList<Message>());
             newFolder.setRules(rules);
             FolderService folderService = RetrofitClient.getRetrofitInstance().create(FolderService.class);
-            Call<Void> saveFolder = folderService.addNewFolder(newFolder, userId);
-            saveFolder.enqueue(new Callback<Void>() {
+            Call<Void> addFolder = folderService.addNewFolder(newFolder, userId);
+            addFolder.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     Toast.makeText(CreateFolderActivity.this, "Uspesno dodat novi folder", Toast.LENGTH_LONG);
@@ -172,14 +172,6 @@ public class CreateFolderActivity extends AppCompatActivity {
             return true;
         }
     }
-
-  /*  public void validateInputName(MenuItem menuItem){
-        if(!validateName()){
-            return;
-        }
-        String inputT = "Name" + textName.getText().toString();
-        Toast.makeText(this, inputT, Toast.LENGTH_LONG);
-    }*/
 
 
 

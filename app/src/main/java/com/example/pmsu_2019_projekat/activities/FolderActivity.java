@@ -126,7 +126,7 @@ public class FolderActivity extends AppCompatActivity {
                     deleteFolder.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Toast.makeText(FolderActivity.this, "Email deleted", Toast.LENGTH_LONG);
+                            Toast.makeText(FolderActivity.this, "Folder deleted", Toast.LENGTH_LONG);
                             Data.getFoldersByAccountID();
                             finish();
                         }

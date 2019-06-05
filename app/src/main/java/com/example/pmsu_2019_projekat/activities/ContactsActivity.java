@@ -80,6 +80,7 @@ public class ContactsActivity extends NavigationActivity{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ContactsActivity.this, CreateContactActivity.class);
+                intent.putExtra("Add", true);
                 startActivity(intent);
             }
         });
@@ -106,6 +107,7 @@ public class ContactsActivity extends NavigationActivity{
         if (id == R.id.contacts_create) {
             Toast.makeText(this, "Create contact selected", Toast.LENGTH_LONG).show();
             Intent a = new Intent(ContactsActivity.this, CreateContactActivity.class);
+            a.putExtra("Add", true);
             startActivity(a);
         }
 
