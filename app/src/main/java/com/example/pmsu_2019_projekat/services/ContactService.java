@@ -13,11 +13,11 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ContactService {
-    @GET("get/contacts")
+    @GET("contacts")
     Call<List<Contact>> getAllContacts();
 
-    @GET("get/contacts/{accountId}")
-    Call<List<Contact>> getContactsByAccount(@Path("accountId") String accountId);
+    @GET("contacts/byUser/{username}")
+    Call<List<Contact>> getContactsByUsername(@Path("username") String username);
 
     @POST("add/contact/{accountId}")
     Call<Void> addNewContact(@Body Contact contact, @Path("accountId") String accountId);

@@ -83,14 +83,14 @@ public class CreateEmailActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case id.toolbar_send:
                 if(validateTo() && validateCc() && validateBcc()){
-                    sendEmail("Send");
+                    //sendEmail("Send");
                     message = "Sent";
                     break;
                 }else {
                     break;
                 }
             case id.toolbar_cancel:
-                sendEmail("Cancel");
+                //sendEmail("Cancel");
                 message = "Canceled";
                 break;
         }
@@ -110,7 +110,7 @@ public class CreateEmailActivity extends AppCompatActivity {
         return null;
     }
 
-    private void sendEmail(String operation){
+    /*private void sendEmail(String operation){
         newEmail = new Message();
         newEmail.setId(String.valueOf(125 + Data.emails.size()));
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
@@ -143,7 +143,7 @@ public class CreateEmailActivity extends AppCompatActivity {
         newEmail.setSubject(textSubject.getText().toString());
         newEmail.setContent(textContent.getText().toString());
         if(operation == "Send"){
-            Data.defaultFolders.get(1).getMessages().add(newEmail);
+            Data.folders.get(1).getMessages().add(newEmail);
             EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
             Call<Void> addEmail = service.addNewEmail(newEmail);
             addEmail.enqueue(new Callback<Void>() {
@@ -165,7 +165,7 @@ public class CreateEmailActivity extends AppCompatActivity {
             finish();
         }
 
-    }
+    }*/
 
     private boolean validateTo(){
 

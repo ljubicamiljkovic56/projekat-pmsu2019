@@ -122,7 +122,7 @@ public class CreateContactActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     Toast.makeText(CreateContactActivity.this, "Uspesno kreiran kontakt", Toast.LENGTH_LONG);
-                    Data.getContactsByAccountID();
+                    Data.getContactsByUsername();
                     finish();
                 }
 
@@ -144,7 +144,7 @@ public class CreateContactActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     Toast.makeText(CreateContactActivity.this, "Uspesno izmenjen kontakt", Toast.LENGTH_LONG);
-                    Data.getContactsByAccountID();
+                    Data.getContactsByUsername();
                     finish();
                 }
 

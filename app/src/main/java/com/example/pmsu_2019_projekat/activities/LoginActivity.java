@@ -15,9 +15,15 @@ import android.widget.Toast;
 
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Account;
+import com.example.pmsu_2019_projekat.services.RetrofitClient;
+import com.example.pmsu_2019_projekat.services.UserService;
 import com.example.pmsu_2019_projekat.tools.Data;
 
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.pmsu_2019_projekat.R.*;
 
@@ -28,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Intent intent;
 
+    public static boolean loggedIn;
     private long backPressedTime;
 
     @Override
@@ -55,33 +62,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = user.getText().toString();
                 String password = pass.getText().toString();
-                new Data(username);
-                for(Account a : Data.accounts){
-                    if(a.getUsername().equals(username) && !a.getPassword().equals(password)){
-                        pass.setError("Pogrešna lozinka");
-                        break;
-                    }else if(a.getUsername().equals(username) && a.getPassword().equals(password)){
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("username",username);
-                        editor.commit();
-                        Toast.makeText(getApplicationContext(), "Login uspesan",Toast.LENGTH_SHORT).show();
-                        startActivity(intent);
-                        break;
-                    }else if(!a.getUsername().equals(username)){
-                        user.setError("Nepostojeći korisnik");
-                    }else{
-                        Toast.makeText(getApplicationContext(),"Niste uneli dobre informacije",Toast.LENGTH_SHORT).show();
-                    }
+                if(LogIn(username, password)){
+                    new Data(username);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("username",username);
+                    editor.commit();
+                    Toast.makeText(getApplicationContext(), "Login uspesan",Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Niste uneli dobre informacije",Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
- /*   public void btnStartEmailsActivity(View v){
-        Intent i = new Intent(LoginActivity.this, EmailsActivity.class);
-        startActivity(i);
-        finish();
-    }*/
 
     @Override
     public void onBackPressed() {
@@ -91,6 +84,23 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
+    }
+
+    private static boolean LogIn(String username, String password) {
+        UserService service = RetrofitClient.getRetrofitInstance().create(UserService.class);
+        Call<Void> call = service.loginUser(username, password);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                loggedIn = true;
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("ERROR:", "Greska: " + t.getMessage());
+                loggedIn = false;
+            }
+        });
+        return loggedIn;
     }
 
     @Override
@@ -123,3 +133,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onDestroy();
     }
 }
+
+/*                 for(Account a : Data.accounts){
+                    if(a.getUsername().equals(username) && !a.getPassword().equals(password)){
+                        pass.setError("Pogrešna lozinka");
+                        break;
+                    }else if(a.getUsername().equals(username) && a.getPassword().equals(password)){
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username",username);
+                        editor.commit();
+                        Toast.makeText(getApplicationContext(), "Login uspesan",Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                        break;
+                    }else if(!a.getUsername().equals(username)){
+                        user.setError("Nepostojeći korisnik");
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Niste uneli dobre informacije",Toast.LENGTH_SHORT).show();
+                    }
+                }*/

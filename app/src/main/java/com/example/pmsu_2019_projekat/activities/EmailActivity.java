@@ -50,28 +50,28 @@ public class EmailActivity extends AppCompatActivity {
         dummy2 = (Message) getIntent().getSerializableExtra("Email");
         TextView from = findViewById(id.email_from);
         if(dummy2.getFrom() == null){
-            from.append(Data.loggedInUser.getUsername());
+            from.append(Data.loggedInUser);
         }else{
-            from.append(dummy2.getFrom().getEmail());
+            from.append(dummy2.getFrom());
         }
         TextView to = findViewById(id.email_to);
         if(dummy2.getTo() == null){
-            to.append(Data.loggedInUser.getUsername());
+            to.append(Data.loggedInUser);
         }else{
-            to.append(dummy2.getTo().get(0).getEmail());
+            to.append(dummy2.getTo().get(0));
         }
-        if(dummy2.getCc() != null && !dummy2.getCc().contains(null)){
+        if(dummy2.getCc() != null && !dummy2.getCc().contains(null) && !dummy2.getCc().isEmpty()){
             TextView cc = findViewById(id.email_cc);
-            cc.append(dummy2.getCc().get(0).getEmail());
+            cc.append(dummy2.getCc().get(0));
         }
-        if(dummy2.getBcc() != null && !dummy2.getBcc().contains(null)){
+        if(dummy2.getBcc() != null && !dummy2.getBcc().contains(null) && !dummy2.getBcc().isEmpty()){
             TextView bcc = findViewById(id.email_bcc);
-            bcc.append(dummy2.getBcc().get(0).getEmail());
+            bcc.append(dummy2.getBcc().get(0));
         }
         TextView dateTime = findViewById(id.email_date);
         dateTime.append(dummy2.getDateTime().toString());
 
-        if(dummy2.getAttachments() != null && !dummy2.getAttachments().contains(null)){
+        if(dummy2.getAttachments() != null && !dummy2.getAttachments().contains(null) && !dummy2.getAttachments().isEmpty()){
             TextView attachment = findViewById(id.email_attachment);
             attachment.append(Html.fromHtml("<font color=\"#0645AD\"><bold>"
                     + dummy2.getAttachments().get(0).getName()
@@ -126,7 +126,7 @@ public class EmailActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Toast.makeText(EmailActivity.this, "Email deleted", Toast.LENGTH_LONG);
-                            for(Folder f : Data.defaultFolders)
+                            for(Folder f : Data.folders)
                                 for(Message m : f.getMessages())
                                     if(m.getId().equals(dummy2.getId()))
                                         f.getMessages().remove(m);

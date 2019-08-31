@@ -7,16 +7,14 @@ public class Rule implements Serializable {
     private String id;
     private Condition condition;
     private Operation operation;
-    private ArrayList<Folder> folders;
 
     public Rule() {
     }
 
-    public Rule(String id, Condition condition, Operation operation, ArrayList<Folder> folders) {
+    public Rule(String id, Condition condition, Operation operation) {
         this.id = id;
         this.condition = condition;
         this.operation = operation;
-        this.folders = folders;
     }
 
     public String getId() {
@@ -43,11 +41,4 @@ public class Rule implements Serializable {
         this.operation = operation;
     }
 
-    public ArrayList<Folder> getFolders() {
-        return folders;
-    }
-
-    public void setFolders(ArrayList<Folder> folders) {
-        this.folders = folders;
-    }
 }

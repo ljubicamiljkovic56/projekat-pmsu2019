@@ -8,7 +8,7 @@ public class Contact implements Serializable {
     private String first;
     private String last;
     private String email;
-    private String format;
+    private String note;
     private Photo photo;
     private String displayName;
 
@@ -16,14 +16,13 @@ public class Contact implements Serializable {
         super();
     }
 
-    public Contact(String id, String first, String last, Photo photo, String email, String format, String displayName) {
+    public Contact(String id, String first, String last, Photo photo, String email, String note, String displayName) {
         this.id = id;
         this.first = first;
         this.last = last;
         this.photo = photo;
         this.email = email;
-        this.format = format;
-        this.format = format;
+        this.note = note;
         this.displayName = displayName;
     }
 
@@ -59,12 +58,12 @@ public class Contact implements Serializable {
         this.email = email;
     }
 
-    public String getFormat() {
-        return format;
+    public String getNote() {
+        return note;
     }
 
-    public void setFormat(String format) {
-        this.format = format;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Photo getPhoto() {

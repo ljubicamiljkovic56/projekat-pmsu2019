@@ -7,15 +7,13 @@ public class Tag implements Serializable {
 
     private String id;
     private String name;
-    private ArrayList<Message> messages;
 
     public Tag() {
     }
 
-    public Tag(String id, String name, ArrayList<Message> messages) {
+    public Tag(String id, String name) {
         this.id = id;
         this.name = name;
-        this.messages = messages;
     }
 
     public String getId() {
@@ -34,12 +32,5 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
-    public ArrayList<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(ArrayList<Message> messages) {
-        this.messages = messages;
-    }
 }
 

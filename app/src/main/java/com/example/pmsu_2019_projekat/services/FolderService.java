@@ -14,11 +14,11 @@ import retrofit2.http.Path;
 
 public interface FolderService {
 
-    @GET("get/folders")
+    @GET("folders")
     Call<List<Folder>> getAllFolders();
 
-    @GET("get/folders/{accountId}")
-    Call<List<Folder>> getFoldersByAccount(@Path("accountId") String accountId);
+    @GET("folders/byAccount/{accountId}")
+    Call<Folder> getFoldersByAccount(@Path("accountId") String accountId);
 
     @POST("add/folder/{accountId}")
     Call<Void> addNewFolder(@Body Folder folder, @Path("accountId") String accountId);

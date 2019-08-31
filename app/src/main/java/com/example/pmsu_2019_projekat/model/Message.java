@@ -8,16 +8,16 @@ import java.util.Date;
 public class Message implements Serializable {
 
     private String id;
-    private Contact from;
-    private ArrayList<Contact> to;
-    private ArrayList<Contact> cc;
-    private ArrayList<Contact> bcc;
+    private String from;
+    private ArrayList<String> to;
+    private ArrayList<String> cc;
+    private ArrayList<String> bcc;
     private Date dateTime;
     private String subject;
     private String content;
     private ArrayList<Tag> tags;
     private ArrayList<Attachment> attachments;
-    private Folder folder;
+    private boolean unread;
 
     public Message(){
         super();
@@ -25,7 +25,7 @@ public class Message implements Serializable {
 
 
 
-    public Message(String id, Contact from, ArrayList<Contact> to, ArrayList<Contact> cc, ArrayList<Contact> bcc, Date dateTime, String subject, String content, ArrayList<Tag> tags, ArrayList<Attachment> attachments, Folder folder) {
+    public Message(String id, String from, ArrayList<String> to, ArrayList<String> cc, ArrayList<String> bcc, Date dateTime, String subject, String content, ArrayList<Tag> tags, ArrayList<Attachment> attachments, boolean unread) {
         this.id = id;
         this.from = from;
         this.to = to;
@@ -36,7 +36,7 @@ public class Message implements Serializable {
         this.content = content;
         this.tags = tags;
         this.attachments = attachments;
-        this.folder = folder;
+        this.unread = unread;
     }
 
     public static Comparator<Message> MessageDateComparator = new Comparator<Message>() {
@@ -53,7 +53,7 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return from.getFirst() + ": " + "Subject: " + subject + " " + "Content: " + content + " ";
+        return from + ": " + "Subject: " + subject + " " + "Content: " + content + " ";
     }
 
     public String getId() {
@@ -64,35 +64,35 @@ public class Message implements Serializable {
         this.id = id;
     }
 
-    public Contact getFrom() {
+    public String getFrom() {
         return from;
     }
 
-    public void setFrom(Contact from) {
+    public void setFrom(String from) {
         this.from = from;
     }
 
-    public ArrayList<Contact> getTo() {
+    public ArrayList<String> getTo() {
         return to;
     }
 
-    public void setTo(ArrayList<Contact> to) {
+    public void setTo(ArrayList<String> to) {
         this.to = to;
     }
 
-    public ArrayList<Contact> getCc() {
+    public ArrayList<String> getCc() {
         return cc;
     }
 
-    public void setCc(ArrayList<Contact> cc) {
+    public void setCc(ArrayList<String> cc) {
         this.cc = cc;
     }
 
-    public ArrayList<Contact> getBcc() {
+    public ArrayList<String> getBcc() {
         return bcc;
     }
 
-    public void setBcc(ArrayList<Contact> bcc) {
+    public void setBcc(ArrayList<String> bcc) {
         this.bcc = bcc;
     }
 
@@ -136,12 +136,11 @@ public class Message implements Serializable {
         this.attachments = attachments;
     }
 
-    public Folder getFolder() {
-        return folder;
+    public boolean isUnread() {
+        return unread;
     }
 
-    public void setFolder(Folder folder) {
-        this.folder = folder;
+    public void setUnread(boolean unread) {
+        this.unread = unread;
     }
-
 }

@@ -96,7 +96,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     private void generateDataList() {
         ListView emailsList = findViewById(id.emails_list_view);
         for(int i = 0; i < messagesList.size(); i++) {
-            if(messagesList.get(i).getFrom().getFirst() == null){
+            if(messagesList.get(i).getFrom() == null){
                 messagesList.remove(i);
             }
         }
@@ -174,17 +174,12 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
 
                 SharedPreferences sharedPreferences2 = getSharedPreferences("loginPrefs", MODE_PRIVATE);
                 String user = sharedPreferences2.getString("username", "");
-                String userId = null;
-                for(Account a : Data.accounts){
-                    if(a.getUsername().equals(user))
-                        userId = a.getId();
-                }
 
-                Data.getContactsByAccountID();
+                Data.getContactsByUsername();
                 Data.getFoldersByAccountID();
 
                 EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
-                Call<List<Message>> call = service.getEmailsByAccount(userId);
+                Call<List<Message>> call = service.getEmailsByUsername(user);
                 call.enqueue(new Callback<List<Message>>() {
                     @Override
                     public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {

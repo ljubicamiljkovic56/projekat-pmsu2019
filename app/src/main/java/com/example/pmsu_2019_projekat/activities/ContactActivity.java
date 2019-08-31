@@ -89,7 +89,7 @@ public class ContactActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Toast.makeText(ContactActivity.this, "Contact deleted", Toast.LENGTH_LONG);
-                            Data.getContactsByAccountID();
+                            Data.getContactsByUsername();
                             finish();
                         }
 

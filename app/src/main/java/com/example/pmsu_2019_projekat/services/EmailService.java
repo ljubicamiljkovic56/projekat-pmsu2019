@@ -14,10 +14,13 @@ import retrofit2.http.Path;
 
 public interface EmailService {
 
-    @GET("get/emails")
+    @GET("messages")
     Call<List<Message>> getAllEmails();
 
-    @GET("get/emails/{accountId}")
+    @GET("messages/byUser/{username}")
+    Call<List<Message>> getEmailsByUsername(@Path("username") String username);
+
+    @GET("emails/{accountId}")
     Call<List<Message>> getEmailsByAccount(@Path("accountId") String accountId);
 
     @POST("add/email")
