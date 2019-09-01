@@ -54,8 +54,8 @@ public class FolderActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
 
         List foldersAndMessagesList = new ArrayList();
-        if(folder1.getSubfolders() != null)
-            foldersAndMessagesList.addAll(folder1.getSubfolders());
+        if(folder1.getSubFolders() != null)
+            foldersAndMessagesList.addAll(folder1.getSubFolders());
         if(folder1.getMessages() != null)
             foldersAndMessagesList.addAll(folder1.getMessages());
 

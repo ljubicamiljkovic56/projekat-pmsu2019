@@ -60,8 +60,8 @@ public class FolderAdapter extends BaseAdapter {
             else
                 message.setText("messages: 0" );
 
-            if(folder.getSubfolders() != null)
-                folders.setText("folders: " + folder.getSubfolders().size());
+            if(folder.getSubFolders() != null)
+                folders.setText("folders: " + folder.getSubFolders().size());
             else
                 folders.setText("folders: 0" );
 

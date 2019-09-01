@@ -44,9 +44,10 @@ public class Data {
         emails = new ArrayList<Message>();
         contacts = new ArrayList<Contact>();
         folders = new ArrayList<Folder>();
+        loggedInUser = username;
         getAccounts();
         getContactsByUsername();
-        getFoldersByAccountID();
+        //getFoldersByAccountID();
     }
 
     public static void getAccounts(){
@@ -56,6 +57,7 @@ public class Data {
             @Override
             public void onResponse(Call<List<Account>> call, Response<List<Account>> response) {
                 accounts = response.body();
+                getFoldersByAccountID();
             }
 
             @Override
@@ -83,6 +85,7 @@ public class Data {
 
     public static void getFoldersByAccountID(){
         folders.clear();
+
         for(Account a : accounts){
             FolderService service = RetrofitClient.getRetrofitInstance().create(FolderService.class);
             Call<Folder> call = service.getFoldersByAccount(a.getId());
