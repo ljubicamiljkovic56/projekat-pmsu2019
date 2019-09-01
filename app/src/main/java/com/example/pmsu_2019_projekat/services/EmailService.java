@@ -26,6 +26,6 @@ public interface EmailService {
     @POST("add/email")
     Call<Void> addNewEmail(@Body Message email);
 
-    @DELETE("delete/email/{id}")
+    @DELETE("messages/{id}")
     Call<Void> deleteEmail(@Path("id") String id);
 }

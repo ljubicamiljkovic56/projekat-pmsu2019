@@ -18,8 +18,7 @@
         <activity android:name=".activities.NavigationActivity"></activity>
         <activity android:name=".activities.LoginActivity"
             android:noHistory="true"/>
-        <activity android:name=".activities.EmailActivity"
-            android:parentActivityName=".activities.EmailsActivity"/>
+        <activity android:name=".activities.EmailActivity"/>
         <activity android:name=".activities.EmailsActivity" />
         <activity
             android:name=".activities.CreateEmailActivity"

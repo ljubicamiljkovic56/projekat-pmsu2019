@@ -71,17 +71,6 @@ public class FoldersActivity extends NavigationActivity {
             progressDialog.dismiss();
             Toast.makeText(FoldersActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
         }
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.folders_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FoldersActivity.this, CreateFolderActivity.class);
-                intent.putExtra("Add", true);
-                startActivity(intent);
-            }
-        });
     }
 
 
@@ -98,19 +87,19 @@ public class FoldersActivity extends NavigationActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.folders_menu, menu);
+        //getMenuInflater().inflate(R.menu.folders_menu, menu);
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.folders_create) {
+        /*if (id == R.id.folders_create) {
             Toast.makeText(this, "Create folder  selected", Toast.LENGTH_LONG).show();
             Intent a = new Intent(FoldersActivity.this, CreateFolderActivity.class);
             a.putExtra("Add", true);
             startActivity(a);
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }

@@ -9,6 +9,13 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/folder_toolbar_create"
+        android:icon="@drawable/ic_create_new_folder_white_24dp"
+        android:orderInCategory="100"
+        android:title="@string/create_new_folder"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/folder_toolbar_delete"
         android:icon="@drawable/ic_delete_white_24dp"
         android:title="@string/folder_menu_delete"

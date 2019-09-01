@@ -112,7 +112,6 @@ public class CreateEmailActivity extends AppCompatActivity {
 
     /*private void sendEmail(String operation){
         newEmail = new Message();
-        newEmail.setId(String.valueOf(125 + Data.emails.size()));
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String loggedAccount = sharedPreferences.getString("username", "");
         Contact from = new Contact();

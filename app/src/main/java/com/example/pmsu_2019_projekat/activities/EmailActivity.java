@@ -126,10 +126,10 @@ public class EmailActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Toast.makeText(EmailActivity.this, "Email deleted", Toast.LENGTH_LONG);
-                            for(Folder f : Data.folders)
+                            /*for(Folder f : Data.folders)
                                 for(Message m : f.getMessages())
                                     if(m.getId().equals(dummy2.getId()))
-                                        f.getMessages().remove(m);
+                                        f.getMessages().remove(m);*/
                             Data.getFoldersByAccountID();
                             finish();
                         }

@@ -20,12 +20,12 @@ public interface FolderService {
     @GET("folders/byAccount/{accountId}")
     Call<Folder> getFoldersByAccount(@Path("accountId") String accountId);
 
-    @POST("add/folder/{accountId}")
-    Call<Void> addNewFolder(@Body Folder folder, @Path("accountId") String accountId);
+    @POST("folders/add/{parentId}/{accountUsername}")
+    Call<Void> addNewFolder(@Body Folder folder, @Path("parentId") String parentId , @Path("accountUsername") String accountUsername);
 
-    @PUT("update/folder/{id}")
+    @PUT("folders/update/{id}")
     Call<Void> updateFolder(@Body Folder folder, @Path("id") String folderId);
 
-    @DELETE("delete/folder/{id}")
+    @DELETE("folders/{id}")
     Call<Void> deleteFolder(@Path("id") String id);
 }

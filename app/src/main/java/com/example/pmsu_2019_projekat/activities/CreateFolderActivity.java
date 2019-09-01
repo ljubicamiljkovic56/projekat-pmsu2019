@@ -42,6 +42,8 @@ public class CreateFolderActivity extends AppCompatActivity {
     private Spinner condition;
     private Spinner operation;
     private Folder folderToEdit;
+    private String parentFolderId;
+    private String folderAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ public class CreateFolderActivity extends AppCompatActivity {
         actionbar.setTitle("Create Folder");
 
         add = (Boolean) getIntent().getSerializableExtra("Add");
+        parentFolderId = (String) getIntent().getSerializableExtra("ParentFolder");
+        folderAccount = (String) getIntent().getSerializableExtra("folderAccount");
 
         condition = (Spinner) findViewById(R.id.spinnerCondition);
         operation = (Spinner) findViewById(R.id.spinnerOperation);
@@ -106,20 +110,14 @@ public class CreateFolderActivity extends AppCompatActivity {
 
         if(add == true){
             SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
-            String loggedAccount = sharedPreferences.getString("username", "");
-            String userId = null;
-            for(Account a : Data.accounts){
-                if(a.getUsername().equals(loggedAccount))
-                    userId = a.getId();
-            }
+            String user = sharedPreferences.getString("username", "");
 
             newFolder = new Folder();
-            newFolder.setId(String.valueOf(125 + Data.folders.size()));
             newFolder.setName(textName.getText().toString());
             newFolder.setMessages(new ArrayList<Message>());
             newFolder.setRules(rules);
             FolderService folderService = RetrofitClient.getRetrofitInstance().create(FolderService.class);
-            Call<Void> addFolder = folderService.addNewFolder(newFolder, userId);
+            Call<Void> addFolder = folderService.addNewFolder(newFolder, parentFolderId, folderAccount);
             addFolder.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {

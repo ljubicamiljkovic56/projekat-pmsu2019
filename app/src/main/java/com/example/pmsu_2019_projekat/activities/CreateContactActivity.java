@@ -102,22 +102,16 @@ public class CreateContactActivity extends AppCompatActivity {
     private void createContact(){
         if(add == true){
             SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
-            String loggedAccount = sharedPreferences.getString("username", "");
-            String userId = null;
-            for(Account a : Data.accounts){
-                if(a.getUsername().equals(loggedAccount))
-                    userId = a.getId();
-            }
+            String user = sharedPreferences.getString("username", "");
 
             newContact = new Contact();
-            newContact.setId(String.valueOf(125 + Data.contacts.size()));
             newContact.setEmail(textEmail.getText().toString());
             newContact.setFirst(textName.getText().toString());
             newContact.setLast(textSurname.getText().toString());
             newContact.setDisplayName(textDisplayName.getText().toString());
 
             ContactService service = RetrofitClient.getRetrofitInstance().create(ContactService.class);
-            Call<Void> addContact = service.addNewContact(newContact, userId);
+            Call<Void> addContact = service.addNewContact(newContact, user);
             addContact.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {

@@ -2,6 +2,7 @@ package com.example.pmsu_2019_projekat.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +65,22 @@ public class FolderActivity extends AppCompatActivity {
         folderList.setOnItemClickListener(new FolderItemClickListener());
         folderList.setAdapter(folderAdapter);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.folders_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FolderActivity.this, CreateFolderActivity.class);
+                intent.putExtra("Add", true);
+                if(folder1.getId() == null){
+                    intent.putExtra("ParentFolder", "0");
+                    intent.putExtra("folderAccount", folder1.getName());
+                }else{
+                    intent.putExtra("ParentFolder", folder1.getId());
+                    intent.putExtra("folderAccount", "0");
+                }
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -94,6 +111,18 @@ public class FolderActivity extends AppCompatActivity {
                 builder.setMessage("Are you sure?").setPositiveButton("Yes", deleteDialogClickListener)
                         .setNegativeButton("No", deleteDialogClickListener).show();
                 break;
+            case R.id.folder_toolbar_create:
+                Toast.makeText(this, "Create folder  selected", Toast.LENGTH_LONG).show();
+                Intent a = new Intent(FolderActivity.this, CreateFolderActivity.class);
+                a.putExtra("Add", true);
+                if(folder1.getId() == null){
+                    a.putExtra("ParentFolder", "0");
+                    a.putExtra("folderAccount", folder1.getName());
+                }else{
+                    a.putExtra("ParentFolder", folder1.getId());
+                    a.putExtra("folderAccount", "0");
+                }
+                startActivity(a);
 
         }
         return  super.onOptionsItemSelected(item);

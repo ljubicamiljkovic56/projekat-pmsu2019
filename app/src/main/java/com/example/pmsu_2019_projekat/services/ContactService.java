@@ -19,12 +19,12 @@ public interface ContactService {
     @GET("contacts/byUser/{username}")
     Call<List<Contact>> getContactsByUsername(@Path("username") String username);
 
-    @POST("add/contact/{accountId}")
-    Call<Void> addNewContact(@Body Contact contact, @Path("accountId") String accountId);
+    @POST("contacts/add/{username}")
+    Call<Void> addNewContact(@Body Contact contact, @Path("username") String username);
 
-    @PUT("update/contact/{id}")
+    @PUT("contacts/update/{id}")
     Call<Void> updateContact(@Body Contact contact, @Path("id") String contactId);
 
-    @DELETE("delete/contact/{id}")
+    @DELETE("contacts/{id}")
     Call<Void> deleteContact(@Path("id") String id);
 }
