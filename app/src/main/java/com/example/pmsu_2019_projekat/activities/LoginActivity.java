@@ -52,10 +52,10 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             intent = new Intent(LoginActivity.this,EmailsActivity.class);
         }
-        if(sharedPreferences.contains("username")){
+        /*if(sharedPreferences.contains("username")){
             new Data(sharedPreferences.getString("username", ""));
             startActivity(intent);
-        }
+        }*/
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
