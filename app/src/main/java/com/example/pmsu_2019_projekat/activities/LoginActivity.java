@@ -62,7 +62,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = user.getText().toString();
                 String password = pass.getText().toString();
-                if(LogIn(username, password)){
+                LogIn(username, password);
+                if(loggedIn){
                     new Data(username);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("username",username);
@@ -86,21 +87,22 @@ public class LoginActivity extends AppCompatActivity {
         backPressedTime = System.currentTimeMillis();
     }
 
-    private static boolean LogIn(String username, String password) {
+    private static void LogIn(String username, String password) {
         UserService service = RetrofitClient.getRetrofitInstance().create(UserService.class);
         Call<Void> call = service.loginUser(username, password);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 loggedIn = true;
+                return;
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.d("ERROR:", "Greska: " + t.getMessage());
                 loggedIn = false;
+                return;
             }
         });
-        return loggedIn;
     }
 
     @Override

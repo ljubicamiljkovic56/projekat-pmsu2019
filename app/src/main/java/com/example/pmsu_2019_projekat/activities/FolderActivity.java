@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.adapters.EmailAdapter;
 import com.example.pmsu_2019_projekat.adapters.FolderAdapter;
+import com.example.pmsu_2019_projekat.model.Account;
 import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.services.FolderService;
@@ -90,7 +91,11 @@ public class FolderActivity extends AppCompatActivity {
         inflater.inflate(R.menu.folder_menu, menu);
         MenuItem editButton = menu.findItem(R.id.folder_toolbar_edit);
         MenuItem deleteButton = menu.findItem(R.id.folder_toolbar_delete);
-        if(folder1.getName().equals("Sent") || folder1.getName().equals("Drafts")){
+        ArrayList<String> usernames = new ArrayList<>();
+        for(Account a : Data.accounts){
+            usernames.add(a.getUsername());
+        }
+        if(folder1.getName().equals("Sent") || folder1.getName().equals("Drafts") || usernames.contains(folder1.getName())){
             editButton.setVisible(false);
             deleteButton.setVisible(false);
         }

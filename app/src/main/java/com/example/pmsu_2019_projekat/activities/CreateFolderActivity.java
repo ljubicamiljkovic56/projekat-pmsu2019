@@ -70,8 +70,11 @@ public class CreateFolderActivity extends AppCompatActivity {
         if(folderToEdit != null){
             actionbar.setTitle("Edit Folder");
             textName.setText(folderToEdit.getName());
-            condition.setSelection(Condition.toInt(folderToEdit.getRules().get(0).getCondition()));
-            operation.setSelection(Operation.toInt(folderToEdit.getRules().get(0).getOperation()));
+            if(folderToEdit.getRules() != null && !folderToEdit.getRules().isEmpty()){
+                condition.setSelection(Condition.toInt(folderToEdit.getRules().get(0).getCondition()));
+                operation.setSelection(Operation.toInt(folderToEdit.getRules().get(0).getOperation()));
+            }
+
         }
 
     }
