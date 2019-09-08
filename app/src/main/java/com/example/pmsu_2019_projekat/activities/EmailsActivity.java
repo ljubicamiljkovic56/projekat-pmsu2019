@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 
@@ -47,6 +49,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     private SharedPreferences sharedPreferences;
     private long interval = 0;
     private Handler handler;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
         actionBar.setHomeAsUpIndicator(drawable.ic_menu_white_24dp);
         actionBar.setTitle("Inbox");
 
+        searchView = (SearchView) findViewById(id.action_search);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -110,6 +114,8 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.emails_menu, menu);
+      //  MenuItem searchItem = menu.findItem(id.action_search);
+      //  SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         return true;
     }
 
