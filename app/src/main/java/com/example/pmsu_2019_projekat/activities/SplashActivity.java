@@ -22,16 +22,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_splash);
+        new InitTask().execute();
 
-        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-
-        if (mWifi.isConnected()) {
-            new InitTask().execute();
-        }else{
-            Toast.makeText(getApplicationContext(), "Niste povezani na internet",Toast.LENGTH_SHORT).show();
-            finishAffinity();
-        }
     }
 
     private class InitTask extends AsyncTask<Void, Void, Void>
@@ -57,7 +49,17 @@ public class SplashActivity extends AppCompatActivity {
             long timeLeft = SPLASH_TIME_OUT - (System.currentTimeMillis() - startTime);
             if(timeLeft < 0) timeLeft = 0;
             SystemClock.sleep(timeLeft);
-            startMainActivity();
+
+            ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+            if (mWifi.isConnected()) {
+                startMainActivity();
+            }else{
+                Toast.makeText(getApplicationContext(), "Niste povezani na internet",Toast.LENGTH_SHORT).show();
+                finishAffinity();
+            }
+
         }
     }
 

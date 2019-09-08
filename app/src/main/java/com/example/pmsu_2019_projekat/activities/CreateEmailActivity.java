@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.pmsu_2019_projekat.R;
 import com.example.pmsu_2019_projekat.model.Account;
 import com.example.pmsu_2019_projekat.model.Contact;
+import com.example.pmsu_2019_projekat.model.Folder;
 import com.example.pmsu_2019_projekat.model.Message;
 import com.example.pmsu_2019_projekat.services.ContactService;
 import com.example.pmsu_2019_projekat.services.EmailService;
@@ -98,7 +99,7 @@ public class CreateEmailActivity extends AppCompatActivity {
         return  super.onOptionsItemSelected(item);
     }
 
-    private static Contact contactFinder(String contactEmail){
+    /*private static Contact contactFinder(String contactEmail){
         List<Contact> csList = Data.contacts;
         if(csList != null){
             for(Contact c : csList){
@@ -108,35 +109,23 @@ public class CreateEmailActivity extends AppCompatActivity {
             }
         }
         return null;
-    }
+    }*/
 
-    /*private void sendEmail(String operation){
+    private void sendEmail(String operation){
         newEmail = new Message();
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs",MODE_PRIVATE);
         String loggedAccount = sharedPreferences.getString("username", "");
-        Contact from = new Contact();
-        from.setEmail(loggedAccount);
-        newEmail.setFrom(from);
+        newEmail.setFrom(Data.accounts.get(0).getUsername());
 
-        ArrayList<Contact> to = new ArrayList<>();
-        Contact fromContact = contactFinder(textTo.getText().toString().trim());
-        if(fromContact != null){
-            to.add(fromContact);
-        }else{
-            fromContact = new Contact();
-            fromContact.setEmail(textTo.getText().toString().trim());
-            to.add(fromContact);
-        }
+        ArrayList<String> to = new ArrayList<>();
+        to.add(textTo.getText().toString().trim());
+
         newEmail.setTo(to);
-        ArrayList<Contact> cc = new ArrayList<>();
-        if(textCc.getText() != null){
-            cc.add(contactFinder(textCc.getText().toString().trim()));
-        }
+        ArrayList<String> cc = new ArrayList<>();
+        cc.add(textCc.getText().toString().trim());
         newEmail.setCc(cc);
-        ArrayList<Contact> bcc = new ArrayList<>();
-        if(textBcc.getText() != null){
-            bcc.add(contactFinder(textBcc.getText().toString().trim()));
-        }
+        ArrayList<String> bcc = new ArrayList<>();
+        bcc.add(textBcc.getText().toString().trim());
         newEmail.setBcc(bcc);
         newEmail.setDateTime(new Date());
         newEmail.setSubject(textSubject.getText().toString());
@@ -144,7 +133,7 @@ public class CreateEmailActivity extends AppCompatActivity {
         if(operation == "Send"){
             Data.folders.get(1).getMessages().add(newEmail);
             EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
-            Call<Void> addEmail = service.addNewEmail(newEmail);
+            Call<Void> addEmail = service.addNewEmail(newEmail, loggedAccount);
             addEmail.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
@@ -160,11 +149,21 @@ public class CreateEmailActivity extends AppCompatActivity {
                 }
             });
         }else if(operation == "Cancel"){
-            Data.defaultFolders.get(0).getMessages().add(newEmail);
+            //Data.folders.get(0).getMessages().add(newEmail);
+            for(Folder f1 : Data.folders){
+                if(f1.getName() == loggedAccount){
+                    for(Folder f2 : f1.getSubFolders()){
+                        if(f2.getName() == "Draft"){
+                            f2.getMessages().add(newEmail);
+                        }
+
+                        }
+                }
+            }
             finish();
         }
 
-    }*/
+    }
 
     private boolean validateTo(){
 

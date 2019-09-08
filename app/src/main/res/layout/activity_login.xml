@@ -71,4 +71,16 @@
         android:text="@string/login_text"
         />
 
+    <TextView
+        android:id="@+id/register_text_view"
+        android:layout_width="188dp"
+        android:layout_height="35dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="50sp"
+        android:gravity="bottom"
+        android:text="@string/register_text"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+
 </LinearLayout>

@@ -1,25 +1,25 @@
 package com.example.pmsu_2019_projekat.activities;
 
-import android.content.ComponentName;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pmsu_2019_projekat.R;
-import com.example.pmsu_2019_projekat.model.Account;
 import com.example.pmsu_2019_projekat.services.RetrofitClient;
 import com.example.pmsu_2019_projekat.services.UserService;
 import com.example.pmsu_2019_projekat.tools.Data;
 
-import java.util.regex.Pattern;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,12 +29,14 @@ import static com.example.pmsu_2019_projekat.R.*;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText user, pass;
-    Button loginButton;
-    SharedPreferences sharedPreferences;
-    Intent intent;
+    private static EditText user, pass;
+    private Button loginButton;
+    private TextView registerText;
+    private SharedPreferences sharedPreferences;
+    private static Intent intent;
+    private ProgressDialog progressDialog;
 
-    public static boolean loggedIn;
+    public static String loggedIn;
     private long backPressedTime;
 
     @Override
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         user = (TextInputEditText) findViewById(id.username_edit);
         pass = (TextInputEditText) findViewById(id.password_edit);
         loginButton = (Button) findViewById(id.btnStartEmails);
+        registerText = findViewById(id.register_text_view);
         sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         String callerActivity = (String) getIntent().getSerializableExtra("activityCaller");
         if(callerActivity != null && callerActivity.equals("ProfileActivity")){
@@ -60,10 +63,24 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
+
                 String username = user.getText().toString();
                 String password = pass.getText().toString();
-                LogIn(username, password);
-                if(loggedIn){
+                String[] i = {username,password};
+                //LogIn(username, password);
+                String loggedIn = null;
+                try {
+                    loggedIn = new AsyncLogin().execute(i).get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(loggedIn != null && loggedIn == "true"){
+                    progressDialog.dismiss();
                     new Data(username);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("username",username);
@@ -71,11 +88,21 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Login uspesan",Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }else{
+                    progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(),"Niste uneli dobre informacije",Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        registerText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(registerIntent);
+            }
+        });
     }
+
 
     @Override
     public void onBackPressed() {
@@ -87,12 +114,15 @@ public class LoginActivity extends AppCompatActivity {
         backPressedTime = System.currentTimeMillis();
     }
 
-    private static void LogIn(String username, String password) {
+    /*private static void LogIn(String username, String password) {
+        loggedIn = false;
         UserService service = RetrofitClient.getRetrofitInstance().create(UserService.class);
         Call<Void> call = service.loginUser(username, password);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                String username = user.getText().toString();
+                new Data(username);
                 loggedIn = true;
                 return;
             }
@@ -103,6 +133,25 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
         });
+    }*/
+
+    private class AsyncLogin extends AsyncTask<String, Void, String>{
+        @Override
+        protected String doInBackground(String... strings) {
+            String username = strings[0];
+            String password = strings[1];
+            UserService service = RetrofitClient.getRetrofitInstance().create(UserService.class);
+            Call<Void> call = service.loginUser(username, password);
+            try {
+                call.execute();
+                loggedIn = "true";
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.d("ERROR:", "Greska: " + e.getMessage());
+                loggedIn = "false";
+            }
+            return loggedIn;
+        }
     }
 
     @Override

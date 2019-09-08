@@ -186,9 +186,12 @@ public class EmailsActivity extends NavigationActivity implements SharedPreferen
                         progressDialog.dismiss();
                         messagesList = response.body();
                         Data.emails.clear();
-                        Data.emails.addAll(messagesList);
-                        emailSorter(sharedPreferences);
-                        generateDataList();
+                        if(messagesList != null && !messagesList.isEmpty()){
+                            Data.emails.addAll(messagesList);
+                            emailSorter(sharedPreferences);
+                            generateDataList();
+                        }
+
                     }
 
                     @Override

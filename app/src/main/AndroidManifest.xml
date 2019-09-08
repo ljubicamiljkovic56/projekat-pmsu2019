@@ -45,6 +45,7 @@
             android:name=".activities.CreateFolderActivity"
             android:parentActivityName=".activities.FoldersActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".activities.RegisterActivity" android:parentActivityName=".activities.LoginActivity" />
     </application>
 
 </manifest>

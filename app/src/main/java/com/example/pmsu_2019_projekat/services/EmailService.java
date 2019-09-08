@@ -23,8 +23,8 @@ public interface EmailService {
     @GET("emails/{accountId}")
     Call<List<Message>> getEmailsByAccount(@Path("accountId") String accountId);
 
-    @POST("add/email")
-    Call<Void> addNewEmail(@Body Message email);
+    @POST("emails/send/{username}")
+    Call<Void> addNewEmail(@Body Message email,@Path("username") String username);
 
     @DELETE("messages/{id}")
     Call<Void> deleteEmail(@Path("id") String id);
