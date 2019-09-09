@@ -58,5 +58,7 @@
     <string name="register_text">No account? Create one!</string>
     <string name="action_register_text">register</string>
     <string name="string_search">Search</string>
+    <string name="manage_accounts_txt">Manage Accounts</string>
+    <string name="add_account">Add account</string>
 
 </resources>

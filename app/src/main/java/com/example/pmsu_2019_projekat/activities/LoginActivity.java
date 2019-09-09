@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                     new Data(username);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("username",username);
+                    editor.putString("password",password);
                     editor.commit();
                     Toast.makeText(getApplicationContext(), "Login uspesan",Toast.LENGTH_SHORT).show();
                     startActivity(intent);

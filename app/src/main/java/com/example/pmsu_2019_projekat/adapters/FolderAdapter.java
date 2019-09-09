@@ -75,14 +75,16 @@ public class FolderAdapter extends BaseAdapter {
             TextView title = view.findViewById(R.id.ETitle);
             TextView content = view.findViewById(R.id.EContent);
 
-            if(email.getFrom() == null){
-                from.setText(Data.loggedInUser);
-                title.setText(email.getSubject());
-                content.setText(email.getContent());
-            }else {
-                from.setText(email.getFrom());
-                title.setText(email.getSubject());
-                content.setText(email.getContent());
+            if(email != null){
+                if(email.getFrom() == null){
+                    from.setText(Data.loggedInUser);
+                    title.setText(email.getSubject());
+                    content.setText(email.getContent());
+                }else {
+                    from.setText(email.getFrom());
+                    title.setText(email.getSubject());
+                    content.setText(email.getContent());
+                }
             }
 
             return view;

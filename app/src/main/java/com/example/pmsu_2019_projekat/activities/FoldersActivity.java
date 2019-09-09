@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
@@ -77,6 +78,7 @@ public class FoldersActivity extends NavigationActivity {
     
 
     private void generateDataList(List<Folder> fsList) {
+        Log.d("AAAAAAAAAAAAA", "generateDataList: " + fsList);
         ListView foldersList = findViewById(R.id.folders_list_view);
         FolderAdapter fAdapter = new FolderAdapter(this, fsList);
         foldersList.setOnItemClickListener(new FoldersItemClickListener());

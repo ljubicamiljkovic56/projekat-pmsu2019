@@ -131,7 +131,6 @@ public class CreateEmailActivity extends AppCompatActivity {
         newEmail.setSubject(textSubject.getText().toString());
         newEmail.setContent(textContent.getText().toString());
         if(operation == "Send"){
-            Data.folders.get(1).getMessages().add(newEmail);
             EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
             Call<Void> addEmail = service.addNewEmail(newEmail, loggedAccount);
             addEmail.enqueue(new Callback<Void>() {

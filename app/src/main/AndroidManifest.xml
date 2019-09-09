@@ -46,6 +46,8 @@
             android:parentActivityName=".activities.FoldersActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".activities.RegisterActivity" android:parentActivityName=".activities.LoginActivity" />
+        <activity android:name=".activities.AccountsActivity" android:parentActivityName=".activities.ProfileActivity"/>
+        <activity android:name=".activities.AccountActivity" android:parentActivityName=".activities.AccountsActivity" />
     </application>
 
 </manifest>
