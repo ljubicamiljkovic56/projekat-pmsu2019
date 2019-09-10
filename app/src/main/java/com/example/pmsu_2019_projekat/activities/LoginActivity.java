@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = pass.getText().toString();
                 String[] i = {username,password};
                 //LogIn(username, password);
-                String loggedIn = null;
+                loggedIn = null;
                 try {
                     loggedIn = new AsyncLogin().execute(i).get();
                 } catch (ExecutionException e) {

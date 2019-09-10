@@ -84,14 +84,14 @@ public class CreateEmailActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case id.toolbar_send:
                 if(validateTo() && validateCc() && validateBcc()){
-                    //sendEmail("Send");
+                    sendEmail("Send");
                     message = "Sent";
                     break;
                 }else {
                     break;
                 }
             case id.toolbar_cancel:
-                //sendEmail("Cancel");
+                sendEmail("Cancel");
                 message = "Canceled";
                 break;
         }
@@ -132,25 +132,25 @@ public class CreateEmailActivity extends AppCompatActivity {
         newEmail.setContent(textContent.getText().toString());
         if(operation == "Send"){
             EmailService service = RetrofitClient.getRetrofitInstance().create(EmailService.class);
-            Call<Void> addEmail = service.addNewEmail(newEmail, loggedAccount);
+            Call<Void> addEmail = service.sendEmail(newEmail, newEmail.getFrom());
             addEmail.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    Toast.makeText(CreateEmailActivity.this, "Uspesno poslat email", Toast.LENGTH_LONG);
+                    Toast.makeText(CreateEmailActivity.this, "Uspesno poslat email", Toast.LENGTH_LONG).show();
 
                     finish();
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(CreateEmailActivity.this, "Nesto nije u redu", Toast.LENGTH_LONG);
+                    Toast.makeText(CreateEmailActivity.this, "Nesto nije u redu", Toast.LENGTH_LONG).show();
                     finish();
                 }
             });
         }else if(operation == "Cancel"){
             //Data.folders.get(0).getMessages().add(newEmail);
             for(Folder f1 : Data.folders){
-                if(f1.getName() == loggedAccount){
+                if(f1.getName() == newEmail.getFrom()){
                     for(Folder f2 : f1.getSubFolders()){
                         if(f2.getName() == "Draft"){
                             f2.getMessages().add(newEmail);
